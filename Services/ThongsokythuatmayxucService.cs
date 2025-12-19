@@ -17,6 +17,7 @@ namespace WebApi.Services
         Task<bool> Add([FromBody] ThongsokythuatEdit Request);
         Task<bool> Update([FromBody] ThongsokythuatEdit Request);
         Task<bool> Delete(int id);
+        Task<ApiResult<int>> DeleteMutiple(List<int> ids);
     }
     public class ThongsokythuatmayxucService : IThongsokythuatmayxucService
     {
@@ -58,6 +59,40 @@ namespace WebApi.Services
             return true;
         }
 
+        public async Task<ApiResult<int>> DeleteMutiple(List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                return new ApiErrorResult<int>("Danh sách id rỗng");
+            }
+
+            // Lấy các bản ghi tồn tại theo ids
+            var existItems = await _thietbiDbContext.ThongsokythuatMayxucs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (existItems.Count == 0)
+            {
+                return new ApiErrorResult<int>("Không tìm thấy bản ghi nào để xóa");
+            }
+
+            // Kiểm tra id không tồn tại
+            var existIds = existItems.Select(x => x.Id).ToList();
+            var invalidIds = ids.Except(existIds).ToList();
+
+            if (invalidIds.Any())
+            {
+                return new ApiErrorResult<int>(
+                    $"Các ID không tồn tại: {string.Join(", ", invalidIds)}"
+                );
+            }
+
+            _thietbiDbContext.ThongsokythuatMayxucs.RemoveRange(existItems);
+            var count = await _thietbiDbContext.SaveChangesAsync();
+
+            return new ApiSuccessResult<int>(count);
+        }
+
         public async Task<List<ThongsokythuatmayxucVm>> GetAll()
         {
             var query = from t in _thietbiDbContext.ThongsokythuatMayxucs.Include(x => x.MayXuc)
@@ -66,6 +101,7 @@ namespace WebApi.Services
             {
                 Id = x.Id,
                 TenThietBi = x.MayXuc.TenThietBi,
+                MayXucId = x.MayXucId,
                 NoiDung = x.NoiDung,
                 DonViTinh = x.DonViTinh,
                 ThongSo = x.ThongSo,

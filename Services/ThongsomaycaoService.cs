@@ -37,7 +37,7 @@ namespace WebApi.Services
             {
                 Id = x.Id,
                 MayCaoId=x.MayCaoId,
-                TenThietBi = x.DanhmucMayCao.TenThietBi,
+                TenThietBi = x.DanhmucMayCao.TenThietBi,                
                 NoiDung = x.NoiDung,
                 DonViTinh = x.DonViTinh,
                 ThongSo = x.ThongSo

@@ -84,5 +84,11 @@ namespace WebApi.Controllers
             await _thongsokythuatmayxucService.Delete(id);
             return Ok();
         }
+        [HttpPost("delete-multiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var result = await _thongsokythuatmayxucService.DeleteMutiple(ids);
+            return Ok(result);
+        }
     }
 }

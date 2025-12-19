@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
+using WebApi.Models.ThongsokythuatMayXuc;
 using WebApi.Services;
 
 namespace WebApi.Controllers
@@ -48,6 +49,44 @@ namespace WebApi.Controllers
             }
             return Ok(response.Count);
 
+        }
+
+        [HttpPost("add")]
+        public async Task<ActionResult> Add([FromBody] MayXuc request)
+        {
+            if (request == null)
+            {
+                return BadRequest();
+            }
+            await _mayXucService.Add(request);
+            return Ok();
+        }
+        [HttpPut("update")]
+        public async Task<ActionResult> Update([FromBody] MayXuc request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await _mayXucService.Update(request);
+            return Ok();
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+            await _mayXucService.Delete(id);
+            return Ok();
+        }
+        [HttpPost("delete-multiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var result = await _mayXucService.DeleteMutiple(ids);
+            return Ok(result);
         }
     }
 }

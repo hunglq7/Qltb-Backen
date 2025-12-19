@@ -962,6 +962,54 @@
   },
   {
     "ContainingType": "WebApi.Controllers.MayxucController",
+    "Method": "Delete",
+    "RelativePath": "api/Mayxuc/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.MayxucController",
+    "Method": "Add",
+    "RelativePath": "api/Mayxuc/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.MayXuc",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.MayxucController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Mayxuc/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.MayxucController",
     "Method": "DeleteMultiple",
     "RelativePath": "api/Mayxuc/DeleteMultipale",
     "HttpMethod": "POST",
@@ -971,6 +1019,22 @@
       {
         "Name": "mayXucs",
         "Type": "System.Collections.Generic.List\u00601[[WebApi.Data.Entites.MayXuc, WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.MayxucController",
+    "Method": "Update",
+    "RelativePath": "api/Mayxuc/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.MayXuc",
         "IsRequired": true
       }
     ],
@@ -2507,6 +2571,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.ThongsokythuatmayxucController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Thongsokythuatmayxuc/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
