@@ -12,7 +12,7 @@ namespace WebApi.Services
         Task<List<NhatKyMayCao>> GetDetailById(int id);
         Task<ApiResult<int>> UpdateMultiple(List<NhatKyMayCao> request);
         Task<ApiResult<int>> DeleteMultiple(List<NhatKyMayCao> request);
-        Task<bool> Add(NhatKyMayCao request);
+        Task<int> Add(NhatKyMayCao request);
         Task<bool> Update(NhatKyMayCao request);
         Task<bool> Delete(int id);
     }
@@ -100,10 +100,18 @@ namespace WebApi.Services
             return new ApiSuccessResult<int>(count);
         }
 
-        public async Task<bool> Add(NhatKyMayCao request)
+        public async Task<int> Add(NhatKyMayCao request)
         {
-            if (request == null) return false;
-            var newItems = new NhatKyMayCao()
+            if (request == null)
+                throw new Exception("Request null");
+
+            if (request.TongHopMayCaoId <= 0)
+                throw new Exception("Thiếu TongHopMayCaoId");
+
+            if (request.NgayThang == default)
+                throw new Exception("Ngày tháng không hợp lệ");
+
+            var newItem = new NhatKyMayCao
             {
                 TongHopMayCaoId = request.TongHopMayCaoId,
                 NgayThang = request.NgayThang,
@@ -112,9 +120,11 @@ namespace WebApi.Services
                 TrangThai = request.TrangThai,
                 GhiChu = request.GhiChu
             };
-            await _thietbiDbContext.NhatKyMayCaos.AddAsync(newItems);
+
+            await _thietbiDbContext.NhatKyMayCaos.AddAsync(newItem);
             await _thietbiDbContext.SaveChangesAsync();
-            return true;
+
+            return newItem.Id;
         }
 
         public async Task<bool> Update(NhatKyMayCao request)

@@ -51,16 +51,11 @@ namespace WebApi.Controllers
             return Ok(query.Count);
         }
 
-
         [HttpPost("Add")]
-        public async Task<ActionResult> Add([FromBody] NhatKyMayCao request)
+        public async Task<IActionResult> Add(NhatKyMayCao request)
         {
-            if (request == null)
-            {
-                return BadRequest();
-            }
-            await _nhatkyMayCaoService.Add(request);
-            return Ok();
+            var result = await _nhatkyMayCaoService.Add(request);
+            return Ok(result);
         }
 
         [HttpPut("update")]
