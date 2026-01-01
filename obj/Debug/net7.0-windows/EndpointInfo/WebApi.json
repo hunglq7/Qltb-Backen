@@ -1704,7 +1704,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Danhmuctoitruc"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -1712,7 +1713,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Danhmuctoitruc"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -1720,12 +1722,99 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Danhmuctoitruc"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Danhmuctoitruc/Add": {
+      "post": {
+        "tags": [
+          "Danhmuctoitruc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Danhmuctoitruc"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Danhmuctoitruc"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Danhmuctoitruc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Danhmuctoitruc/update": {
+      "put": {
+        "tags": [
+          "Danhmuctoitruc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Danhmuctoitruc"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Danhmuctoitruc"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Danhmuctoitruc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Danhmuctoitruc/DatailById/{Id}": {
+      "delete": {
+        "tags": [
+          "Danhmuctoitruc"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -3182,6 +3271,135 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/NhatkyMayxuc"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Nhatkymayxuc/Add": {
+      "post": {
+        "tags": [
+          "Nhatkymayxuc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyMayxuc"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyMayxuc"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyMayxuc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Nhatkymayxuc/update": {
+      "put": {
+        "tags": [
+          "Nhatkymayxuc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyMayxuc"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyMayxuc"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyMayxuc"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Nhatkymayxuc/{Id}": {
+      "delete": {
+        "tags": [
+          "Nhatkymayxuc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Nhatkymayxuc/DeleteMultiplet": {
+      "post": {
+        "tags": [
+          "Nhatkymayxuc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -4797,7 +5015,7 @@
         }
       }
     },
-    "/api/Thongsokythuatmaycao/DeleteMultipale": {
+    "/api/Thongsokythuatmaycao/DeleteMultiple": {
       "post": {
         "tags": [
           "Thongsokythuatmaycao"
@@ -4808,7 +5026,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ThongSoKyThuatMayCao"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -4816,7 +5035,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ThongSoKyThuatMayCao"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -4824,7 +5044,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ThongSoKyThuatMayCao"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -5100,35 +5321,6 @@
             "description": "Success"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Thongsokythuattoitruc"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ThongsokythuattoitrucEdit"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ThongsokythuattoitrucEdit"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ThongsokythuattoitrucEdit"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
       }
     },
     "/api/Thongsokythuattoitruc/paging": {
@@ -5192,6 +5384,37 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Thongsokythuattoitruc/Add": {
+      "post": {
+        "tags": [
+          "Thongsokythuattoitruc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThongsokythuattoitrucEdit"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThongsokythuattoitrucEdit"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThongsokythuattoitrucEdit"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -5269,7 +5492,7 @@
         }
       }
     },
-    "/api/Thongsokythuattoitruc/update": {
+    "/api/Thongsokythuattoitruc/Update": {
       "put": {
         "tags": [
           "Thongsokythuattoitruc"
@@ -5289,6 +5512,49 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ThongsokythuattoitrucEdit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Thongsokythuattoitruc/DeleteMultiple": {
+      "post": {
+        "tags": [
+          "Thongsokythuattoitruc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
               }
             }
           }
@@ -7799,7 +8065,7 @@
         }
       }
     },
-    "/api/Tonghopmaycao/DeleteMultipale": {
+    "/api/Tonghopmaycao/DeleteMultiple": {
       "post": {
         "tags": [
           "Tonghopmaycao"
@@ -7810,7 +8076,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TongHopMayCao"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -7818,7 +8085,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TongHopMayCao"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
@@ -7826,7 +8094,8 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TongHopMayCao"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -8054,6 +8323,49 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Tonghopmayxuc/DeleteMultiple": {
+      "post": {
+        "tags": [
+          "Tonghopmayxuc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -9108,7 +9420,7 @@
         }
       }
     },
-    "/api/Tonghoptoitruc": {
+    "/api/Tonghoptoitruc/Add": {
       "post": {
         "tags": [
           "Tonghoptoitruc"
@@ -9137,7 +9449,9 @@
             "description": "Success"
           }
         }
-      },
+      }
+    },
+    "/api/Tonghoptoitruc/Update": {
       "put": {
         "tags": [
           "Tonghoptoitruc"
@@ -9297,6 +9611,49 @@
         "tags": [
           "Tonghoptoitruc"
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Tonghoptoitruc/DeleteMultiple": {
+      "post": {
+        "tags": [
+          "Tonghoptoitruc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"

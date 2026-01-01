@@ -16,13 +16,13 @@ namespace WebApi.Controllers
         {
             _service = service;
         }
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> Create([FromBody] TonghoptoitrucCreateRequest request)
         {
             var query = await _service.Create(request);
             return Ok(query);
         }
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(TonghoptoitrucUpdateRequest request)
         {
             var query = await _service.Update(request);
@@ -62,6 +62,21 @@ namespace WebApi.Controllers
         {
             var toitruc = await _service.GetAll();
             return Ok(toitruc);
+        }
+
+
+        [HttpPost("DeleteMultiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return BadRequest("Danh sách ID rỗng");
+
+            var result = await _service.DeleteMutiple(ids);
+
+            if (result == null || result.Count == 0)
+                return NotFound("Không xóa được bản ghi nào");
+
+            return Ok(new { deleted = result.Count });
         }
 
     }

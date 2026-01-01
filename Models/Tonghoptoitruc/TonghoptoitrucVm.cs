@@ -8,6 +8,7 @@
         public int ThietbiId { get; set; }
         public string? TenThietBi { get; set; }
         public string? PhongBan { get; set; }
+        public int DonViSuDungId { get; set; }
 
         public string? ViTriLapDat { get; set; }
         public DateTime NgayLap { get; set; }

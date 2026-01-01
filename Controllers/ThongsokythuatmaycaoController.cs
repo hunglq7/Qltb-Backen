@@ -84,17 +84,19 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        [HttpPost("DeleteMultipale")]
-
-        public async Task<IActionResult> DeleteMultiple([FromBody] List<ThongSoKyThuatMayCao> reponse)
+     
+        [HttpPost("DeleteMultiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
         {
-            var query = await _thongsokythuatmaycaoService.DeleteMultiple(reponse);
-            if (query.Count == 0)
-            {
-                return NotFound("Không xóa được bản ghi nào");
-            }
-            return Ok(query.Count);
+            if (ids == null || ids.Count == 0)
+                return BadRequest("Danh sách ID rỗng");
 
+            var result = await _thongsokythuatmaycaoService.DeleteMultiple(ids);
+
+            if (result == null || result.Count == 0)
+                return NotFound("Không xóa được bản ghi nào");
+
+            return Ok(new { deleted = result.Count });
         }
 
     }

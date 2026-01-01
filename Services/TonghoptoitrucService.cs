@@ -14,7 +14,7 @@ namespace WebApi.Services
         Task<int> Delete(int id);
         Task<int> SumTonghoptoitruc();
         Task<TongHopToiTruc> GetById(int id);
-
+        Task<List<int>> DeleteMutiple(List<int> ids);
         Task<PagedResult<TonghoptoitrucVm>> GetAllPaging(GetManagerTonghoptoitrucPagingRequest request);
         Task<List<TonghoptoitrucVm>> GetAll();
     }
@@ -64,6 +64,21 @@ namespace WebApi.Services
 
         }
 
+        public async Task<List<int>> DeleteMutiple(List<int> ids)
+        {
+            var items = await _thietbiDbContext.TongHopToiTrucs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (!items.Any())
+                return new List<int>();
+
+            _thietbiDbContext.TongHopToiTrucs.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+
+            return items.Select(x => x.Id).ToList();
+        }
+
         public async Task<List<TonghoptoitrucVm>> GetAll()
         {
             var query = from t in _thietbiDbContext.TongHopToiTrucs.Include(x => x.Danhmuctoitruc).Include(x => x.PhongBan)
@@ -75,6 +90,7 @@ namespace WebApi.Services
                 ThietbiId=x.ThietbiId,
                 TenThietBi = x.Danhmuctoitruc.TenThietBi,
                 PhongBan = x.PhongBan.TenPhong,
+                DonViSuDungId = x.DonViSuDungId,
                 ViTriLapDat = x.ViTriLapDat,
                 NgayLap = x.NgayLap,
                 MucDichSuDung = x.MucDichSuDung,

@@ -18,6 +18,7 @@ namespace Api.Services
         Task<bool> Add(ThongsokythuattoitrucEdit Request);
         Task<bool> Update(ThongsokythuattoitrucEdit Request);
         Task<bool> Delete(int id);
+        Task<List<int>> DeleteMutiple(List<int> ids);
 
     }
     public class ThongsokythuattoitrucService : IThongsokythuattoitrucService
@@ -61,6 +62,21 @@ namespace Api.Services
             return true;
         }
 
+        public async Task<List<int>> DeleteMutiple(List<int> ids)
+        {
+            var items = await _thietbiDbContext.ThongsokythuatToitrucs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (!items.Any())
+                return new List<int>();
+
+            _thietbiDbContext.ThongsokythuatToitrucs.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+
+            return items.Select(x => x.Id).ToList();
+        }
+
         public async Task<List<ThongsokythuattoitrucVm>> GetAll()
         {
             var query = from t in _thietbiDbContext.ThongsokythuatToitrucs.Include(x => x.Danhmuctoitruc)
@@ -68,7 +84,7 @@ namespace Api.Services
             return await query.Select(x => new ThongsokythuattoitrucVm()
             {
                 Id = x.Id,
-                DanhmuctoitrucId=x.DanhmuctoitrucId,
+                DanhmuctoitrucId = x.DanhmuctoitrucId,
                 TenToiTruc = x.Danhmuctoitruc.TenThietBi,
                 NoiDung = x.NoiDung,
                 DonViTinh = x.DonViTinh,
@@ -138,7 +154,7 @@ namespace Api.Services
             {
                 Id = x.t.Id,
                 TenToiTruc = x.m.TenThietBi,
-                DanhmuctoitrucId=x.m.Id,
+                DanhmuctoitrucId = x.m.Id,
                 NoiDung = x.t.NoiDung,
                 DonViTinh = x.t.DonViTinh,
                 ThongSo = x.t.ThongSo,

@@ -10,12 +10,12 @@ namespace WebApi.Controllers
     public class LoaithietbiController : ControllerBase
     {
         private readonly ILoaithietbiService _loaithietbiService;
-            public LoaithietbiController(ILoaithietbiService loaithietbiService)
+        public LoaithietbiController(ILoaithietbiService loaithietbiService)
         {
             _loaithietbiService = loaithietbiService;
         }
         [HttpGet]
-        public async Task<ActionResult> GetDonvitinh()
+        public async Task<ActionResult> GetLoaithietbi()
         {
             var loaithietbi = await _loaithietbiService.GetLoaithietbi();
             return Ok(loaithietbi);
@@ -37,7 +37,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> DeleteMultiple([FromBody] List<LoaiThietBi> loaithietbi)
         {
             var loathietbis = await _loaithietbiService.DeleteMutipleLoaithietbi(loaithietbi);
-            if (loathietbis.Count==0)
+            if (loathietbis.Count == 0)
             {
                 return BadRequest("Xóa bản ghi thất bại");
             }

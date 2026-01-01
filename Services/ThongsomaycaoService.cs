@@ -16,7 +16,7 @@ namespace WebApi.Services
         Task<bool> Add(ThongSoKyThuatMayCao request);
         Task<bool> Update(ThongSoKyThuatMayCao request);
         Task<bool> Delete(int id);
-        Task<ApiResult<int>> DeleteMultiple(List<ThongSoKyThuatMayCao> response);
+        Task<List<int>> DeleteMultiple(List<int> ids);
     }
 
     public class ThongsokythuatmaycaoService : IThongsokythuatmaycaoService
@@ -149,24 +149,19 @@ namespace WebApi.Services
             return true;
         }
 
-        public async Task<ApiResult<int>> DeleteMultiple(List<ThongSoKyThuatMayCao> response)
+        public async Task<List<int>> DeleteMultiple(List<int> ids)
         {
-            var ids = response.Select(x => x.Id).ToList();
-            if (ids.Count == 0)
-            {
-                return new ApiErrorResult<int>("Không tìm thấy bản ghi nào");
-            }
+            var items = await _thietbiDbContext.ThongSoKyThuatMayCaos
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
 
-            var existingItems = _thietbiDbContext.ThongSoKyThuatMayCaos.AsNoTracking().Where(x => ids.Contains(x.Id)).ToList();
-            if (existingItems.Count != ids.Count)
-            {
-                return new ApiErrorResult<int>("Xóa không hợp lệ");
-            }
+            if (!items.Any())
+                return new List<int>();
 
-            _thietbiDbContext.RemoveRange(existingItems);
-            var count = await _thietbiDbContext.SaveChangesAsync();
+            _thietbiDbContext.ThongSoKyThuatMayCaos.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
 
-            return new ApiSuccessResult<int>(count);
+            return items.Select(x => x.Id).ToList();
         }
     }
 }

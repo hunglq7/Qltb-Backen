@@ -19,7 +19,7 @@ namespace WebApi.Services
         Task<bool> UpdateTonghopmayxuc([FromBody] MayxucUpdateRequest Request);
         Task<bool> DeleteTonghopmayxuc(int id);
         Task<PagedResult<TonghopmayxucVM>> GetAllPaging(GetManagerTonghopMayxucPagingRequest request);
- 
+        Task<List<int>> DeleteMutiple(List<int> ids);
 
     }
     public class TonghopmayxucService : ITonghopmayxucService
@@ -140,13 +140,16 @@ namespace WebApi.Services
                 Id = x.Id,
                 MaQuanLy = x.MaQuanLy ?? string.Empty,
                 TenMayXuc = x.MayXuc!.TenThietBi,
+                MayxucId = x.MayXucId,
                 TenPhongBan = x.PhongBan != null ? (x.PhongBan.TenPhong ?? string.Empty) : string.Empty,
+                PhongBanId = x.PhongBanId,
                 LoaiThietBi = x.LoaiThietBi != null ? (x.LoaiThietBi.TenLoai ?? string.Empty) : string.Empty,
+                LoaiThietBiId = x.LoaiThietBiId,
                 ViTriLapDat = x.ViTriLapDat ?? string.Empty,
                 NgayLap = x.NgayLap,
                 SoLuong = x.SoLuong,
                 TinhTrang = x.TinhTrang ?? string.Empty,
-                DuPhong= x.DuPhong,
+                DuPhong = x.DuPhong,
                 GhiChu = x.GhiChu ?? string.Empty,
                 TongTB = TongTB
             }).ToListAsync();
@@ -159,7 +162,7 @@ namespace WebApi.Services
                         .Include(x => x.MayXuc)
                         .Include(x => x.PhongBan)
                         .Include(x => x.LoaiThietBi)
-                        select t;        
+                        select t;
 
             // Lọc theo duPhong (nếu có)
             if (request.duPhong.HasValue)
@@ -236,15 +239,15 @@ namespace WebApi.Services
                 mayxuc.LoaiThietBiId = Request.LoaiThietBiId;
                 mayxuc.ViTriLapDat = Request.ViTriLapDat;
                 mayxuc.NgayLap = Request.NgayLap;
-                mayxuc.SoLuong = Request.SoLuong ;
-                mayxuc.TinhTrang = Request.TinhTrang ;
+                mayxuc.SoLuong = Request.SoLuong;
+                mayxuc.TinhTrang = Request.TinhTrang;
                 mayxuc.DuPhong = Request.DuPhong;
-                mayxuc.GhiChu = Request.GhiChu ;
+                mayxuc.GhiChu = Request.GhiChu;
 
                 // Mark as modified and save
                 _thietbiDbContext.Entry(mayxuc).State = EntityState.Modified;
                 var result = await _thietbiDbContext.SaveChangesAsync();
-                
+
                 return result > 0;
             }
             catch (DbUpdateException dbEx)
@@ -261,12 +264,22 @@ namespace WebApi.Services
 
         public async Task<int> SumTonghopmayxuc()
         {
-            var query =  from s in _thietbiDbContext.TongHopMayXucs
+            var query = from s in _thietbiDbContext.TongHopMayXucs
                         select s;
             var sum = await query.SumAsync(x => x.SoLuong);
             return sum;
         }
 
-       
+        public async Task<List<int>> DeleteMutiple(List<int> ids)
+        {
+            var items = await _thietbiDbContext.TongHopMayXucs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+            if (!items.Any())
+                return new List<int>();
+            _thietbiDbContext.TongHopMayXucs.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+            return items.Select(x => x.Id).ToList();
+        }
     }
 }

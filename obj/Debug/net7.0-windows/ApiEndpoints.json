@@ -788,6 +788,38 @@
   },
   {
     "ContainingType": "Api.Controllers.DanhmuctoitrucController",
+    "Method": "Add",
+    "RelativePath": "api/Danhmuctoitruc/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Api.Data.Entites.Danhmuctoitruc",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.DanhmuctoitrucController",
+    "Method": "GetDetailById",
+    "RelativePath": "api/Danhmuctoitruc/DatailById/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.DanhmuctoitrucController",
     "Method": "DeleteMultiple",
     "RelativePath": "api/Danhmuctoitruc/DeleteMultipale",
     "HttpMethod": "POST",
@@ -795,8 +827,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "reponse",
-        "Type": "System.Collections.Generic.List\u00601[[Api.Data.Entites.Danhmuctoitruc, WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.DanhmuctoitrucController",
+    "Method": "Update",
+    "RelativePath": "api/Danhmuctoitruc/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Api.Data.Entites.Danhmuctoitruc",
         "IsRequired": true
       }
     ],
@@ -910,7 +958,7 @@
   },
   {
     "ContainingType": "WebApi.Controllers.LoaithietbiController",
-    "Method": "GetDonvitinh",
+    "Method": "GetLoaithietbi",
     "RelativePath": "api/Loaithietbi",
     "HttpMethod": "GET",
     "IsController": true,
@@ -1530,6 +1578,38 @@
   },
   {
     "ContainingType": "WebApi.Controllers.NhatkymayxucController",
+    "Method": "Delete",
+    "RelativePath": "api/Nhatkymayxuc/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.NhatkymayxucController",
+    "Method": "Add",
+    "RelativePath": "api/Nhatkymayxuc/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.NhatkyMayxuc",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.NhatkymayxucController",
     "Method": "GetDetailById",
     "RelativePath": "api/Nhatkymayxuc/DatailById/{Id}",
     "HttpMethod": "GET",
@@ -1555,6 +1635,38 @@
       {
         "Name": "request",
         "Type": "System.Collections.Generic.List\u00601[[WebApi.Data.Entites.NhatkyMayxuc, WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.NhatkymayxucController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Nhatkymayxuc/DeleteMultiplet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.NhatkymayxucController",
+    "Method": "Update",
+    "RelativePath": "api/Nhatkymayxuc/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.NhatkyMayxuc",
         "IsRequired": true
       }
     ],
@@ -2432,14 +2544,14 @@
   {
     "ContainingType": "WebApi.Controllers.ThongsokythuatmaycaoController",
     "Method": "DeleteMultiple",
-    "RelativePath": "api/Thongsokythuatmaycao/DeleteMultipale",
+    "RelativePath": "api/Thongsokythuatmaycao/DeleteMultiple",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "reponse",
-        "Type": "System.Collections.Generic.List\u00601[[WebApi.Data.Entites.ThongSoKyThuatMayCao, WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -2677,22 +2789,6 @@
   },
   {
     "ContainingType": "Api.Controllers.ThongsokythuattoitrucController",
-    "Method": "Add",
-    "RelativePath": "api/Thongsokythuattoitruc",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Api.Models.Thongsokythuattoitruc.ThongsokythuattoitrucEdit",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Api.Controllers.ThongsokythuattoitrucController",
     "Method": "GetById",
     "RelativePath": "api/Thongsokythuattoitruc/{Id}",
     "HttpMethod": "GET",
@@ -2718,6 +2814,38 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.ThongsokythuattoitrucController",
+    "Method": "Add",
+    "RelativePath": "api/Thongsokythuattoitruc/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Api.Models.Thongsokythuattoitruc.ThongsokythuattoitrucEdit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.ThongsokythuattoitrucController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Thongsokythuattoitruc/DeleteMultiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -2783,7 +2911,7 @@
   {
     "ContainingType": "Api.Controllers.ThongsokythuattoitrucController",
     "Method": "Update",
-    "RelativePath": "api/Thongsokythuattoitruc/update",
+    "RelativePath": "api/Thongsokythuattoitruc/Update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -4240,14 +4368,14 @@
   {
     "ContainingType": "WebApi.Controllers.TonghopmaycaoController",
     "Method": "DeleteMultiple",
-    "RelativePath": "api/Tonghopmaycao/DeleteMultipale",
+    "RelativePath": "api/Tonghopmaycao/DeleteMultiple",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "reponse",
-        "Type": "System.Collections.Generic.List\u00601[[WebApi.Data.Entites.TongHopMayCao, WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -4420,6 +4548,22 @@
       {
         "Name": "Id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.TonghopmayxucController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Tonghopmayxuc/DeleteMultiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -5123,38 +5267,6 @@
   },
   {
     "ContainingType": "WebApi.Controllers.TonghoptoitrucController",
-    "Method": "Create",
-    "RelativePath": "api/Tonghoptoitruc",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "WebApi.Models.Tonghoptoitruc.TonghoptoitrucCreateRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebApi.Controllers.TonghoptoitrucController",
-    "Method": "Update",
-    "RelativePath": "api/Tonghoptoitruc",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "WebApi.Models.Tonghoptoitruc.TonghoptoitrucUpdateRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebApi.Controllers.TonghoptoitrucController",
     "Method": "Delete",
     "RelativePath": "api/Tonghoptoitruc/{id}",
     "HttpMethod": "DELETE",
@@ -5180,6 +5292,38 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.TonghoptoitrucController",
+    "Method": "Create",
+    "RelativePath": "api/Tonghoptoitruc/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Models.Tonghoptoitruc.TonghoptoitrucCreateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.TonghoptoitrucController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Tonghoptoitruc/DeleteMultiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -5244,6 +5388,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.TonghoptoitrucController",
+    "Method": "Update",
+    "RelativePath": "api/Tonghoptoitruc/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Models.Tonghoptoitruc.TonghoptoitrucUpdateRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

@@ -40,7 +40,7 @@ namespace Api.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] ThongsokythuattoitrucEdit request)
         {
             if (request == null)
@@ -65,7 +65,7 @@ namespace Api.Controllers
             return Ok(items);
         }
 
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] ThongsokythuattoitrucEdit request)
         {
             if (!ModelState.IsValid)
@@ -85,6 +85,20 @@ namespace Api.Controllers
             }
             await _thongsokythuattoitrucService.Delete(id);
             return Ok();
+        }
+
+        [HttpPost("DeleteMultiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return BadRequest("Danh sách ID rỗng");
+
+            var result = await _thongsokythuattoitrucService.DeleteMutiple(ids);
+
+            if (result == null || result.Count == 0)
+                return NotFound("Không xóa được bản ghi nào");
+
+            return Ok(new { deleted = result.Count });
         }
 
     }

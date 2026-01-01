@@ -56,7 +56,7 @@ namespace WebApi.Controllers
 
         public async Task<ActionResult> SumTonghopmayxuc()
         {
-            var query = await  _tonghopmayxucService.SumTonghopmayxuc();
+            var query = await _tonghopmayxucService.SumTonghopmayxuc();
             return Ok(query);
         }
 
@@ -91,6 +91,19 @@ namespace WebApi.Controllers
         }
 
 
+        [HttpPost("DeleteMultiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return BadRequest("Danh sách ID rỗng");
+
+            var result = await _tonghopmayxucService.DeleteMutiple(ids);
+
+            if (result == null || result.Count == 0)
+                return NotFound("Không xóa được bản ghi nào");
+
+            return Ok(new { deleted = result.Count });
+        }
 
     }
 }
