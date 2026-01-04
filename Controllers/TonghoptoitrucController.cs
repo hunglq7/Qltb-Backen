@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.Entites;
+using WebApi.Models.Common;
 using WebApi.Models.Tonghoptoitruc;
 using WebApi.Services;
 
@@ -78,6 +79,12 @@ namespace WebApi.Controllers
 
             return Ok(new { deleted = result.Count });
         }
+        [HttpGet("search")]
+public async Task<IActionResult> Search([FromQuery] SearchTongHopRequest request)
+{
+    var result = await _service.SearchAsync(request);
+    return Ok(result);
+}
 
     }
 }

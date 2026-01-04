@@ -8,6 +8,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Text.Json;
 using WebApi.Common;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
@@ -18,7 +19,11 @@ var JwtSetting = builder.Configuration.GetSection("JWTSetting");
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
 builder.Services.AddDbContext<ThietbiDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ThietbiDb")));
 builder.Services.AddIdentity<AppUser, AppRole>()
@@ -183,7 +188,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();

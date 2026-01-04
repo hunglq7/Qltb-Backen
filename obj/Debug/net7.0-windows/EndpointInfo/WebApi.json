@@ -3167,26 +3167,14 @@
         }
       }
     },
-    "/api/Nhatkymayxuc": {
-      "get": {
-        "tags": [
-          "Nhatkymayxuc"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Nhatkymayxuc/DatailById/{Id}": {
+    "/api/Nhatkymayxuc/tonghop/{id}": {
       "get": {
         "tags": [
           "Nhatkymayxuc"
         ],
         "parameters": [
           {
-            "name": "Id",
+            "name": "id",
             "in": "path",
             "required": true,
             "style": "simple",
@@ -3203,47 +3191,7 @@
         }
       }
     },
-    "/api/Nhatkymayxuc/UpdateMultiple": {
-      "put": {
-        "tags": [
-          "Nhatkymayxuc"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/NhatkyMayxuc"
-                }
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/NhatkyMayxuc"
-                }
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/NhatkyMayxuc"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Nhatkymayxuc/DeleteMultipale": {
+    "/api/Nhatkymayxuc": {
       "post": {
         "tags": [
           "Nhatkymayxuc"
@@ -3252,26 +3200,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/NhatkyMayxuc"
-                }
+                "$ref": "#/components/schemas/NhatkyMayxucCreateDto"
               }
             },
             "text/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/NhatkyMayxuc"
-                }
+                "$ref": "#/components/schemas/NhatkyMayxucCreateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/NhatkyMayxuc"
-                }
+                "$ref": "#/components/schemas/NhatkyMayxucCreateDto"
               }
             }
           }
@@ -3283,57 +3222,38 @@
         }
       }
     },
-    "/api/Nhatkymayxuc/Add": {
-      "post": {
-        "tags": [
-          "Nhatkymayxuc"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NhatkyMayxuc"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NhatkyMayxuc"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/NhatkyMayxuc"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Nhatkymayxuc/update": {
+    "/api/Nhatkymayxuc/{id}": {
       "put": {
         "tags": [
           "Nhatkymayxuc"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NhatkyMayxuc"
+                "$ref": "#/components/schemas/NhatkyMayxucUpdateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/NhatkyMayxuc"
+                "$ref": "#/components/schemas/NhatkyMayxucUpdateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/NhatkyMayxuc"
+                "$ref": "#/components/schemas/NhatkyMayxucUpdateDto"
               }
             }
           }
@@ -3343,9 +3263,7 @@
             "description": "Success"
           }
         }
-      }
-    },
-    "/api/Nhatkymayxuc/{Id}": {
+      },
       "delete": {
         "tags": [
           "Nhatkymayxuc"
@@ -3369,7 +3287,7 @@
         }
       }
     },
-    "/api/Nhatkymayxuc/DeleteMultiplet": {
+    "/api/Nhatkymayxuc/delete-multiple": {
       "post": {
         "tags": [
           "Nhatkymayxuc"
@@ -3567,6 +3485,35 @@
             "description": "Success"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "NhatkyTonghoptoitruc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyToitrucCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyToitrucCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyToitrucCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/api/NhatkyTonghoptoitruc/{Id}": {
@@ -3661,6 +3608,138 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/NhatkyTonghoptoitruc"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/NhatkyTonghoptoitruc/tonghop/{id}": {
+      "get": {
+        "tags": [
+          "NhatkyTonghoptoitruc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/NhatkyTonghoptoitruc/{id}": {
+      "put": {
+        "tags": [
+          "NhatkyTonghoptoitruc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyToitrucUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyToitrucUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NhatkyToitrucUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NhatkyTonghoptoitruc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/NhatkyTonghoptoitruc/delete-multiple": {
+      "post": {
+        "tags": [
+          "NhatkyTonghoptoitruc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -8108,6 +8187,72 @@
         }
       }
     },
+    "/api/Tonghopmaycao/search": {
+      "get": {
+        "tags": [
+          "Tonghopmaycao"
+        ],
+        "parameters": [
+          {
+            "name": "Keyword",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DuPhong",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TuNgay",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "DenNgay",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "PageIndex",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Tonghopmayxuc": {
       "get": {
         "tags": [
@@ -8366,6 +8511,72 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Tonghopmayxuc/search": {
+      "get": {
+        "tags": [
+          "Tonghopmayxuc"
+        ],
+        "parameters": [
+          {
+            "name": "Keyword",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DuPhong",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TuNgay",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "DenNgay",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "PageIndex",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -9654,6 +9865,72 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Tonghoptoitruc/search": {
+      "get": {
+        "tags": [
+          "Tonghoptoitruc"
+        ],
+        "parameters": [
+          {
+            "name": "Keyword",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DuPhong",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "TuNgay",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "DenNgay",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "PageIndex",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -11722,6 +11999,134 @@
           },
           "tongHopMayXuc": {
             "$ref": "#/components/schemas/TongHopMayXuc"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NhatkyMayxucCreateDto": {
+        "type": "object",
+        "properties": {
+          "tonghopmayxucId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngaythang": {
+            "type": "string",
+            "nullable": true
+          },
+          "donVi": {
+            "type": "string",
+            "nullable": true
+          },
+          "viTri": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NhatkyMayxucUpdateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tonghopmayxucId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngaythang": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "donVi": {
+            "type": "string",
+            "nullable": true
+          },
+          "viTri": {
+            "type": "string",
+            "nullable": true
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NhatkyToitrucCreateDto": {
+        "type": "object",
+        "properties": {
+          "tonghoptoitrucId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngaythang": {
+            "type": "string",
+            "nullable": true
+          },
+          "donVi": {
+            "type": "string",
+            "nullable": true
+          },
+          "viTri": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NhatkyToitrucUpdateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tonghoptoitrucId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngaythang": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "donVi": {
+            "type": "string",
+            "nullable": true
+          },
+          "viTri": {
+            "type": "string",
+            "nullable": true
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

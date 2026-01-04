@@ -1,122 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\DU AN WEB JEACT\\Qltb-Backen\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\services\\nhatkymayxucservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\nhatkymayxucservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\controllers\\nhatkymayxuccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\nhatkymayxuccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\controllers\\thongsokythuattoitruccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\thongsokythuattoitruccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\controllers\\thongsokythuatmayxuccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\thongsokythuatmayxuccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\services\\thongsokythuatmayxucservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\thongsokythuatmayxucservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\controllers\\tonghopmayxuccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\tonghopmayxuccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ThongsokythuattoitrucController.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\ThongsokythuattoitrucController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ThongsokythuattoitrucController.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\ThongsokythuattoitrucController.cs",
-              "RelativeToolTip": "Controllers\\ThongsokythuattoitrucController.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAuwFkAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T15:49:25.745Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NhatkymayxucService.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\NhatkymayxucService.cs",
-              "RelativeDocumentMoniker": "Services\\NhatkymayxucService.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\NhatkymayxucService.cs",
-              "RelativeToolTip": "Services\\NhatkymayxucService.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAAwJ8AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T15:31:52.982Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NhatkymayxucController.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\NhatkymayxucController.cs",
-              "RelativeDocumentMoniker": "Controllers\\NhatkymayxucController.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\NhatkymayxucController.cs",
-              "RelativeToolTip": "Controllers\\NhatkymayxucController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAcwF8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T15:30:31.924Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ThongsokythuatmayxucService.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\ThongsokythuatmayxucService.cs",
-              "RelativeDocumentMoniker": "Services\\ThongsokythuatmayxucService.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\ThongsokythuatmayxucService.cs",
-              "RelativeToolTip": "Services\\ThongsokythuatmayxucService.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAvwFwAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T13:19:12.602Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ThongsokythuatmayxucController.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\ThongsokythuatmayxucController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ThongsokythuatmayxucController.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\ThongsokythuatmayxucController.cs",
-              "RelativeToolTip": "Controllers\\ThongsokythuatmayxucController.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAmwFsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T13:18:46.672Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TonghopmayxucController.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\TonghopmayxucController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TonghopmayxucController.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\TonghopmayxucController.cs",
-              "RelativeToolTip": "Controllers\\TonghopmayxucController.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAwF0AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-01T09:16:47.433Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

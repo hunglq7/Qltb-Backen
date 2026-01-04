@@ -1,6 +1,7 @@
 ﻿using Api.Models.Tonghopmayxuc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.Common;
 using WebApi.Models.Tonghopmayxuc;
 using WebApi.Models.Tonghopthietbi;
 using WebApi.Services;
@@ -103,6 +104,12 @@ namespace WebApi.Controllers
                 return NotFound("Không xóa được bản ghi nào");
 
             return Ok(new { deleted = result.Count });
+        }
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] SearchTongHopRequest request)
+        {
+            var result = await _tonghopmayxucService.SearchAsync(request);
+            return Ok(result);
         }
 
     }

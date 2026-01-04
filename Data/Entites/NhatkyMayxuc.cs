@@ -16,9 +16,9 @@ namespace WebApi.Data.Entites
         [MaxLength(50)]
         public string? DonVi { get; set; }
         [MaxLength(500)]
-        public string? ViTri{ get; set; } 
-        public string? TrangThai { get; set; } 
-        public string? GhiChu { get; set; } 
+        public string? ViTri { get; set; }
+        public string? TrangThai { get; set; }
+        public string? GhiChu { get; set; }
         [ForeignKey("TonghopmayxucId")]
         public virtual TongHopMayXuc? TongHopMayXuc { get; set; }
 

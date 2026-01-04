@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.Entites;
+using WebApi.Models.Common;
+using WebApi.Models.Nhatkymayxuc;
 using WebApi.Models.ThongsokythuatMayXuc;
 using WebApi.Services;
 
@@ -10,86 +12,49 @@ namespace WebApi.Controllers
     [ApiController]
     public class NhatkymayxucController : ControllerBase
     {
-        public readonly INhatkymayxucService _nhatkymayxucService;
-        public NhatkymayxucController(INhatkymayxucService nhatkymayxucService)
-        {
-            _nhatkymayxucService = nhatkymayxucService;
+        private readonly INhatkymayxucService _service;
 
-        }
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public NhatkymayxucController(INhatkymayxucService service)
         {
-            var query = await _nhatkymayxucService.GetAll();
-            return Ok(query);
-        }
-        [HttpGet("DatailById/{Id}")]
-        public async Task<ActionResult> GetDetailById(int Id)
-        {
-            var items = await _nhatkymayxucService.getDatailById(Id);
-            return Ok(items);
+            _service = service;
         }
 
-        [HttpPut("UpdateMultiple")]
-        public async Task<ActionResult> UpdateMuliple([FromBody] List<NhatkyMayxuc> request)
+        [HttpGet("tonghop/{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var query = await _nhatkymayxucService.UpdateMultiple(request);
-            if (query.Count == 0)
-            {
-                return BadRequest("Cập nhật bản ghi thất bại");
-            }
-            return Ok(query.Count);
-
+            var data = await _service.GetByTonghopAsync(id);
+            return Ok(ApiResponse<List<NhatkymayxucVm>>.Ok(data));
         }
 
-        [HttpPost("DeleteMultipale")]
-
-        public async Task<ActionResult> DeleteMultiple([FromBody] List<NhatkyMayxuc> request)
+        [HttpPost]
+        public async Task<IActionResult> Create(NhatkyMayxucCreateDto dto)
         {
-            var query = await _nhatkymayxucService.DeleteMutiple(request);
-            if (query.Count == 0)
-            {
-                return BadRequest("Xóa bản ghi thất bại");
-            }
-            return Ok(query.Count);
-        }
-        [HttpPost("Add")]
-        public async Task<ActionResult> Add([FromBody] NhatkyMayxuc request)
-        {
-            if (request == null)
-            {
-                return BadRequest();
-            }
-            await _nhatkymayxucService.Add(request);
-            return Ok();
+            var id = await _service.CreateAsync(dto);
+            return Ok(ApiResponse<int>.Ok(id, "Thêm mới thành công"));
         }
 
-        [HttpPut("update")]
-        public async Task<ActionResult> Update([FromBody] NhatkyMayxuc request)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, NhatkyMayxucUpdateDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            await _nhatkymayxucService.Update(request);
-            return Ok();
+            if (id != dto.Id)
+                return BadRequest(ApiResponse<string>.Fail("Id không khớp"));
+
+            await _service.UpdateAsync(dto);
+            return Ok(ApiResponse<bool>.Ok(true, "Cập nhật thành công"));
         }
 
-
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == 0)
-            {
-                return BadRequest();
-            }
-            await _nhatkymayxucService.Delete(id);
-            return Ok();
+            await _service.DeleteAsync(id);
+            return Ok(ApiResponse<bool>.Ok(true, "Đã xóa"));
         }
-        [HttpPost("DeleteMultiplet")]
-        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+
+        [HttpPost("delete-multiple")]
+        public async Task<IActionResult> DeleteMultiple(List<int> ids)
         {
-            var result = await _nhatkymayxucService.DeleteMutiplet(ids);
-            return Ok(result);
+            var count = await _service.DeleteMultipleAsync(ids);
+            return Ok(ApiResponse<int>.Ok(count, "Xóa nhiều dòng thành công"));
         }
     }
 }

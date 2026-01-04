@@ -11,7 +11,7 @@ namespace WebApi.Data.Entites
         public int Id { get; set; }
         [Required]
         [StringLength(100)]
-        public string TenPhong { get; set; } = string.Empty;
+        public string? TenPhong { get; set; }
         public bool TrangThai { get; set; }
         public virtual IEnumerable<NhanVien>? NhanViens { get; set; }
         public virtual IEnumerable<TongHopThietBi>? TongHopThietBis { get; set; }

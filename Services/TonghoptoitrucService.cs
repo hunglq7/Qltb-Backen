@@ -4,7 +4,6 @@ using WebApi.Models.Common;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
 using WebApi.Models.Tonghoptoitruc;
-using WebApi.Models.Tonghopquatgio;
 namespace WebApi.Services
 {
     public interface ITonghoptoitrucService
@@ -16,6 +15,7 @@ namespace WebApi.Services
         Task<TongHopToiTruc> GetById(int id);
         Task<List<int>> DeleteMutiple(List<int> ids);
         Task<PagedResult<TonghoptoitrucVm>> GetAllPaging(GetManagerTonghoptoitrucPagingRequest request);
+        Task<PagedResult<TonghoptoitrucVm>> SearchAsync( SearchTongHopRequest request);
         Task<List<TonghoptoitrucVm>> GetAll();
     }
     public class TonghoptoitrucService : ITonghoptoitrucService
@@ -170,6 +170,73 @@ namespace WebApi.Services
             return query;
         }
 
+       
+
+        public async Task<PagedResult<TonghoptoitrucVm>> SearchAsync(SearchTongHopRequest request)
+        {
+            var query = from t in _thietbiDbContext.TongHopToiTrucs.Include(x => x.Danhmuctoitruc).Include(x => x.PhongBan)
+                        select t;
+
+            if (!string.IsNullOrWhiteSpace(request.Keyword))
+            {
+                query = query.Where(x =>
+                    x.Danhmuctoitruc.TenThietBi.Contains(request.Keyword) ||
+                    x.GhiChu.Contains(request.Keyword) || 
+                    x.ViTriLapDat.Contains(request.Keyword)||
+                    x.MaQuanLy.Contains(request.Keyword)||
+                    x.PhongBan.TenPhong.Contains(request.Keyword)
+                    );
+                    
+            }
+            // ✅ Lọc theo trạng thái true / false
+            if (request.DuPhong.HasValue)
+            {
+                query = query.Where(x => x.DuPhong== request.DuPhong.Value);
+            }
+
+            // 📅 Từ ngày
+            if (request.TuNgay.HasValue)
+            {
+                query = query.Where(x => x.NgayLap>= request.TuNgay.Value.Date);
+            }
+
+            // 📅 Đến ngày (<= 23:59:59)
+            if (request.DenNgay.HasValue)
+            {
+                var denNgay = request.DenNgay.Value.Date.AddDays(1).AddTicks(-1);
+                query = query.Where(x => x.NgayLap <= denNgay);
+            }
+            var totalRecords = await query.CountAsync();
+            var items = await query
+        .OrderByDescending(x => x.NgayLap)
+        .Skip((request.PageIndex - 1) * request.PageSize)
+        .Take(request.PageSize)
+         .Select(x => new TonghoptoitrucVm()
+         {
+             Id = x.Id,
+             MaQuanLy = x.MaQuanLy,
+             TenThietBi = x.Danhmuctoitruc.TenThietBi,
+             ThietbiId = x.ThietbiId,
+             PhongBan = x.PhongBan.TenPhong,
+             DonViSuDungId = x.DonViSuDungId,
+             ViTriLapDat = x.ViTriLapDat,
+             NgayLap = x.NgayLap,
+             MucDichSuDung = x.MucDichSuDung,
+             SoLuong = x.SoLuong,
+             TinhTrangThietBi = x.TinhTrangThietBi,
+             DuPhong = x.DuPhong,
+
+         })
+        .ToListAsync();
+            return new PagedResult<TonghoptoitrucVm>
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                TotalRecords = totalRecords,
+                Items = items
+            };
+        }
+
         public async Task<int> SumTonghoptoitruc()
         {
             var query = from s in _thietbiDbContext.TongHopToiTrucs
@@ -177,6 +244,7 @@ namespace WebApi.Services
             var sum = await query.SumAsync(x => x.SoLuong);
             return sum;
         }
+
 
         public async Task<int> Update(TonghoptoitrucUpdateRequest request)
         {

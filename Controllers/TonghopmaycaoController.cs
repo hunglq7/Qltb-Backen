@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.Entites;
+using WebApi.Models.Common;
 using WebApi.Models.MayCao.Tonghopmaycao;
 using WebApi.Models.TonghopBomnuc;
 using WebApi.Services;
@@ -97,6 +98,13 @@ namespace WebApi.Controllers
                 return NotFound("Không xóa được bản ghi nào");
 
             return Ok(new { deleted = result.Count });
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] SearchTongHopRequest request)
+        {
+            var result = await _tonghopmaycaoService.SearchAsync(request);
+            return Ok(result);
         }
     }
 }
