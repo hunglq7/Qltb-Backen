@@ -14,11 +14,11 @@ namespace WebApi.Controllers
     {
         public readonly IDanhmucbomnuocService _danhmucbomnuocService;
         public readonly ThietbiDbContext _dbContext;
-        public DanhmucbomnuocController( IDanhmucbomnuocService danhmucbomnuocService, ThietbiDbContext dbContext)
+        public DanhmucbomnuocController(IDanhmucbomnuocService danhmucbomnuocService, ThietbiDbContext dbContext)
         {
             _danhmucbomnuocService = danhmucbomnuocService;
             _dbContext = dbContext;
-            
+
         }
 
         [HttpGet]
@@ -57,28 +57,29 @@ namespace WebApi.Controllers
         [HttpPost("UploadExcelFile")]
         public async Task<IActionResult> UploadExcelFile([FromForm] IFormFile file)
         {
-            try {
+            try
+            {
                 System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            if(file==null || file.Length==0)
+                if (file == null || file.Length == 0)
                 {
                     BadRequest("No file Upload");
                 }
                 var uploadFolder = $"{Directory.GetCurrentDirectory()}\\Uploads";
-                if(Directory.Exists(uploadFolder))
+                if (Directory.Exists(uploadFolder))
                 {
                     Directory.CreateDirectory(uploadFolder);
                 }
                 var filePath = Path.Combine(uploadFolder, file.FileName);
-                using(var stream=new FileStream(filePath,FileMode.Create))
+                using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
                 using (var stream = System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read))
                 {
-                    
+
                     using (var reader = ExcelReaderFactory.CreateReader(stream))
                     {
-                       
+
                         do
                         {
                             bool isHeaderSkipped = false;
@@ -94,21 +95,66 @@ namespace WebApi.Controllers
                                 dmBomNuoc.LoaiThietBi = reader.GetValue(2).ToString();
 
                                 _dbContext.Add(dmBomNuoc);
-                               await  _dbContext.SaveChangesAsync();
+                                await _dbContext.SaveChangesAsync();
                             }
                         } while (reader.NextResult());
 
-                       
+
                     }
-                   
+
                 }
                 return Ok("Thêm bản ghi thành công");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 StatusCode(5000, ex.Message);
             }
             return BadRequest("Thêm thất bại");
+        }
+        [HttpPost("Add")]
+        public async Task<ActionResult> Add([FromBody] DanhmucBomnuoc request)
+        {
+            if (request == null)
+            {
+                return BadRequest();
+            }
+            await _danhmucbomnuocService.Add(request);
+            return Ok();
+        }
+
+        [HttpPut("Update")]
+        public async Task<ActionResult> Update([FromBody] DanhmucBomnuoc request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await _danhmucbomnuocService.Update(request);
+            return Ok();
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+            await _danhmucbomnuocService.Delete(id);
+            return Ok();
+        }
+
+        [HttpPost("Delete-Multiple")]
+
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var query = await _danhmucbomnuocService.DeleteMuny(ids);
+            if (query.Count == 0)
+            {
+                return NotFound("Không xóa được bản ghi nào");
+            }
+            return Ok(query.Count);
+
         }
 
     }

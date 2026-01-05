@@ -18,6 +18,7 @@ namespace WebApi.Services
         Task<bool> Update([FromBody] TonghopbomnuocUpdateRequest Request);
         Task<bool> Delete(int id);
         Task<PagedResult<TonghopBomnuocVm>> GetAllPaging(TonghopbomnuocPagingRequest request);
+        Task<PagedResult<TonghopBomnuocVm>> SearchAsync(SearchTongHopRequest request);
     }
     public class TonghopbomnuocService : ITonghopbomnuocService
     {
@@ -75,7 +76,7 @@ namespace WebApi.Services
             try
             {
                 var query = from t in _thietbiDbContext.TongHopBomNuocs.Include(x => x.DanhmucBomnuoc).Include(x => x.PhongBan)
-                            select t;           
+                            select t;
 
                 if (request.duPhong != null && request.duPhong == true)
                 {
@@ -111,7 +112,7 @@ namespace WebApi.Services
                         DuPhong = x.DuPhong,
                         GhiChu = x.GhiChu ?? string.Empty
                     }).ToListAsync();
-                
+
                 var pagedResult = new PagedResult<TonghopBomnuocVm>()
                 {
                     TotalRecords = totalRow,
@@ -173,7 +174,7 @@ namespace WebApi.Services
                             join p in _thietbiDbContext.PhongBans on t.DonViId equals p.Id
                             join m in _thietbiDbContext.DanhmucBomnuocs on t.BomNuocId equals m.Id
                             select new { t, p, m };
-                
+
                 return await Query.Select(x => new TongHopBomNuoc
                 {
                     Id = x.t.Id,
@@ -193,6 +194,70 @@ namespace WebApi.Services
                 // Log the exception here if you have logging configured
                 return new List<TongHopBomNuoc>();
             }
+        }
+
+        public async Task<PagedResult<TonghopBomnuocVm>> SearchAsync(SearchTongHopRequest request)
+        {
+            var query = from t in _thietbiDbContext.TongHopBomNuocs.Include(x => x.DanhmucBomnuoc).Include(x => x.PhongBan)
+                        select t;
+
+            if (!string.IsNullOrWhiteSpace(request.Keyword))
+            {
+                query = query.Where(x =>
+                    x.DanhmucBomnuoc.TenThietBi.Contains(request.Keyword) ||
+                    x.GhiChu.Contains(request.Keyword) ||
+                    x.ViTriLapDat.Contains(request.Keyword) ||
+                    x.MaQuanLy.Contains(request.Keyword) ||
+                    x.PhongBan.TenPhong.Contains(request.Keyword)
+                    );
+
+            }
+            // ✅ Lọc theo trạng thái true / false
+            if (request.DuPhong.HasValue)
+            {
+                query = query.Where(x => x.DuPhong == request.DuPhong.Value);
+            }
+
+            // 📅 Từ ngày
+            if (request.TuNgay.HasValue)
+            {
+                query = query.Where(x => x.NgayLap >= request.TuNgay.Value.Date);
+            }
+
+            // 📅 Đến ngày (<= 23:59:59)
+            if (request.DenNgay.HasValue)
+            {
+                var denNgay = request.DenNgay.Value.Date.AddDays(1).AddTicks(-1);
+                query = query.Where(x => x.NgayLap <= denNgay);
+            }
+            var totalRecords = await query.CountAsync();
+            var items = await query
+        .OrderByDescending(x => x.NgayLap)
+        .Skip((request.PageIndex - 1) * request.PageSize)
+        .Take(request.PageSize)
+         .Select(x => new TonghopBomnuocVm()
+         {
+             Id = x.Id,
+             MaQuanLy = x.MaQuanLy,
+             TenThietBi = x.DanhmucBomnuoc.TenThietBi,
+             BomNuocId = x.BomNuocId,
+             TenDonVi = x.PhongBan.TenPhong,
+             DonViId = x.DonViId,
+             ViTriLapDat = x.ViTriLapDat,
+             NgayLap = x.NgayLap,
+             SoLuong = x.SoLuong,
+             TinhTrangThietBi = x.TinhTrangThietBi,
+             DuPhong = x.DuPhong,
+             GhiChu = x.GhiChu
+         })
+        .ToListAsync();
+            return new PagedResult<TonghopBomnuocVm>
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                TotalRecords = totalRecords,
+                Items = items
+            };
         }
 
         public async Task<int> Sum()
@@ -246,6 +311,8 @@ namespace WebApi.Services
                 // Log the exception here if you have logging configured
                 return false;
             }
+
+
         }
     }
 }
