@@ -1538,7 +1538,6 @@ E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\staticwebassets.build.js
 E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\staticwebassets.build.json.cache
 E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\staticwebassets.development.json
 E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\staticwebassets.build.endpoints.json
-E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\staticwebassets.upToDateCheck.txt
 E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\WebApi.csproj.Up2Date
 E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\WebApi.dll
 E:\DU AN WEB REACT\Qltb-Backen\obj\Debug\net7.0-windows\refint\WebApi.dll
