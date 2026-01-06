@@ -12,7 +12,7 @@ namespace WebApi.Controllers
     public class ThongsobomnuocController : ControllerBase
     {
         public readonly IThongsobomnuocService _thongsobomnuocService;
-        public ThongsobomnuocController( IThongsobomnuocService thongsobomnuocService)
+        public ThongsobomnuocController(IThongsobomnuocService thongsobomnuocService)
         {
             _thongsobomnuocService = thongsobomnuocService;
         }
@@ -36,7 +36,7 @@ namespace WebApi.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] ThongSoBomNuoc request)
         {
             if (request == null)
@@ -61,7 +61,7 @@ namespace WebApi.Controllers
             return Ok(items);
         }
 
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] ThongSoBomNuoc request)
         {
             if (!ModelState.IsValid)
