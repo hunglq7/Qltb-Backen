@@ -82,5 +82,18 @@ namespace WebApi.Controllers
             await _thongsobomnuocService.Delete(id);
             return Ok();
         }
+        [HttpPost("Delete-Multiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return BadRequest("Danh sách ID rỗng");
+
+            var result = await _thongsobomnuocService.DeleteMutiple(ids);
+
+            if (result == null || result.Count == 0)
+                return NotFound("Không xóa được bản ghi nào");
+
+            return Ok(new { deleted = result.Count });
+        }
     }
 }

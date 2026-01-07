@@ -11,12 +11,15 @@ namespace WebApi.Services
 {
     public interface ITonghopbomnuocService
     {
+
         Task<bool> Add([FromBody] TonghopbomnuocCreateRequest Request);
         Task<TongHopBomNuoc> GetById(int id);
         Task<int> Sum();
         Task<List<TongHopBomNuoc>> getDatailById(int id);
         Task<bool> Update([FromBody] TonghopbomnuocUpdateRequest Request);
         Task<bool> Delete(int id);
+        Task<List<int>> DeleteMutiple(List<int> ids);
+        Task<List<TonghopBomnuocVm>> GetAll();
         Task<PagedResult<TonghopBomnuocVm>> GetAllPaging(TonghopbomnuocPagingRequest request);
         Task<PagedResult<TonghopBomnuocVm>> SearchAsync(SearchTongHopRequest request);
     }
@@ -69,6 +72,40 @@ namespace WebApi.Services
             _thietbiDbContext.TongHopBomNuocs.Remove(query);
             await _thietbiDbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<List<int>> DeleteMutiple(List<int> ids)
+        {
+            var items = await _thietbiDbContext.TongHopBomNuocs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (!items.Any())
+                return new List<int>();
+
+            _thietbiDbContext.TongHopBomNuocs.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+
+            return items.Select(x => x.Id).ToList();
+        }
+
+        public async Task<List<TonghopBomnuocVm>> GetAll()
+        {
+            var query = from t in _thietbiDbContext.TongHopBomNuocs.Include(x => x.DanhmucBomnuoc).Include(x => x.PhongBan)
+                        select t;
+            return await query.Select(x => new TonghopBomnuocVm()
+            {
+                Id = x.Id,
+                MaQuanLy = x.MaQuanLy ?? string.Empty,
+                TenThietBi = x.DanhmucBomnuoc != null ? x.DanhmucBomnuoc.TenThietBi ?? string.Empty : string.Empty,
+                TenDonVi = x.PhongBan != null ? x.PhongBan.TenPhong ?? string.Empty : string.Empty,
+                ViTriLapDat = x.ViTriLapDat ?? string.Empty,
+                NgayLap = x.NgayLap,
+                SoLuong = x.SoLuong,
+                TinhTrangThietBi = x.TinhTrangThietBi ?? string.Empty,
+                DuPhong = x.DuPhong,
+                GhiChu = x.GhiChu ?? string.Empty
+            }).ToListAsync();
         }
 
         public async Task<PagedResult<TonghopBomnuocVm>> GetAllPaging(TonghopbomnuocPagingRequest request)
