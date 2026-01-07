@@ -17,6 +17,7 @@ namespace WebApi.Services
         Task<List<TongHopBomNuoc>> getDatailById(int id);
         Task<bool> Update([FromBody] TonghopbomnuocUpdateRequest Request);
         Task<bool> Delete(int id);
+        Task<List<int>> DeleteMutiple(List<int> ids);
         Task<PagedResult<TonghopBomnuocVm>> GetAllPaging(TonghopbomnuocPagingRequest request);
         Task<PagedResult<TonghopBomnuocVm>> SearchAsync(SearchTongHopRequest request);
     }
@@ -69,6 +70,21 @@ namespace WebApi.Services
             _thietbiDbContext.TongHopBomNuocs.Remove(query);
             await _thietbiDbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<List<int>> DeleteMutiple(List<int> ids)
+        {
+            var items = await _thietbiDbContext.TongHopBomNuocs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (!items.Any())
+                return new List<int>();
+
+            _thietbiDbContext.TongHopBomNuocs.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+
+            return items.Select(x => x.Id).ToList();
         }
 
         public async Task<PagedResult<TonghopBomnuocVm>> GetAllPaging(TonghopbomnuocPagingRequest request)

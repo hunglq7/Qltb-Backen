@@ -17,11 +17,12 @@ namespace WebApi.Services
         Task<bool> Add([FromBody] ThongSoBomNuoc Request);
         Task<bool> Update([FromBody] ThongSoBomNuoc Request);
         Task<bool> Delete(int id);
+        Task<List<int>> DeleteMutiple(List<int> ids);
     }
     public class ThongsobomnuocService : IThongsobomnuocService
     {
         private readonly ThietbiDbContext _thietbiDbContext;
-        public ThongsobomnuocService( ThietbiDbContext thietbiDbContext)
+        public ThongsobomnuocService(ThietbiDbContext thietbiDbContext)
 
         {
             _thietbiDbContext = thietbiDbContext;
@@ -59,6 +60,21 @@ namespace WebApi.Services
             return true;
         }
 
+        public async Task<List<int>> DeleteMutiple(List<int> ids)
+        {
+            var items = await _thietbiDbContext.ThongSoBomNuocs
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (!items.Any())
+                return new List<int>();
+
+            _thietbiDbContext.ThongSoBomNuocs.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+
+            return items.Select(x => x.Id).ToList();
+        }
+
         public async Task<List<ThongsoBomnuocVm>> GetAll()
         {
             var query = from t in _thietbiDbContext.ThongSoBomNuocs.Include(x => x.DanhmucBomnuoc)
@@ -67,6 +83,7 @@ namespace WebApi.Services
             {
                 Id = x.Id,
                 TenThietBi = x.DanhmucBomnuoc.TenThietBi,
+                BomNuocId = x.BomNuocId,
                 NoiDung = x.NoiDung,
                 DonViTinh = x.DonViTinh,
                 ThongSo = x.ThongSo,
@@ -84,12 +101,12 @@ namespace WebApi.Services
 
 
             int totalRow = await query.CountAsync();
-           
+
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(x => new ThongsoBomnuocVm()
                 {
-                    Id = x.Id,                    
+                    Id = x.Id,
                     TenThietBi = x.DanhmucBomnuoc!.TenThietBi,
                     NoiDung = x.NoiDung,
                     DonViTinh = x.DonViTinh,
@@ -105,7 +122,7 @@ namespace WebApi.Services
             };
             return pagedResult;
         }
-            public async Task<ThongSoBomNuoc> GetById(int id)
+        public async Task<ThongSoBomNuoc> GetById(int id)
         {
             var items = await _thietbiDbContext.ThongSoBomNuocs.FindAsync(id);
             if (items == null)
