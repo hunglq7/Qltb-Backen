@@ -178,6 +178,12 @@ namespace WebApi.Controllers
         {
             return Ok("TonghopbomnuocController is working!");
         }
+        [HttpGet("getAll")]
+        public async Task<ActionResult> GetAll()
+        {
+            var items = await _service.GetAll();
+            return Ok(items);
+        }
 
         [HttpPost("Delete-Multiple")]
         public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
