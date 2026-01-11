@@ -17,13 +17,13 @@ namespace WebApi.Services
         Task<bool> Update([FromBody] ThongsoQuatgio Request);
         Task<bool> Delete(int id);
         Task<ApiResult<int>> DeleteMutiple(List<ThongsoQuatgio> request);
-
+        Task<List<int>> DeleteSelect(List<int> ids);
     }
     public class ThongsoquatgioService : IThongsoquatgioService
     {
 
         private readonly ThietbiDbContext _thietbiDbContext;
-        public ThongsoquatgioService( ThietbiDbContext thietbiDbContext)
+        public ThongsoquatgioService(ThietbiDbContext thietbiDbContext)
         {
             _thietbiDbContext = thietbiDbContext;
         }
@@ -83,6 +83,21 @@ namespace WebApi.Services
             return new ApiSuccessResult<int>(count);
         }
 
+        public async Task<List<int>> DeleteSelect(List<int> ids)
+        {
+            var items = await _thietbiDbContext.ThongsoQuatgios
+                 .Where(x => ids.Contains(x.Id))
+                 .ToListAsync();
+
+            if (!items.Any())
+                return new List<int>();
+
+            _thietbiDbContext.ThongsoQuatgios.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+
+            return items.Select(x => x.Id).ToList();
+        }
+
         public async Task<List<ThongsoQuatgioVm>> GetAll()
         {
             var query = from t in _thietbiDbContext.ThongsoQuatgios.Include(x => x.DanhmucQuatgio)
@@ -90,7 +105,8 @@ namespace WebApi.Services
             return await query.Select(x => new ThongsoQuatgioVm()
             {
                 Id = x.Id,
-                TenThietBi=x.DanhmucQuatgio!.TenThietBi,
+                TenThietBi = x.DanhmucQuatgio!.TenThietBi,
+                QuatGioId = x.QuatgioId,
                 NoiDung = x.NoiDung,
                 DonViTinh = x.DonViTinh,
                 ThongSo = x.ThongSo,
@@ -159,7 +175,7 @@ namespace WebApi.Services
             return await Query.Select(x => new ThongsoQuatgioVm
             {
                 Id = x.t.Id,
-               TenThietBi = x.m.TenThietBi,
+                TenThietBi = x.m.TenThietBi,
                 NoiDung = x.t.NoiDung,
                 DonViTinh = x.t.DonViTinh,
                 ThongSo = x.t.ThongSo,

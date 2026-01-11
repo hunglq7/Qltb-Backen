@@ -15,7 +15,7 @@ namespace WebApi.Controllers
         public ThongsoquatgioController(IThongsoquatgioService thongsoquatgioService)
         {
             _thongsoquatgioService = thongsoquatgioService;
-            
+
         }
 
         [HttpGet]
@@ -37,7 +37,7 @@ namespace WebApi.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] ThongsoQuatgio request)
         {
             if (request == null)
@@ -62,7 +62,7 @@ namespace WebApi.Controllers
             return Ok(items);
         }
 
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] ThongsoQuatgio request)
         {
             if (!ModelState.IsValid)
@@ -93,6 +93,19 @@ namespace WebApi.Controllers
                 return BadRequest("Xóa bản ghi thất bại");
             }
             return Ok(query.Count);
+        }
+        [HttpPost("DeleteSelect")]
+        public async Task<IActionResult> DeleteSelect([FromBody] List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return BadRequest("Danh sách ID rỗng");
+
+            var result = await _thongsoquatgioService.DeleteSelect(ids);
+
+            if (result == null || result.Count == 0)
+                return NotFound("Không xóa được bản ghi nào");
+
+            return Ok(new { deleted = result.Count });
         }
     }
 }
