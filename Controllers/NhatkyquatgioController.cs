@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.Entites;
+using WebApi.Models.Common;
 using WebApi.Services;
 
 namespace WebApi.Controllers
@@ -10,10 +11,10 @@ namespace WebApi.Controllers
     public class NhatkyquatgioController : ControllerBase
     {
         private readonly INhatkyquatgioService _nhatkyquatgioService;
-        public NhatkyquatgioController( INhatkyquatgioService nhatkyquatgioService)
+        public NhatkyquatgioController(INhatkyquatgioService nhatkyquatgioService)
         {
             _nhatkyquatgioService = nhatkyquatgioService;
-            
+
         }
         [HttpGet]
         public async Task<ActionResult> GetAll()
@@ -27,7 +28,12 @@ namespace WebApi.Controllers
             var items = await _nhatkyquatgioService.getDatailById(Id);
             return Ok(items);
         }
-
+        [HttpGet("tonghopquatgioId/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var data = await _nhatkyquatgioService.GetByTonghopquatgioId(id);
+            return Ok(ApiResponse<List<NhatKyQuatGio>>.Ok(data));
+        }
         [HttpPut("UpdateMultiple")]
         public async Task<ActionResult> UpdateMuliple([FromBody] List<NhatKyQuatGio> request)
         {
@@ -53,7 +59,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] NhatKyQuatGio request)
         {
             if (request == null)
@@ -62,6 +68,33 @@ namespace WebApi.Controllers
             }
             await _nhatkyquatgioService.Add(request);
             return Ok();
+        }
+        [HttpPut("Update")]
+        public async Task<ActionResult> Update([FromBody] NhatKyQuatGio request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await _nhatkyquatgioService.Update(request);
+            return Ok();
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+            await _nhatkyquatgioService.Delete(id);
+            return Ok();
+        }
+        [HttpPost("DeleteSelect")]
+        public async Task<IActionResult> DeleteMultiple(List<int> ids)
+        {
+            var count = await _nhatkyquatgioService.DeleteSelect(ids);
+            return Ok(ApiResponse<int>.Ok(count, "Xóa nhiều dòng thành công"));
         }
     }
 }

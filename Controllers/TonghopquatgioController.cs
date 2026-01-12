@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.Entites;
+using WebApi.Models.Common;
 using WebApi.Models.Tonghopquatgio;
 using WebApi.Services;
 
@@ -16,7 +17,7 @@ namespace WebApi.Controllers
             _tonghopquatgioService = tonghopquatgioService;
         }
 
-        [HttpPost("create")]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] TonghopQuatgio request)
         {
             if (request == null)
@@ -48,7 +49,7 @@ namespace WebApi.Controllers
             return Ok(query);
         }
 
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] TonghopQuatgio request)
         {
             if (!ModelState.IsValid)
@@ -94,6 +95,23 @@ namespace WebApi.Controllers
             }
             return Ok(query.Count);
 
+        }
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] SearchTongHopRequest request)
+        {
+            var result = await _tonghopquatgioService.SearchAsync(request);
+            return Ok(result);
+        }
+        [HttpPost("DeleteSelect")]
+        public async Task<IActionResult> DeleteSelect([FromBody] List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return BadRequest("Danh sách ID rỗng");
+
+            var result = await _tonghopquatgioService.DeleteSelect(ids);
+            if (result == null || result.Count == 0)
+                return NotFound("Không xóa được bản ghi nào");
+            return Ok(new { deleted = result.Count });
         }
 
     }

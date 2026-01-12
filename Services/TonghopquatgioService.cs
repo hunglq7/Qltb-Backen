@@ -10,7 +10,7 @@ namespace WebApi.Services
 {
     public interface ITonghopquatgioService
     {
-  
+
         Task<bool> AddTonghopquatgio([FromBody] TonghopQuatgio Request);
         Task<TonghopQuatgio> GetById(int id);
         Task<int> SumTonghopquatgio();
@@ -18,8 +18,10 @@ namespace WebApi.Services
         Task<bool> UpdateTonghopquatgio([FromBody] TonghopQuatgio Request);
         Task<bool> DeleteTonghopquatgio(int id);
         Task<PagedResult<TonghopquatgioVm>> GetAllPaging(TonghopquatgioPagingRequest request);
+        Task<PagedResult<TonghopquatgioVm>> SearchAsync(SearchTongHopRequest request);
         Task<List<TonghopquatgioVm>> GetQuatgio();
         Task<ApiResult<int>> DeleteMutiple(List<TonghopQuatgio> response);
+        Task<List<int>> DeleteSelect(List<int> ids);
     }
     public class TonghopquatgioService : ITonghopquatgioService
     {
@@ -45,7 +47,7 @@ namespace WebApi.Services
                 NgayLap = Request.NgayLap,
                 SoLuong = Request.SoLuong,
                 TinhTrangThietBi = Request.TinhTrangThietBi,
-                DuPhong=Request.DuPhong,
+                DuPhong = Request.DuPhong,
                 GhiChu = Request.GhiChu,
 
             };
@@ -74,6 +76,18 @@ namespace WebApi.Services
             _thietbiDbContext.RemoveRange(exitItems);
             var count = await _thietbiDbContext.SaveChangesAsync();
             return new ApiSuccessResult<int>(count);
+        }
+
+        public async Task<List<int>> DeleteSelect(List<int> ids)
+        {
+            var items = await _thietbiDbContext.TonghopQuatgio
+              .Where(x => ids.Contains(x.Id))
+              .ToListAsync();
+            if (!items.Any())
+                return new List<int>();
+            _thietbiDbContext.TonghopQuatgio.RemoveRange(items);
+            await _thietbiDbContext.SaveChangesAsync();
+            return items.Select(x => x.Id).ToList();
         }
 
         public async Task<bool> DeleteTonghopquatgio(int id)
@@ -127,7 +141,7 @@ namespace WebApi.Services
             var pagedResult = new PagedResult<TonghopquatgioVm>()
             {
                 TotalRecords = totalRow,
-                SumRecords=sumSoluong,
+                SumRecords = sumSoluong,
                 Items = data,
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize
@@ -158,15 +172,15 @@ namespace WebApi.Services
             var Query = from t in _thietbiDbContext.TonghopQuatgio.Where(x => x.Id == id)
                         join p in _thietbiDbContext.PhongBans on t.DonViId equals p.Id
                         join m in _thietbiDbContext.DanhmucQuatgios on t.QuatGioId equals m.Id
-                      
 
-                        select new { t, p, m};
+
+                        select new { t, p, m };
             return await Query.Select(x => new TonghopquatgioVm
             {
                 Id = x.t.Id,
                 MaQuanLy = x.t.MaQuanLy,
                 TenThietBi = x.m.TenThietBi,
-                TenDonVi = x.p.TenPhong,              
+                TenDonVi = x.p.TenPhong,
                 ViTriLapDat = x.t.ViTriLapDat,
                 TinhTrangThietBi = x.t.TinhTrangThietBi,
                 NgayLap = x.t.NgayLap,
@@ -184,7 +198,7 @@ namespace WebApi.Services
             {
                 Id = x.Id,
                 MaQuanLy = x.MaQuanLy,
-                quatGioId=x.DanhmucQuatgio!.Id,
+                quatGioId = x.DanhmucQuatgio!.Id,
                 TenThietBi = x.DanhmucQuatgio!.TenThietBi,
                 TenDonVi = x.PhongBan!.TenPhong,
                 ViTriLapDat = x.ViTriLapDat,
@@ -194,6 +208,70 @@ namespace WebApi.Services
                 DuPhong = x.DuPhong,
                 GhiChu = x.GhiChu
             }).ToListAsync();
+        }
+
+        public async Task<PagedResult<TonghopquatgioVm>> SearchAsync(SearchTongHopRequest request)
+        {
+            var query = from t in _thietbiDbContext.TonghopQuatgio.Include(x => x.DanhmucQuatgio).Include(x => x.PhongBan)
+                        select t;
+
+            if (!string.IsNullOrWhiteSpace(request.Keyword))
+            {
+                query = query.Where(x =>
+                    x.DanhmucQuatgio.TenThietBi.Contains(request.Keyword) ||
+                    x.GhiChu.Contains(request.Keyword) ||
+                    x.ViTriLapDat.Contains(request.Keyword) ||
+                    x.MaQuanLy.Contains(request.Keyword) ||
+                    x.PhongBan.TenPhong.Contains(request.Keyword)
+                    );
+
+            }
+            // ✅ Lọc theo trạng thái true / false
+            if (request.DuPhong.HasValue)
+            {
+                query = query.Where(x => x.DuPhong == request.DuPhong.Value);
+            }
+
+            // 📅 Từ ngày
+            if (request.TuNgay.HasValue)
+            {
+                query = query.Where(x => x.NgayLap >= request.TuNgay.Value.Date);
+            }
+
+            // 📅 Đến ngày (<= 23:59:59)
+            if (request.DenNgay.HasValue)
+            {
+                var denNgay = request.DenNgay.Value.Date.AddDays(1).AddTicks(-1);
+                query = query.Where(x => x.NgayLap <= denNgay);
+            }
+            var totalRecords = await query.CountAsync();
+            var items = await query
+        .OrderByDescending(x => x.NgayLap)
+        .Skip((request.PageIndex - 1) * request.PageSize)
+        .Take(request.PageSize)
+         .Select(x => new TonghopquatgioVm()
+         {
+             Id = x.Id,
+             MaQuanLy = x.MaQuanLy,
+             TenThietBi = x.DanhmucQuatgio.TenThietBi,
+             quatGioId = x.QuatGioId,
+             TenDonVi = x.PhongBan.TenPhong,
+             DonViId = x.DonViId,
+             ViTriLapDat = x.ViTriLapDat,
+             NgayLap = x.NgayLap,
+             SoLuong = x.SoLuong,
+             TinhTrangThietBi = x.TinhTrangThietBi,
+             DuPhong = x.DuPhong,
+             GhiChu = x.GhiChu
+         })
+        .ToListAsync();
+            return new PagedResult<TonghopquatgioVm>
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                TotalRecords = totalRecords,
+                Items = items
+            };
         }
 
         public async Task<int> SumTonghopquatgio()
@@ -226,6 +304,6 @@ namespace WebApi.Services
             return true;
         }
 
-        
+
     }
 }
