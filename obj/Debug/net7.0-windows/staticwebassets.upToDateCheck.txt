@@ -276,16 +276,16 @@ wwwroot\Images\ThietBi\HP Pro 400(1).jpg
 wwwroot\Images\ThietBi\HP Pro 400.jpg
 wwwroot\Images\ThietBi\HP T1200.jpg
 wwwroot\Images\ThietBi\HP T2600s.jpg
-wwwroot\Images\ThietBi\HP-401D.jpg
-wwwroot\Images\ThietBi\HP-PRO-400.jpg
 wwwroot\Images\ThietBi\hp1006.jpg
 wwwroot\Images\ThietBi\hp1020.jpg
+wwwroot\Images\ThietBi\HP-401D.jpg
 wwwroot\Images\ThietBi\hp501.jpg
 wwwroot\Images\ThietBi\HP501DN.jpg
 wwwroot\Images\ThietBi\hp5100.jpg
 wwwroot\Images\ThietBi\HP5200.jpg
 wwwroot\Images\ThietBi\hp706n.jpg
 wwwroot\Images\ThietBi\Hp776.jpg
+wwwroot\Images\ThietBi\HP-PRO-400.jpg
 wwwroot\Images\ThietBi\Koala.jpg
 wwwroot\Images\ThietBi\Kyocera TASKalfa 3212i(1).jpg
 wwwroot\Images\ThietBi\Kyocera TASKalfa 3212i.jpg
