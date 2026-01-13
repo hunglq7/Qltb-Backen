@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Data.EF;
 
@@ -11,9 +12,11 @@ using WebApi.Data.EF;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ThietbiDbContext))]
-    partial class ThietbiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260112145816_danhmuc_capnhat_GiaCot")]
+    partial class danhmuc_capnhat_GiaCot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,7 +305,7 @@ namespace WebApi.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "36bbb2bd-141f-43eb-bfea-48b191d7f494",
+                            ConcurrencyStamp = "fee7b087-4db3-42a7-84ae-b9c207b09ad1",
                             Dob = new DateTime(1979, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hunglq7@gmail.com",
                             EmailConfirmed = true,
@@ -312,7 +315,7 @@ namespace WebApi.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hunglq7@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK+I+mWkqmP5EOYSeV4RAAPW6XVAECeoYA6DK2ZXIeIIkhMIZmNbVtC7De3BSeBmWg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHIR9OVMqFyazBu/5417Pdzs/ChuU8CFjwKNqUg9hmZ4peGOXxdJs6jmEov584VJjQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -673,6 +676,9 @@ namespace WebApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LoaiThietBiId"));
+
+                    b.Property<decimal>("ChieuCao")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("MaLoai")
                         .IsRequired()

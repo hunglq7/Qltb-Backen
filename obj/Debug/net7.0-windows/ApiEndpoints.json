@@ -541,6 +541,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebApi.Controllers.DanhmucgiacotController",
+    "Method": "GetAll",
+    "RelativePath": "api/Danhmucgiacot",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucgiacotController",
+    "Method": "DeleteById",
+    "RelativePath": "api/Danhmucgiacot/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucgiacotController",
+    "Method": "Add",
+    "RelativePath": "api/Danhmucgiacot/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.DanhmucGiaCot",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucgiacotController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Danhmucgiacot/DeleteSelect",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucgiacotController",
+    "Method": "Update",
+    "RelativePath": "api/Danhmucgiacot/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.DanhmucGiaCot",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebApi.Controllers.DanhmucgiacotthuylucController",
     "Method": "GetAll",
     "RelativePath": "api/Danhmucgiacotthuyluc",

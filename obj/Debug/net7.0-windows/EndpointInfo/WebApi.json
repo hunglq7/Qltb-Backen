@@ -1129,6 +1129,147 @@
         }
       }
     },
+    "/api/Danhmucgiacot": {
+      "get": {
+        "tags": [
+          "Danhmucgiacot"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Danhmucgiacot/DeleteSelect": {
+      "post": {
+        "tags": [
+          "Danhmucgiacot"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Danhmucgiacot/Add": {
+      "post": {
+        "tags": [
+          "Danhmucgiacot"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhmucGiaCot"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhmucGiaCot"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhmucGiaCot"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Danhmucgiacot/Update": {
+      "put": {
+        "tags": [
+          "Danhmucgiacot"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhmucGiaCot"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhmucGiaCot"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhmucGiaCot"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Danhmucgiacot/{Id}": {
+      "delete": {
+        "tags": [
+          "Danhmucgiacot"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Danhmucgiacotthuyluc": {
       "get": {
         "tags": [
@@ -11488,6 +11629,54 @@
         },
         "additionalProperties": false
       },
+      "CapNhatGiaCot": {
+        "type": "object",
+        "properties": {
+          "capNhatId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "donViId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "loaiThietBiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soLuongDangQuanLy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soLuongHuyDong": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soLuongHong": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soLuongDuPhong": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngayCapNhat": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          },
+          "phongBan": {
+            "$ref": "#/components/schemas/PhongBan"
+          },
+          "danhmucGiaCot": {
+            "$ref": "#/components/schemas/DanhmucGiaCot"
+          }
+        },
+        "additionalProperties": false
+      },
       "Capdien": {
         "type": "object",
         "properties": {
@@ -11855,6 +12044,43 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TongHopBomNuoc"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DanhmucGiaCot": {
+        "required": [
+          "maLoai",
+          "tenLoai"
+        ],
+        "type": "object",
+        "properties": {
+          "loaiThietBiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maLoai": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "tenLoai": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "chieuCao": {
+            "type": "number",
+            "format": "double"
+          },
+          "moTa": {
+            "type": "string",
+            "nullable": true
+          },
+          "capNhatGiaCots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CapNhatGiaCot"
             },
             "nullable": true
           }
@@ -13281,6 +13507,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TongHopAptomatKhoidongtu"
+            },
+            "nullable": true
+          },
+          "capNhatGiaCots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CapNhatGiaCot"
             },
             "nullable": true
           }
