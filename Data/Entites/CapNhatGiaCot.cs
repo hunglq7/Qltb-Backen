@@ -14,9 +14,10 @@ namespace WebApi.Data.Entites
         public int SoLuongHuyDong { get; set; }
         public int SoLuongHong { get; set; }
         public int SoLuongDuPhong { get; set; }
+        public string? ViTriSuDung { get; set; }
         public DateTime NgayCapNhat { get; set; }
         public string? GhiChu { get; set; }
-        [ForeignKey(nameof(DonViId))]    
+        [ForeignKey(nameof(DonViId))]
         public virtual PhongBan? PhongBan { get; set; }
         [ForeignKey(nameof(LoaiThietBiId))]
         public virtual DanhmucGiaCot? DanhmucGiaCot { get; set; }

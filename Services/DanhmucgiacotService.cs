@@ -31,7 +31,6 @@ namespace WebApi.Services
             {
                 MaLoai = request.MaLoai,
                 TenLoai = request.TenLoai,
-                ChieuCao = request.ChieuCao,
                 MoTa = request.MoTa,
             };
             await _thietbiDbContext.DanhmucGiaCots.AddAsync(newItems);
@@ -80,11 +79,10 @@ namespace WebApi.Services
                         select c;
             return await query.Select(x => new DanhmucgiacotVm()
             {
-               LoaiThietBiId = x.LoaiThietBiId,
-               MaLoai=x.MaLoai,
-               TenLoai=x.TenLoai,
-               ChieuCao=x.ChieuCao,
-               MoTa=x.MoTa,
+                LoaiThietBiId = x.LoaiThietBiId,
+                MaLoai = x.MaLoai,
+                TenLoai = x.TenLoai,
+                MoTa = x.MoTa,
             }).ToListAsync();
         }
 
@@ -97,8 +95,7 @@ namespace WebApi.Services
             }
             existingItem.MaLoai = request.MaLoai;
             existingItem.TenLoai = request.TenLoai;
-            existingItem.ChieuCao = request.ChieuCao;
-            existingItem.MoTa = request.MoTa;           
+            existingItem.MoTa = request.MoTa;
             _thietbiDbContext.DanhmucGiaCots.Update(existingItem);
             await _thietbiDbContext.SaveChangesAsync();
             return true;

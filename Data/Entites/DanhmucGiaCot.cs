@@ -9,11 +9,10 @@ namespace WebApi.Data.Entites
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LoaiThietBiId { get; set; }
-        [Required]        
+        [Required]
         public string? MaLoai { get; set; }
         [Required]
         public string? TenLoai { get; set; }
-        public decimal ChieuCao { get; set; }
         public string? MoTa { get; set; }
         public virtual IEnumerable<CapNhatGiaCot>? CapNhatGiaCots { get; set; }
     }

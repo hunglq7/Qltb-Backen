@@ -7,7 +7,6 @@ namespace WebApi.Models.GiaCot
         public int LoaiThietBiId { get; set; }
         public string? MaLoai { get; set; }
         public string? TenLoai { get; set; }
-        public decimal ChieuCao { get; set; }
         public string? MoTa { get; set; }
     }
 }
