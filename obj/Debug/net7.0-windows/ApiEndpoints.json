@@ -100,6 +100,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebApi.Controllers.CapnhatgiacotController",
+    "Method": "GetAll",
+    "RelativePath": "api/Capnhatgiacot",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.CapnhatgiacotController",
+    "Method": "DeleteById",
+    "RelativePath": "api/Capnhatgiacot/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.CapnhatgiacotController",
+    "Method": "Add",
+    "RelativePath": "api/Capnhatgiacot/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.CapNhatGiaCot",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.CapnhatgiacotController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Capnhatgiacot/DeleteSelect",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.CapnhatgiacotController",
+    "Method": "Update",
+    "RelativePath": "api/Capnhatgiacot/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.CapNhatGiaCot",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebApi.Controllers.ChucvuController",
     "Method": "GetChucvu",
     "RelativePath": "api/Chucvu",

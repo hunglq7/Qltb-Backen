@@ -213,6 +213,147 @@
         }
       }
     },
+    "/api/Capnhatgiacot": {
+      "get": {
+        "tags": [
+          "Capnhatgiacot"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Capnhatgiacot/DeleteSelect": {
+      "post": {
+        "tags": [
+          "Capnhatgiacot"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Capnhatgiacot/Add": {
+      "post": {
+        "tags": [
+          "Capnhatgiacot"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapNhatGiaCot"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapNhatGiaCot"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapNhatGiaCot"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Capnhatgiacot/Update": {
+      "put": {
+        "tags": [
+          "Capnhatgiacot"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapNhatGiaCot"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapNhatGiaCot"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapNhatGiaCot"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Capnhatgiacot/{Id}": {
+      "delete": {
+        "tags": [
+          "Capnhatgiacot"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Chucvu": {
       "get": {
         "tags": [
@@ -11660,6 +11801,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "viTriSuDung": {
+            "type": "string",
+            "nullable": true
+          },
           "ngayCapNhat": {
             "type": "string",
             "format": "date-time"
@@ -12068,10 +12213,6 @@
           "tenLoai": {
             "minLength": 1,
             "type": "string"
-          },
-          "chieuCao": {
-            "type": "number",
-            "format": "double"
           },
           "moTa": {
             "type": "string",

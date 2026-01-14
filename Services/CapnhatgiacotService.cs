@@ -12,6 +12,7 @@ namespace WebApi.Services
 {
     public interface ICapnhatgiacotService
     {
+        Task<List<CapnhatgiacotVm>> GetAll();
         Task<ApiResult<int>> DeleteMutiple(List<int> ids);
         Task<bool> Add(CapNhatGiaCot request);
         Task<bool> Update(CapNhatGiaCot request);
@@ -36,6 +37,7 @@ namespace WebApi.Services
             {
                 DonViId = request.DonViId,
                 LoaiThietBiId = request.LoaiThietBiId,
+                ViTriSuDung = request.ViTriSuDung,
                 SoLuongDangQuanLy = request.SoLuongDangQuanLy,
                 SoLuongHong = request.SoLuongHong,
                 SoLuongHuyDong = request.SoLuongHuyDong,
@@ -68,7 +70,7 @@ namespace WebApi.Services
             }
 
             var items = await _thietbiDbContext.CapNhatGiaCots
-                .Where(x => ids.Contains(x.LoaiThietBiId))
+                .Where(x => ids.Contains(x.CapNhatId))
                 .ToListAsync();
 
             if (items.Count != ids.Count)
@@ -82,6 +84,25 @@ namespace WebApi.Services
             return new ApiSuccessResult<int>(count);
         }
 
+        public async Task<List<CapnhatgiacotVm>> GetAll()
+        {
+            var query = from c in _thietbiDbContext.CapNhatGiaCots.Include(x => x.PhongBan).Include(x => x.DanhmucGiaCot)
+                        select c;
+            return await query.Select(x => new CapnhatgiacotVm()
+            {
+                CapNhatId = x.CapNhatId,
+                TenDonVi = x.PhongBan!.TenPhong,
+                DonViId = x.DonViId,
+                TenLoaiThietBi = x.DanhmucGiaCot!.TenLoai,
+                LoaiThietBiId = x.LoaiThietBiId,
+                ViTriSuDung = x.ViTriSuDung,
+                SoLuongDangQuanLy = x.SoLuongDangQuanLy,
+                SoLuongHong = x.SoLuongHong,
+                SoLuongHuyDong = x.SoLuongHuyDong,
+                SoLuongDuPhong = x.SoLuongDuPhong,
+                NgayCapNhat = x.NgayCapNhat
+            }).ToListAsync();
+        }
         public async Task<PagedResult<CapnhatgiacotVm>> SearchAsync(SearchTongHopRequest request)
         {
             var query = from t in _thietbiDbContext.CapNhatGiaCots.Include(x => x.DanhmucGiaCot).Include(x => x.PhongBan)
@@ -90,7 +111,7 @@ namespace WebApi.Services
             if (!string.IsNullOrWhiteSpace(request.Keyword))
             {
                 query = query.Where(x =>
-                    x.DanhmucGiaCot!.TenLoai!.Contains(request.Keyword) ||                   
+                    x.DanhmucGiaCot!.TenLoai!.Contains(request.Keyword) ||
                     x.PhongBan!.TenPhong!.Contains(request.Keyword)
                     );
 
@@ -120,6 +141,7 @@ namespace WebApi.Services
              CapNhatId = x.CapNhatId,
              TenDonVi = x.PhongBan!.TenPhong,
              TenLoaiThietBi = x.DanhmucGiaCot!.TenLoai,
+             ViTriSuDung = x.ViTriSuDung,
              SoLuongDangQuanLy = x.SoLuongDangQuanLy,
              SoLuongHong = x.SoLuongHong,
              SoLuongHuyDong = x.SoLuongHuyDong,
@@ -139,13 +161,14 @@ namespace WebApi.Services
 
         public async Task<bool> Update(CapNhatGiaCot request)
         {
-            var existingItem = _thietbiDbContext.CapNhatGiaCots.AsNoTracking().FirstOrDefault(x => x.LoaiThietBiId == request.LoaiThietBiId);
+            var existingItem = _thietbiDbContext.CapNhatGiaCots.AsNoTracking().FirstOrDefault(x => x.CapNhatId == request.CapNhatId);
             if (existingItem == null)
             {
                 return false;
             }
             existingItem.DonViId = request.DonViId;
             existingItem.LoaiThietBiId = request.LoaiThietBiId;
+            existingItem.ViTriSuDung = request.ViTriSuDung;
             existingItem.SoLuongDangQuanLy = request.SoLuongDangQuanLy;
             existingItem.SoLuongHuyDong = request.SoLuongHuyDong;
             existingItem.SoLuongHong = request.SoLuongHong;
