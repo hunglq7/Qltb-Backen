@@ -39,9 +39,6 @@ namespace WebApi.Services
                 LoaiThietBiId = request.LoaiThietBiId,
                 ViTriSuDung = request.ViTriSuDung,
                 SoLuongDangQuanLy = request.SoLuongDangQuanLy,
-                SoLuongHong = request.SoLuongHong,
-                SoLuongHuyDong = request.SoLuongHuyDong,
-                SoLuongDuPhong = request.SoLuongDuPhong,
                 NgayCapNhat = request.NgayCapNhat
             };
             await _thietbiDbContext.CapNhatGiaCots.AddAsync(newItems);
@@ -97,9 +94,6 @@ namespace WebApi.Services
                 LoaiThietBiId = x.LoaiThietBiId,
                 ViTriSuDung = x.ViTriSuDung,
                 SoLuongDangQuanLy = x.SoLuongDangQuanLy,
-                SoLuongHong = x.SoLuongHong,
-                SoLuongHuyDong = x.SoLuongHuyDong,
-                SoLuongDuPhong = x.SoLuongDuPhong,
                 NgayCapNhat = x.NgayCapNhat
             }).ToListAsync();
         }
@@ -136,16 +130,12 @@ namespace WebApi.Services
         .Take(request.PageSize)
          .Select(x => new CapnhatgiacotVm()
 
-
          {
              CapNhatId = x.CapNhatId,
              TenDonVi = x.PhongBan!.TenPhong,
              TenLoaiThietBi = x.DanhmucGiaCot!.TenLoai,
              ViTriSuDung = x.ViTriSuDung,
              SoLuongDangQuanLy = x.SoLuongDangQuanLy,
-             SoLuongHong = x.SoLuongHong,
-             SoLuongHuyDong = x.SoLuongHuyDong,
-             SoLuongDuPhong = x.SoLuongDuPhong,
              NgayCapNhat = x.NgayCapNhat
 
          })
@@ -170,9 +160,6 @@ namespace WebApi.Services
             existingItem.LoaiThietBiId = request.LoaiThietBiId;
             existingItem.ViTriSuDung = request.ViTriSuDung;
             existingItem.SoLuongDangQuanLy = request.SoLuongDangQuanLy;
-            existingItem.SoLuongHuyDong = request.SoLuongHuyDong;
-            existingItem.SoLuongHong = request.SoLuongHong;
-            existingItem.SoLuongDuPhong = request.SoLuongDuPhong;
             existingItem.NgayCapNhat = request.NgayCapNhat;
             _thietbiDbContext.CapNhatGiaCots.Update(existingItem);
             await _thietbiDbContext.SaveChangesAsync();

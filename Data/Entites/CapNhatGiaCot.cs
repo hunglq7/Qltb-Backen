@@ -11,9 +11,6 @@ namespace WebApi.Data.Entites
         public int DonViId { get; set; }
         public int LoaiThietBiId { get; set; }
         public int SoLuongDangQuanLy { get; set; }
-        public int SoLuongHuyDong { get; set; }
-        public int SoLuongHong { get; set; }
-        public int SoLuongDuPhong { get; set; }
         public string? ViTriSuDung { get; set; }
         public DateTime NgayCapNhat { get; set; }
         public string? GhiChu { get; set; }

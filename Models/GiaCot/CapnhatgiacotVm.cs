@@ -14,9 +14,6 @@ namespace WebApi.Models.GiaCot
         public string? ViTriSuDung { get; set; }
         public int LoaiThietBiId { get; set; }
         public int SoLuongDangQuanLy { get; set; }
-        public int SoLuongHuyDong { get; set; }
-        public int SoLuongHong { get; set; }
-        public int SoLuongDuPhong { get; set; }
         public DateTime NgayCapNhat { get; set; }
     }
 }

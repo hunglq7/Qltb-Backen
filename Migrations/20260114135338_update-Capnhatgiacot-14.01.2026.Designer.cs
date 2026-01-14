@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Data.EF;
 
@@ -11,9 +12,11 @@ using WebApi.Data.EF;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(ThietbiDbContext))]
-    partial class ThietbiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260114135338_update-Capnhatgiacot-14.01.2026")]
+    partial class updateCapnhatgiacot14012026
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
