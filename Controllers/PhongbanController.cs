@@ -106,5 +106,17 @@ namespace WebApi.Controllers
             await _phongbanService.Delete(id);
             return Ok();
         }
+        [HttpPost("DeleteSelect")]
+
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var query = await _phongbanService.DeleteSelect(ids);
+            if (query.Count == 0)
+            {
+                return NotFound("Không xóa được bản ghi nào");
+            }
+            return Ok(query.Count);
+
+        }
     }
 }
