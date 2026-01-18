@@ -74,7 +74,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] PhongBan request)
         {
             if (request == null)
@@ -85,7 +85,7 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] PhongBan request)
         {
             if (!ModelState.IsValid)
@@ -105,6 +105,18 @@ namespace WebApi.Controllers
             }
             await _phongbanService.Delete(id);
             return Ok();
+        }
+        [HttpPost("DeleteSelect")]
+
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var query = await _phongbanService.DeleteSelect(ids);
+            if (query.Count == 0)
+            {
+                return NotFound("Không xóa được bản ghi nào");
+            }
+            return Ok(query.Count);
+
         }
     }
 }

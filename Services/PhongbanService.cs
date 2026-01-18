@@ -17,6 +17,7 @@ namespace WebApi.Services
         Task<int> Delete(PhongbanVm phongban);
         Task<ApiResult<int>> UpdateMultiple(List<PhongBan> response);
         Task<ApiResult<int>> DeleteMutiple(List<PhongBan> response);
+        Task<ApiResult<int>> DeleteSelect(List<int> ids);
         Task<bool> Add([FromBody] PhongBan Request);
         Task<bool> Update([FromBody] PhongBan Request);
         Task<bool> Delete(int id);
@@ -32,7 +33,7 @@ namespace WebApi.Services
 
         public async Task<int> CreatePhongban(PhongbanCreateRequest request)
         {
-           if(request == null)
+            if (request == null)
             {
                 return 0;
             }
@@ -41,18 +42,18 @@ namespace WebApi.Services
                 TenPhong = request.TenPhong,
                 TrangThai = request.TrangThai,
             };
-             _dbContext.PhongBans.Add(phongban);
+            _dbContext.PhongBans.Add(phongban);
             return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> Delete(PhongbanVm phongban)
         {
-            var phong = await _dbContext.PhongBans.Where(x=>x.Id== phongban.Id).FirstOrDefaultAsync();
-            if(phong == null)
+            var phong = await _dbContext.PhongBans.Where(x => x.Id == phongban.Id).FirstOrDefaultAsync();
+            if (phong == null)
             {
                 throw new ThietbiException($"Cannot find a phongban");
             }
-             _dbContext.Remove(phong);
+            _dbContext.Remove(phong);
             return await _dbContext.SaveChangesAsync();
 
         }
@@ -72,14 +73,14 @@ namespace WebApi.Services
                     return new ApiErrorResult<int>("Thực hiện xóa không hợp lệ");
                 }
                 var exitPhongban = _dbContext.PhongBans.AsNoTracking().Where(x => ids.Contains(x.Id)).ToList();
-               
+
                 var phongbans = exitPhongban.Select(x => x.Id).ToList();
                 var deff = ids.Except(phongbans).ToList();
                 if (deff.Count > 0)
                 {
                     throw new Exception("id không hợp lệ");
                 }
-               _dbContext.RemoveRange(exitPhongban);
+                _dbContext.RemoveRange(exitPhongban);
                 var count = await _dbContext.SaveChangesAsync();
 
                 return new ApiSuccessResult<int>(count);
@@ -90,7 +91,7 @@ namespace WebApi.Services
             }
         }
 
-       
+
 
         public async Task<List<PhongbanVm>> GetPhongban()
         {
@@ -99,8 +100,8 @@ namespace WebApi.Services
             return await query.Select(x => new PhongbanVm()
             {
                 Id = x.Id,
-                TenPhong=x.TenPhong,
-                TrangThai=x.TrangThai,
+                TenPhong = x.TenPhong,
+                TrangThai = x.TrangThai,
 
             }).ToListAsync();
 
@@ -117,21 +118,21 @@ namespace WebApi.Services
 
                 }
                 var exitPhongban = _dbContext.PhongBans.AsNoTracking().Where(x => ids.Contains(x.Id)).ToList();
-                
+
                 if (!exitPhongban.All(x => ids.Contains(x.Id)))
                 {
                     return new ApiErrorResult<int>("Bạn chưa chọn bản ghi cần cập nhật");
                 }
-               _dbContext.UpdateRange(response);
+                _dbContext.UpdateRange(response);
                 var count = await _dbContext.SaveChangesAsync();
                 var UpdateMuliple = _dbContext.PhongBans.Where(x => ids.Contains(x.Id)).ToList();
-             
+
                 return new ApiSuccessResult<int>(count);
 
             }
             catch (Exception ex)
             {
-                return new ApiErrorResult<int>("Lỗi kết nối hệ thống " +ex);
+                return new ApiErrorResult<int>("Lỗi kết nối hệ thống " + ex);
             }
         }
 
@@ -174,6 +175,28 @@ namespace WebApi.Services
             _dbContext.PhongBans.Remove(items);
             await _dbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<ApiResult<int>> DeleteSelect(List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                return new ApiErrorResult<int>("Danh sách ID rỗng");
+            }
+
+            var items = await _dbContext.PhongBans
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (items.Count != ids.Count)
+            {
+                return new ApiErrorResult<int>("Một số bản ghi không tồn tại");
+            }
+
+            _dbContext.PhongBans.RemoveRange(items);
+            var count = await _dbContext.SaveChangesAsync();
+
+            return new ApiSuccessResult<int>(count);
         }
     }
 }
