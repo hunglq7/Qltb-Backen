@@ -4555,35 +4555,6 @@
             "description": "Success"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Phongban"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PhongBan"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PhongBan"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PhongBan"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
       }
     },
     "/api/Phongban/delete": {
@@ -4697,7 +4668,38 @@
         }
       }
     },
-    "/api/Phongban/update": {
+    "/api/Phongban/Add": {
+      "post": {
+        "tags": [
+          "Phongban"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhongBan"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhongBan"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhongBan"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Phongban/Update": {
       "put": {
         "tags": [
           "Phongban"
@@ -4745,6 +4747,49 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Phongban/DeleteSelect": {
+      "post": {
+        "tags": [
+          "Phongban"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
@@ -11786,18 +11831,6 @@
             "format": "int32"
           },
           "soLuongDangQuanLy": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "soLuongHuyDong": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "soLuongHong": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "soLuongDuPhong": {
             "type": "integer",
             "format": "int32"
           },

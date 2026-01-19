@@ -74,7 +74,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] PhongBan request)
         {
             if (request == null)
@@ -85,7 +85,7 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] PhongBan request)
         {
             if (!ModelState.IsValid)

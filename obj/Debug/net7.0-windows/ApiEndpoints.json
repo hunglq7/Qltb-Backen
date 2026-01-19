@@ -2284,22 +2284,6 @@
   },
   {
     "ContainingType": "WebApi.Controllers.PhongbanController",
-    "Method": "Add",
-    "RelativePath": "api/Phongban",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "WebApi.Data.Entites.PhongBan",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebApi.Controllers.PhongbanController",
     "Method": "Delete",
     "RelativePath": "api/Phongban/{id}",
     "HttpMethod": "DELETE",
@@ -2309,6 +2293,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.PhongbanController",
+    "Method": "Add",
+    "RelativePath": "api/Phongban/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.PhongBan",
         "IsRequired": true
       }
     ],
@@ -2348,8 +2348,24 @@
   },
   {
     "ContainingType": "WebApi.Controllers.PhongbanController",
+    "Method": "DeleteMultiple",
+    "RelativePath": "api/Phongban/DeleteSelect",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.PhongbanController",
     "Method": "Update",
-    "RelativePath": "api/Phongban/update",
+    "RelativePath": "api/Phongban/Update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,

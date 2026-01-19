@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\DU AN WEB JEACT\\Qltb-Backen\\",
+  "WorkspaceRootPath": "E:\\DU AN WEB REACT\\Qltb-Backen\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\services\\capnhatgiacotservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\capnhatgiacotservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\services\\phongbanservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\phongbanservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\controllers\\capnhatgiacotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\capnhatgiacotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\phongbancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\phongbancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CapnhatgiacotController.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\CapnhatgiacotController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CapnhatgiacotController.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\CapnhatgiacotController.cs",
-              "RelativeToolTip": "Controllers\\CapnhatgiacotController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwB4AAAAIAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "PhongbanService.cs",
+              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\PhongbanService.cs",
+              "RelativeDocumentMoniker": "Services\\PhongbanService.cs",
+              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\PhongbanService.cs",
+              "RelativeToolTip": "Services\\PhongbanService.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T15:35:14.593Z",
+              "WhenOpened": "2026-01-19T00:41:50.394Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CapnhatgiacotService.cs",
-              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\CapnhatgiacotService.cs",
-              "RelativeDocumentMoniker": "Services\\CapnhatgiacotService.cs",
-              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\CapnhatgiacotService.cs",
-              "RelativeToolTip": "Services\\CapnhatgiacotService.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAkwEoAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "PhongbanController.cs",
+              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\PhongbanController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PhongbanController.cs",
+              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\PhongbanController.cs",
+              "RelativeToolTip": "Controllers\\PhongbanController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T08:33:39.437Z",
+              "WhenOpened": "2026-01-19T00:41:21.741Z",
               "EditorCaption": ""
             }
           ]
