@@ -40,5 +40,46 @@ namespace WebApi.Controllers
             }
             return Ok(query.Count);
         }
+
+        [HttpPost("Add")]
+        public async Task<ActionResult> Add([FromBody] DanhMucRole request)
+        {
+            if (request == null)
+            {
+                return BadRequest();
+            }
+            await _danhmucRoleService.Add(request);
+            return Ok();
+        }
+
+        [HttpPut("Update")]
+        public async Task<ActionResult> Update([FromBody] DanhMucRole request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await _danhmucRoleService.Update(request);
+            return Ok();
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> DeleteById(int Id)
+        {
+            var items = await _danhmucRoleService.Delete(Id);
+            return Ok(items);
+        }
+        [HttpPost("DeleteSelect")]
+
+        public async Task<IActionResult> DeleteSelect([FromBody] List<int> ids)
+        {
+            var query = await _danhmucRoleService.DeleteSelect(ids);
+            if (query.Count == 0)
+            {
+                return NotFound("Không xóa được bản ghi nào");
+            }
+            return Ok(query.Count);
+
+        }
     }
 }

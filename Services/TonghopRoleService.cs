@@ -13,14 +13,16 @@ namespace WebApi.Services
     {
         // Define methods for the TonghopRoleService here
         Task<bool> Add(TongHopRole role);
+        Task<List<TonghopRoleVm>> GetAll();
         Task<TongHopRole> GetById(int id);
         Task<int> Sum();
         Task<List<TonghopRoleVm>> getDatailById(int id);
         Task<bool> Update([FromBody] TongHopRole Request);
         Task<bool> Delete(int id);
+        Task<ApiResult<int>> DeleteSelect(List<int> ids);
         Task<PagedResult<TonghopRoleVm>> GetAllPaging(TonghopRolePagingRequest request);
     }
-    public class TonghopRoleService:ITonghopRoleService
+    public class TonghopRoleService : ITonghopRoleService
     {
         private readonly ThietbiDbContext _thietbiDb;
 
@@ -39,19 +41,19 @@ namespace WebApi.Services
             var items = new TongHopRole()
             {
                 Id = Request.Id,
-                RoleId= Request.RoleId,
-                PhongBanId= Request.PhongBanId,
-                ViTriLapDat= Request.ViTriLapDat,
-               NgayLap= Request.NgayLap,
-               SoLuong= Request.SoLuong,
-               TinhTrangThietBi= Request.TinhTrangThietBi,
-               DuPhong= Request.DuPhong,        
-               GhiChu= Request.GhiChu               
+                RoleId = Request.RoleId,
+                PhongBanId = Request.PhongBanId,
+                ViTriLapDat = Request.ViTriLapDat,
+                NgayLap = Request.NgayLap,
+                SoLuong = Request.SoLuong,
+                TinhTrangThietBi = Request.TinhTrangThietBi,
+                DuPhong = Request.DuPhong,
+                GhiChu = Request.GhiChu
             };
             await _thietbiDb.TongHopRoles.AddAsync(items);
             await _thietbiDb.SaveChangesAsync();
             return true;
-            
+
         }
 
         public async Task<TongHopRole> GetById(int id)
@@ -62,8 +64,8 @@ namespace WebApi.Services
                 query = new TongHopRole()
                 {
                     Id = 0,
-                    RoleId=0,
-                NgayLap = DateTime.Now,
+                    RoleId = 0,
+                    NgayLap = DateTime.Now,
 
                 }
                      ;
@@ -87,15 +89,15 @@ namespace WebApi.Services
                         select new { t, p, m };
             return await Query.Select(x => new TonghopRoleVm
             {
-               Id = x.t.Id,
-               TenThietBi = x.m.TenThietBi,
-               TenPhong = x.p.TenPhong,
-               ViTriLapDat = x.t.ViTriLapDat,
-               NgayLap = x.t.NgayLap,
-               SoLuong = x.t.SoLuong,
-               TinhTrangThietBi = x.t.TinhTrangThietBi,
-               DuPhong = x.t.DuPhong,         
-               GhiChu = x.t.GhiChu
+                Id = x.t.Id,
+                TenThietBi = x.m.TenThietBi,
+                TenPhong = x.p.TenPhong,
+                ViTriLapDat = x.t.ViTriLapDat,
+                NgayLap = x.t.NgayLap,
+                SoLuong = x.t.SoLuong,
+                TinhTrangThietBi = x.t.TinhTrangThietBi,
+                DuPhong = x.t.DuPhong,
+                GhiChu = x.t.GhiChu
             }).ToListAsync();
         }
 
@@ -113,7 +115,7 @@ namespace WebApi.Services
             entity.NgayLap = Request.NgayLap;
             entity.SoLuong = Request.SoLuong;
             entity.TinhTrangThietBi = Request.TinhTrangThietBi;
-            entity.DuPhong = Request.DuPhong;    
+            entity.DuPhong = Request.DuPhong;
             entity.GhiChu = Request.GhiChu;
             _thietbiDb.Update(entity);
             await _thietbiDb.SaveChangesAsync();
@@ -181,7 +183,49 @@ namespace WebApi.Services
             };
             return pagedResult;
         }
+
+        public async Task<List<TonghopRoleVm>> GetAll()
+        {
+            var query = from t in _thietbiDb.TongHopRoles
+                        select t;
+            return await query.Select(x => new TonghopRoleVm()
+            {
+                Id = x.Id,
+                TenThietBi = x.DanhmucRole.TenThietBi,
+                RoleId = x.RoleId,
+                TenPhong = x.PhongBan.TenPhong,
+                PhongBanId = x.PhongBanId,
+                ViTriLapDat = x.ViTriLapDat,
+                NgayLap = x.NgayLap,
+                SoLuong = x.SoLuong,
+                TinhTrangThietBi = x.TinhTrangThietBi,
+                DuPhong = x.DuPhong,
+                GhiChu = x.GhiChu
+            }).ToListAsync();
+        }
+
+        public async Task<ApiResult<int>> DeleteSelect(List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                return new ApiErrorResult<int>("Danh sách ID rỗng");
+            }
+
+            var items = await _thietbiDb.TongHopRoles
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (items.Count != ids.Count)
+            {
+                return new ApiErrorResult<int>("Một số bản ghi không tồn tại");
+            }
+
+            _thietbiDb.TongHopRoles.RemoveRange(items);
+            var count = await _thietbiDb.SaveChangesAsync();
+
+            return new ApiSuccessResult<int>(count);
+        }
     }
-    
-    
+
+
 }
