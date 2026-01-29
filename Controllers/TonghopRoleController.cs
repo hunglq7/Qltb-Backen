@@ -15,7 +15,7 @@ namespace WebApi.Controllers
         {
             _tonghopRoleService = tonghopRoleService;
         }
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] TongHopRole request)
         {
             if (request == null)
@@ -37,7 +37,7 @@ namespace WebApi.Controllers
             var entity = await _tonghopRoleService.getDatailById(Id);
             return Ok(entity);
         }
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] TongHopRole request)
         {
             if (!ModelState.IsValid)
@@ -68,6 +68,27 @@ namespace WebApi.Controllers
         {
             var sum = await _tonghopRoleService.Sum();
             return Ok(sum);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            var query = await _tonghopRoleService.GetAll();
+            return Ok(query);
+
+        }
+
+        [HttpPost("DeleteSelect")]
+
+        public async Task<IActionResult> DeleteSelect([FromBody] List<int> ids)
+        {
+            var query = await _tonghopRoleService.DeleteSelect(ids);
+            if (query.Count == 0)
+            {
+                return NotFound("Không xóa được bản ghi nào");
+            }
+            return Ok(query.Count);
+
         }
     }
 }

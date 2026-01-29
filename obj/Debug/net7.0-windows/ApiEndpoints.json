@@ -1022,6 +1022,38 @@
   },
   {
     "ContainingType": "WebApi.Controllers.DanhmucRoleController",
+    "Method": "DeleteById",
+    "RelativePath": "api/DanhmucRole/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucRoleController",
+    "Method": "Add",
+    "RelativePath": "api/DanhmucRole/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.DanhMucRole",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucRoleController",
     "Method": "DeleteMultiple",
     "RelativePath": "api/DanhmucRole/DeleteMultipale",
     "HttpMethod": "POST",
@@ -1031,6 +1063,38 @@
       {
         "Name": "reponse",
         "Type": "System.Collections.Generic.List\u00601[[WebApi.Data.Entites.DanhMucRole, WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucRoleController",
+    "Method": "DeleteSelect",
+    "RelativePath": "api/DanhmucRole/DeleteSelect",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.DanhmucRoleController",
+    "Method": "Update",
+    "RelativePath": "api/DanhmucRole/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.DanhMucRole",
         "IsRequired": true
       }
     ],
@@ -5712,18 +5776,12 @@
   },
   {
     "ContainingType": "WebApi.Controllers.TonghopRoleController",
-    "Method": "Add",
+    "Method": "GetAll",
     "RelativePath": "api/TonghopRole",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "WebApi.Data.Entites.TongHopRole",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -5753,6 +5811,38 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.TonghopRoleController",
+    "Method": "Add",
+    "RelativePath": "api/TonghopRole/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Data.Entites.TongHopRole",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Controllers.TonghopRoleController",
+    "Method": "DeleteSelect",
+    "RelativePath": "api/TonghopRole/DeleteSelect",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -5838,7 +5928,7 @@
   {
     "ContainingType": "WebApi.Controllers.TonghopRoleController",
     "Method": "Update",
-    "RelativePath": "api/TonghopRole/update",
+    "RelativePath": "api/TonghopRole/Update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,

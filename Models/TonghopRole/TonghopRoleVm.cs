@@ -6,7 +6,9 @@ namespace WebApi.Models.TonghopRole
     {
         public int Id { get; set; }
         public string? TenThietBi { get; set; }
-        public string? TenPhong{ get; set; }      
+        public int RoleId { get; set; }
+        public string? TenPhong { get; set; }
+        public int PhongBanId { get; set; }
         public string? ViTriLapDat { get; set; }
         public DateTime NgayLap { get; set; }
         public int SoLuong { get; set; }

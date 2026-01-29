@@ -2181,6 +2181,135 @@
         }
       }
     },
+    "/api/DanhmucRole/Add": {
+      "post": {
+        "tags": [
+          "DanhmucRole"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhMucRole"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhMucRole"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhMucRole"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/DanhmucRole/Update": {
+      "put": {
+        "tags": [
+          "DanhmucRole"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhMucRole"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhMucRole"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DanhMucRole"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/DanhmucRole/{Id}": {
+      "delete": {
+        "tags": [
+          "DanhmucRole"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/DanhmucRole/DeleteSelect": {
+      "post": {
+        "tags": [
+          "DanhmucRole"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Danhmuctoitruc": {
       "get": {
         "tags": [
@@ -10365,7 +10494,7 @@
         }
       }
     },
-    "/api/TonghopRole": {
+    "/api/TonghopRole/Add": {
       "post": {
         "tags": [
           "TonghopRole"
@@ -10466,7 +10595,7 @@
         }
       }
     },
-    "/api/TonghopRole/update": {
+    "/api/TonghopRole/Update": {
       "put": {
         "tags": [
           "TonghopRole"
@@ -10587,6 +10716,61 @@
         "tags": [
           "TonghopRole"
         ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/TonghopRole": {
+      "get": {
+        "tags": [
+          "TonghopRole"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/TonghopRole/DeleteSelect": {
+      "post": {
+        "tags": [
+          "TonghopRole"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success"
