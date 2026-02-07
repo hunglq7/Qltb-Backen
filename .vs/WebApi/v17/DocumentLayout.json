@@ -3,19 +3,12 @@
   "WorkspaceRootPath": "E:\\DU AN WEB REACT\\Qltb-Backen\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\tonghopbienapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\tonghopbienapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\tonghoprolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\tonghoprolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\SourceServer\\027a0d95ece620d3bde20bbe64a9c99c741188709891645d07f7dde2ce83aaed\\Controllers\\TonghopRoleController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\services\\phongbanservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\phongbanservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\phongbancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\phongbancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,49 +24,27 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "TonghopRoleController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\AppData\\Local\\SourceServer\\027a0d95ece620d3bde20bbe64a9c99c741188709891645d07f7dde2ce83aaed\\Controllers\\TonghopRoleController.cs",
-              "ToolTip": "C:\\Users\\Admin\\AppData\\Local\\SourceServer\\027a0d95ece620d3bde20bbe64a9c99c741188709891645d07f7dde2ce83aaed\\Controllers\\TonghopRoleController.cs [Read Only]",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAnwBMAAAAIAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T05:12:58.717Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TonghopRoleController.cs",
               "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopRoleController.cs",
               "RelativeDocumentMoniker": "Controllers\\TonghopRoleController.cs",
               "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopRoleController.cs",
               "RelativeToolTip": "Controllers\\TonghopRoleController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAIA0wDgAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAAAGMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T00:46:37.366Z",
+              "WhenOpened": "2026-02-07T04:17:59.983Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PhongbanService.cs",
-              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\PhongbanService.cs",
-              "RelativeDocumentMoniker": "Services\\PhongbanService.cs",
-              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\PhongbanService.cs",
-              "RelativeToolTip": "Services\\PhongbanService.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "TonghopbienapController.cs",
+              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopbienapController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TonghopbienapController.cs",
+              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopbienapController.cs",
+              "RelativeToolTip": "Controllers\\TonghopbienapController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAEcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-19T00:41:50.394Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PhongbanController.cs",
-              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\PhongbanController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PhongbanController.cs",
-              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\PhongbanController.cs",
-              "RelativeToolTip": "Controllers\\PhongbanController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-19T00:41:21.741Z"
+              "WhenOpened": "2026-02-07T04:17:51.306Z",
+              "EditorCaption": ""
             }
           ]
         }
