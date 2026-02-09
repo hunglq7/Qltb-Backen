@@ -10,23 +10,35 @@ namespace WebApi.Controllers
     public class TonghopbienapController : ControllerBase
     {
         public readonly ITonghopbienapService _service;
-        public TonghopbienapController(ITonghopbienapService service)
+        private readonly ILogger<TonghopbienapController> _logger;
+
+        public TonghopbienapController(ITonghopbienapService service, ILogger<TonghopbienapController> logger)
         {
             _service = service;
+            _logger = logger;
         }
         [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] TonghopBienap request)
         {
-            if (request == null || !ModelState.IsValid)
+            _logger.LogInformation($"Add received: BienapId={request?.BienapId}, PhongbanId={request?.PhongbanId}, NgayLap={request?.NgayLap}");
+
+            if (request == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Request không được rỗng");
+            }
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                var errorList = errors.Select(e => e.ErrorMessage).ToList();
+                _logger.LogError($"ModelState errors: {string.Join(", ", errorList)}");
+                return BadRequest(new { message = "Model validation failed", errors = errorList });
             }
             var result = await _service.Add(request);
-            if (!result)
+            if (result == null)
             {
                 return BadRequest("Thêm mới thất bại");
             }
-            return Ok();
+            return Ok(result);
         }
         [HttpGet("DetailById/{Id}")]
         public async Task<ActionResult> GetDetailById(int Id)
@@ -43,12 +55,21 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             }
             var result = await _service.Update(request);
-            if (!result)
+            if (result == null)
             {
                 return BadRequest("Cập nhật thất bại");
             }
-            return Ok();
+            return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            var query = await _service.GetAll();
+            return Ok(query);
+
+        }
+
         [HttpDelete("{Id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -56,14 +77,18 @@ namespace WebApi.Controllers
             {
                 return BadRequest();
             }
-            await _service.Delete(id);
+            var deleted = await _service.Delete(id);
+            if (!deleted)
+            {
+                return NotFound("Không tìm thấy bản ghi");
+            }
             return Ok();
         }
         [HttpPost("DeleteSelect")]
         public async Task<IActionResult> DeleteSelect([FromBody] List<int> ids)
         {
             var query = await _service.DeleteSelect(ids);
-            if (query.Count == 0)
+            if (query == null || query.Count == null || query.Count.Equals(0))
             {
                 return NotFound("Không xóa được bản ghi nào");
             }

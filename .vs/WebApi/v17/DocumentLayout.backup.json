@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "E:\\DU AN WEB REACT\\Qltb-Backen\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\danhmucbienapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\danhmucbienapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\tonghopbienapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\tonghopbienapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\danhmucrolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\danhmucrolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\services\\tonghopbienapservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\tonghopbienapservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\services\\danhmucbienapservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\danhmucbienapservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\controllers\\tonghoprolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\tonghoprolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\services\\danhmucroleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:services\\danhmucroleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\data\\entites\\danhmucbienap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:data\\entites\\danhmucbienap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|e:\\du an web react\\qltb-backen\\data\\entites\\tonghopbienap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:data\\entites\\tonghopbienap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,66 +31,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DanhmucBienapController.cs",
-              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\DanhmucBienapController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DanhmucBienapController.cs",
-              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\DanhmucBienapController.cs",
-              "RelativeToolTip": "Controllers\\DanhmucBienapController.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAA7wE8AAAANAAAAAAAAAA==",
+              "Title": "TonghopbienapController.cs",
+              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopbienapController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TonghopbienapController.cs",
+              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopbienapController.cs",
+              "RelativeToolTip": "Controllers\\TonghopbienapController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAswCMAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T02:44:46.545Z",
+              "WhenOpened": "2026-02-07T04:17:51.306Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DanhmucRoleController.cs",
-              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\DanhmucRoleController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DanhmucRoleController.cs",
-              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\DanhmucRoleController.cs",
-              "RelativeToolTip": "Controllers\\DanhmucRoleController.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAgwFIAAAAJAAAAAAAAAA==",
+              "Title": "TonghopbienapService.cs",
+              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\TonghopbienapService.cs",
+              "RelativeDocumentMoniker": "Services\\TonghopbienapService.cs",
+              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\TonghopbienapService.cs",
+              "RelativeToolTip": "Services\\TonghopbienapService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAADEAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T02:44:08.416Z",
+              "WhenOpened": "2026-02-09T01:32:17.558Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "DanhmucRoleService.cs",
-              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\DanhmucRoleService.cs",
-              "RelativeDocumentMoniker": "Services\\DanhmucRoleService.cs",
-              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\DanhmucRoleService.cs",
-              "RelativeToolTip": "Services\\DanhmucRoleService.cs",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHsAAAAYAAAAAAAAAA==",
+              "Title": "TonghopBienap.cs",
+              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Data\\Entites\\TonghopBienap.cs",
+              "RelativeDocumentMoniker": "Data\\Entites\\TonghopBienap.cs",
+              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Data\\Entites\\TonghopBienap.cs",
+              "RelativeToolTip": "Data\\Entites\\TonghopBienap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T02:31:19.008Z",
+              "WhenOpened": "2026-02-09T01:12:42.057Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DanhmucBienApService.cs",
-              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\DanhmucBienApService.cs",
-              "RelativeDocumentMoniker": "Services\\DanhmucBienApService.cs",
-              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Services\\DanhmucBienApService.cs",
-              "RelativeToolTip": "Services\\DanhmucBienApService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGYAAAAsAAAAAAAAAA==",
+              "Title": "TonghopRoleController.cs",
+              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopRoleController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TonghopRoleController.cs",
+              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Controllers\\TonghopRoleController.cs",
+              "RelativeToolTip": "Controllers\\TonghopRoleController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAFEAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T02:30:59.891Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DanhmucBienap.cs",
-              "DocumentMoniker": "E:\\DU AN WEB REACT\\Qltb-Backen\\Data\\Entites\\DanhmucBienap.cs",
-              "RelativeDocumentMoniker": "Data\\Entites\\DanhmucBienap.cs",
-              "ToolTip": "E:\\DU AN WEB REACT\\Qltb-Backen\\Data\\Entites\\DanhmucBienap.cs",
-              "RelativeToolTip": "Data\\Entites\\DanhmucBienap.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-07T01:30:24.028Z",
+              "WhenOpened": "2026-02-07T04:17:59.983Z",
               "EditorCaption": ""
             }
           ]

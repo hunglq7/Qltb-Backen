@@ -11,10 +11,10 @@ namespace WebApi.Services
 {
     public interface ITonghopbienapService
     {
-        Task<bool> Add(TonghopBienap Request);
+        Task<TonghopBienap> Add(TonghopBienap Request);
         Task<List<TonghopbienapVm>> GetAll();
         Task<List<TonghopbienapVm>> getDatailById(int id);
-        Task<bool> Update([FromBody] TonghopBienap Request);
+        Task<TonghopBienap> Update([FromBody] TonghopBienap Request);
         Task<bool> Delete(int id);
         Task<ApiResult<int>> DeleteSelect(List<int> ids);
     }
@@ -25,24 +25,40 @@ namespace WebApi.Services
         {
             _thietbiDb = thietbiDb;
         }
-        public async Task<bool> Add(TonghopBienap Request)
+        public async Task<TonghopBienap> Add(TonghopBienap Request)
         {
             if (Request == null)
             {
-                return false;
+                return null;
             }
+            // validate referenced entities exist
+            var bienapExists = await _thietbiDb.DanhmucBienaps.AnyAsync(x => x.Id == Request.BienapId);
+            var phongbanExists = await _thietbiDb.PhongBans.AnyAsync(x => x.Id == Request.PhongbanId);
+            if (!bienapExists || !phongbanExists)
+            {
+                return null;
+            }
+
             var items = new TonghopBienap()
             {
                 BienapId = Request.BienapId,
-                PhongbanId  = Request.PhongbanId,
+                PhongbanId = Request.PhongbanId,
                 ViTriLapDat = Request.ViTriLapDat,
-                NgayLap = Request.NgayLap,           
+                NgayLap = Request.NgayLap,
                 DuPhong = Request.DuPhong,
                 GhiChu = Request.GhiChu
             };
-            await _thietbiDb.TonghopBienaps.AddAsync(items);
-            await _thietbiDb.SaveChangesAsync();
-            return true;
+
+            try
+            {
+                await _thietbiDb.TonghopBienaps.AddAsync(items);
+                await _thietbiDb.SaveChangesAsync();
+                return items;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public async Task<bool> Delete(int id)
@@ -53,7 +69,7 @@ namespace WebApi.Services
                 return false;
             }
             _thietbiDb.TonghopBienaps.Remove(query);
-            _thietbiDb.SaveChanges();
+            await _thietbiDb.SaveChangesAsync();
             return true;
         }
 
@@ -90,7 +106,7 @@ namespace WebApi.Services
                 TenPhongBan = x.PhongBan.TenPhong,
                 PhongbanId = x.PhongbanId,
                 ViTriLapDat = x.ViTriLapDat,
-                NgayLap = x.NgayLap,         
+                NgayLap = x.NgayLap,
                 DuPhong = x.DuPhong,
                 GhiChu = x.GhiChu
             }).ToListAsync();
@@ -110,29 +126,43 @@ namespace WebApi.Services
                 TenThietBi = x.m.TenThietBi,
                 TenPhongBan = x.p.TenPhong,
                 ViTriLapDat = x.t.ViTriLapDat,
-                NgayLap = x.t.NgayLap,         
+                NgayLap = x.t.NgayLap,
                 DuPhong = x.t.DuPhong,
                 GhiChu = x.t.GhiChu
             }).ToListAsync();
         }
 
-        public async Task<bool> Update([FromBody] TonghopBienap Request)
+        public async Task<TonghopBienap> Update([FromBody] TonghopBienap Request)
         {
             var entity = await _thietbiDb.TonghopBienaps.FindAsync(Request.Id);
             if (entity == null)
             {
-                return false;
+                return null;
             }
-            entity.Id = Request.Id;
+            // validate referenced entities exist
+            var bienapExists = await _thietbiDb.DanhmucBienaps.AnyAsync(x => x.Id == Request.BienapId);
+            var phongbanExists = await _thietbiDb.PhongBans.AnyAsync(x => x.Id == Request.PhongbanId);
+            if (!bienapExists || !phongbanExists)
+            {
+                return null;
+            }
+
             entity.BienapId = Request.BienapId;
             entity.PhongbanId = Request.PhongbanId;
             entity.ViTriLapDat = Request.ViTriLapDat;
-            entity.NgayLap = Request.NgayLap;     
+            entity.NgayLap = Request.NgayLap;
             entity.DuPhong = Request.DuPhong;
             entity.GhiChu = Request.GhiChu;
             _thietbiDb.Update(entity);
-            await _thietbiDb.SaveChangesAsync();
-            return true;
+            try
+            {
+                await _thietbiDb.SaveChangesAsync();
+                return entity;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
