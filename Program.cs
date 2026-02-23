@@ -23,6 +23,7 @@ var JwtSetting = builder.Configuration.GetSection("JWTSetting");
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; // ✅ Cho phép deserialize camelCase
 });
 builder.Services.AddDbContext<ThietbiDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ThietbiDb")));

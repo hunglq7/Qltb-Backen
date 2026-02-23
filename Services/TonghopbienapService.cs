@@ -29,14 +29,14 @@ namespace WebApi.Services
         {
             if (Request == null)
             {
-                return null;
+                throw new ArgumentNullException(nameof(Request));
             }
             // validate referenced entities exist
             var bienapExists = await _thietbiDb.DanhmucBienaps.AnyAsync(x => x.Id == Request.BienapId);
             var phongbanExists = await _thietbiDb.PhongBans.AnyAsync(x => x.Id == Request.PhongbanId);
             if (!bienapExists || !phongbanExists)
             {
-                return null;
+                throw new Exception("BiênAp hoặc PhòngBan không tồn tại");
             }
 
             var items = new TonghopBienap()
@@ -49,16 +49,9 @@ namespace WebApi.Services
                 GhiChu = Request.GhiChu
             };
 
-            try
-            {
-                await _thietbiDb.TonghopBienaps.AddAsync(items);
-                await _thietbiDb.SaveChangesAsync();
-                return items;
-            }
-            catch
-            {
-                return null;
-            }
+            await _thietbiDb.TonghopBienaps.AddAsync(items);
+            await _thietbiDb.SaveChangesAsync();
+            return items;
         }
 
         public async Task<bool> Delete(int id)
@@ -95,56 +88,91 @@ namespace WebApi.Services
             return new ApiSuccessResult<int>(count);
         }
 
+        // public async Task<List<TonghopbienapVm>> GetAll()
+        // {
+        //     try
+        //     {
+        //         var result = await _thietbiDb.TonghopBienaps
+        //             .Include(x => x.DanhmucBienap)
+        //             .Include(x => x.PhongBan)
+        //             .AsNoTracking()
+        //             .Select(x => new TonghopbienapVm()
+        //             {
+        //                 Id = x.Id,
+        //                 TenThietBi = x.DanhmucBienap != null ? x.DanhmucBienap.TenThietBi : "Không xác định",
+        //                 BienapId = x.BienapId,
+        //                 TenPhongBan = x.PhongBan != null ? x.PhongBan.TenPhong : "Không xác định",
+        //                 PhongbanId = x.PhongbanId,
+        //                 ViTriLapDat = x.ViTriLapDat ?? "",
+        //                 NgayLap = x.NgayLap,
+        //                 DuPhong = x.DuPhong,
+        //                 GhiChu = x.GhiChu ?? ""
+        //             })
+        //             .ToListAsync();
+
+        //         return result;
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         throw new Exception($"GetAll error: {ex.Message}", ex);
+        //     }
+        // }
+
         public async Task<List<TonghopbienapVm>> GetAll()
         {
-            var query = _thietbiDb.TonghopBienaps.Include(x => x.DanhmucBienap).Include(x => x.PhongBan);
-            return await query.Select(x => new TonghopbienapVm()
-            {
-                Id = x.Id,
-                TenThietBi = x.DanhmucBienap.TenThietBi,
-                BienapId = x.BienapId,
-                TenPhongBan = x.PhongBan.TenPhong,
-                PhongbanId = x.PhongbanId,
-                ViTriLapDat = x.ViTriLapDat,
-                NgayLap = x.NgayLap,
-                DuPhong = x.DuPhong,
-                GhiChu = x.GhiChu
-            }).ToListAsync();
+            return await _thietbiDb.TonghopBienaps
+                .Select(x => new TonghopbienapVm
+                {
+                    Id = x.Id,
+                    BienapId = x.BienapId,
+                    PhongbanId = x.PhongbanId,
+                    ViTriLapDat = x.ViTriLapDat,
+                    NgayLap = x.NgayLap,
+                    DuPhong = x.DuPhong,
+                    GhiChu = x.GhiChu
+                })
+                .ToListAsync();
         }
 
         public async Task<List<TonghopbienapVm>> getDatailById(int id)
         {
-            var Query = from t in _thietbiDb.TonghopBienaps.Where(x => x.Id == id)
-                        join p in _thietbiDb.PhongBans on t.PhongbanId equals p.Id
-                        join m in _thietbiDb.DanhmucBienaps on t.BienapId equals m.Id
-
-
-                        select new { t, p, m };
-            return await Query.Select(x => new TonghopbienapVm
-            {
-                Id = x.t.Id,
-                TenThietBi = x.m.TenThietBi,
-                TenPhongBan = x.p.TenPhong,
-                ViTriLapDat = x.t.ViTriLapDat,
-                NgayLap = x.t.NgayLap,
-                DuPhong = x.t.DuPhong,
-                GhiChu = x.t.GhiChu
-            }).ToListAsync();
+            var result = await _thietbiDb.TonghopBienaps
+                .Where(x => x.Id == id)
+                .Include(x => x.DanhmucBienap)
+                .Include(x => x.PhongBan)
+                .AsNoTracking()
+                .Select(x => new TonghopbienapVm
+                {
+                    Id = x.Id,
+                    TenThietBi = x.DanhmucBienap != null ? x.DanhmucBienap.TenThietBi : "Không xác định",
+                    BienapId = x.BienapId,
+                    TenPhongBan = x.PhongBan != null ? x.PhongBan.TenPhong : "Không xác định",
+                    PhongbanId = x.PhongbanId,
+                    ViTriLapDat = x.ViTriLapDat ?? "",
+                    NgayLap = x.NgayLap,
+                    DuPhong = x.DuPhong,
+                    GhiChu = x.GhiChu ?? ""
+                }).ToListAsync();
+            return result;
         }
 
         public async Task<TonghopBienap> Update([FromBody] TonghopBienap Request)
         {
+            if (Request == null)
+            {
+                throw new ArgumentNullException(nameof(Request));
+            }
             var entity = await _thietbiDb.TonghopBienaps.FindAsync(Request.Id);
             if (entity == null)
             {
-                return null;
+                throw new Exception($"Không tìm thấy bản ghi với ID {Request.Id}");
             }
             // validate referenced entities exist
             var bienapExists = await _thietbiDb.DanhmucBienaps.AnyAsync(x => x.Id == Request.BienapId);
             var phongbanExists = await _thietbiDb.PhongBans.AnyAsync(x => x.Id == Request.PhongbanId);
             if (!bienapExists || !phongbanExists)
             {
-                return null;
+                throw new Exception("BiênAp hoặc PhòngBan không tồn tại");
             }
 
             entity.BienapId = Request.BienapId;
@@ -154,15 +182,8 @@ namespace WebApi.Services
             entity.DuPhong = Request.DuPhong;
             entity.GhiChu = Request.GhiChu;
             _thietbiDb.Update(entity);
-            try
-            {
-                await _thietbiDb.SaveChangesAsync();
-                return entity;
-            }
-            catch
-            {
-                return null;
-            }
+            await _thietbiDb.SaveChangesAsync();
+            return entity;
         }
     }
 }
