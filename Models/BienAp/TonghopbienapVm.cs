@@ -11,7 +11,7 @@ namespace WebApi.Models.BienAp
         public int PhongbanId { get; set; }
     
         public string? ViTriLapDat { get; set; }
-        public DateTime NgayLap { get; set; }
+        public DateTime? NgayLap { get; set; }
         public Boolean DuPhong { get; set; }
    
         public string? GhiChu { get; set; }

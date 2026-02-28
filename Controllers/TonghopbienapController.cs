@@ -123,13 +123,12 @@ namespace WebApi.Controllers
         [HttpPost("DeleteSelect")]
         public async Task<IActionResult> DeleteSelect([FromBody] List<int> ids)
         {
-            var query = await _service.DeleteSelect(ids);
-            if (query == null || query.Count == null || query.Count.Equals(0))
+            var result = await _service.DeleteSelect(ids);
+            if (!result.IsSuccessed)
             {
-                return NotFound("Không xóa được bản ghi nào");
+                return BadRequest(new { message = result.Message, success = false });
             }
-            return Ok(query.Count);
-
+            return Ok(new { data = result.ResultObj, success = true });
         }
     }
 }

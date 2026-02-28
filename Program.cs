@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using WebApi.Common;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
@@ -23,7 +24,9 @@ var JwtSetting = builder.Configuration.GetSection("JWTSetting");
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; // ✅ Cho phép deserialize camelCase
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; // ✅ Cho phép deserialize camelCase;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
 });
 builder.Services.AddDbContext<ThietbiDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ThietbiDb")));

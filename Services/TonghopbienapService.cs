@@ -120,18 +120,36 @@ namespace WebApi.Services
 
         public async Task<List<TonghopbienapVm>> GetAll()
         {
-            return await _thietbiDb.TonghopBienaps
-                .Select(x => new TonghopbienapVm
-                {
-                    Id = x.Id,
-                    BienapId = x.BienapId,
-                    PhongbanId = x.PhongbanId,
-                    ViTriLapDat = x.ViTriLapDat,
-                    NgayLap = x.NgayLap,
-                    DuPhong = x.DuPhong,
-                    GhiChu = x.GhiChu
-                })
-                .ToListAsync();
+            try
+            {
+                // Sử dụng Include để nạp dữ liệu từ các bảng liên quan
+                var result = await _thietbiDb.TonghopBienaps
+                    .Include(x => x.DanhmucBienap)
+                    .Include(x => x.PhongBan)
+                    .AsNoTracking() // Tối ưu hiệu suất cho truy vấn chỉ đọc
+                    .Select(x => new TonghopbienapVm
+                    {
+                        Id = x.Id,
+                        BienapId = x.BienapId,
+                        // Kiểm tra null cho bảng DanhmucBienap để tránh lỗi 500
+                        TenThietBi = x.DanhmucBienap != null ? x.DanhmucBienap.TenThietBi : "N/A",
+                        PhongbanId = x.PhongbanId,
+                        // Kiểm tra null cho bảng PhongBan
+                        TenPhongBan = x.PhongBan != null ? x.PhongBan.TenPhong : "N/A",
+                        ViTriLapDat = x.ViTriLapDat ?? "", // Xử lý null cho chuỗi
+                        NgayLap = EF.Property<DateTime?>(x, "NgayLap"),
+                        DuPhong = x.DuPhong,
+                        GhiChu = x.GhiChu ?? ""
+                    })
+                    .ToListAsync();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Ném lỗi chi tiết để dễ dàng kiểm tra trong Log
+                throw new Exception($"Lỗi thực thi GetAll: {ex.Message}");
+            }
         }
 
         public async Task<List<TonghopbienapVm>> getDatailById(int id)
@@ -149,7 +167,7 @@ namespace WebApi.Services
                     TenPhongBan = x.PhongBan != null ? x.PhongBan.TenPhong : "Không xác định",
                     PhongbanId = x.PhongbanId,
                     ViTriLapDat = x.ViTriLapDat ?? "",
-                    NgayLap = x.NgayLap,
+                    NgayLap = EF.Property<DateTime?>(x, "NgayLap"),
                     DuPhong = x.DuPhong,
                     GhiChu = x.GhiChu ?? ""
                 }).ToListAsync();
