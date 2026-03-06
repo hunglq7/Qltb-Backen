@@ -81,10 +81,12 @@ namespace WebApi.Data.EF
         public DbSet<Tonghopgiacotthuyluc> Tonghopgiacotthuylucs { get; set; }
         public DbSet<ThongsoAptomatKhoidongtu> ThongsoAptomatKhoidongtus { get; set; }
         public DbSet<TongHopAptomatKhoidongtu> TongHopAptomatKhoidongtus { get; set; }
-        public DbSet<Nhatkyaptomatkhoidongtu> Nhatkyaptomatkhoidongtus{ get; set; }
+        public DbSet<Nhatkyaptomatkhoidongtu> Nhatkyaptomatkhoidongtus { get; set; }
         public DbSet<DanhmucGiaCot> DanhmucGiaCots { get; set; }
-        public DbSet<CapNhatGiaCot> CapNhatGiaCots{ get; set; }
+        public DbSet<CapNhatGiaCot> CapNhatGiaCots { get; set; }
         public DbSet<TonghopBienap> TonghopBienaps { get; set; }
+        public DbSet<TongHopKhoanBalang> TongHopKhoanBalangs { get; set; }
+        public DbSet<DanhmucKhoanBalang> DanhmucKhoanBalangs { get; set; }
 
     }
 }
