@@ -12,11 +12,11 @@ namespace WebApi.Data.Entites
 
         public int KhoanBalangId { get; set; }
         public int DonViId { get; set; }
-        public string ViTriLapDat { get; set; }
+        public string? ViTriLapDat { get; set; }
         public DateTime NgayLap { get; set; }
         public int SoLuong { get; set; }
-        public string TinhTrangKyThuat { get; set; }
-        public string LoaiThietBi { get; set; }
+        public string? TinhTrangKyThuat { get; set; }
+        public string? LoaiThietBi { get; set; }
         public Boolean DuPhong { get; set; }
         public string GhiChu { get; set; }
         [ForeignKey("KhoanBalangId")]

@@ -29,8 +29,8 @@ namespace WebApi.Controllers
             var result = await _danhmucBalangService.Add(dto);
             return Ok(result);
         }
-        [HttpPut("Update/{id}")]
-        public async Task<IActionResult> UpdateDanhmucKhoanBalang(int id, [FromBody] DanhmucKhoanBalang dto)
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateDanhmucKhoanBalang([FromBody] DanhmucKhoanBalang dto)
         {
             var result = await _danhmucBalangService.Update(dto);
             return Ok(result);

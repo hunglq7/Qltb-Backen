@@ -11,9 +11,9 @@ namespace WebApi.Data.Entites
         public int Id { get; set; }
         [Required]
         [MaxLength(255)]
-        public string TenThietBi { get; set; }
+        public string? TenThietBi { get; set; }
         [MaxLength(500)]
-        public string GhiChu { get; set; }
+        public string? GhiChu { get; set; }
         public virtual IEnumerable<TongHopKhoanBalang>? TongHopKhoanBalangs { get; set; }
     }
 }

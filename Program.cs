@@ -123,6 +123,7 @@ builder.Services.AddTransient<INhatkyaptomatkhoidongtuService, Nhatkyaptomatkhoi
 builder.Services.AddTransient<IDanhmucgiacotService, DanhmucgiacotService>();
 builder.Services.AddTransient<ICapnhatgiacotService, CapnhatgiacotService>();
 builder.Services.AddTransient<ITonghopbienapService, TonghopbienapService>();
+builder.Services.AddTransient<ITonghopKhoanBalangService, TonghopKhoanBalangService>();
 
 builder.Services.Configure<FormOptions>(o =>
 {
