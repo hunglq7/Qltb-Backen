@@ -5,7 +5,8 @@ namespace WebApi.Common
     {
         public static string GetByKey(string key)
         {
-            return System.Configuration.ConfigurationManager.AppSettings[key].ToString();
+            var value = System.Configuration.ConfigurationManager.AppSettings?[key];
+            return value ?? string.Empty;
         }
     }
 }

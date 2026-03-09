@@ -139,6 +139,9 @@ namespace Api.Services
 
         public async Task<bool> Update(ThongsoAptomatKhoidongtuEdit Request)
         {
+            if (Request == null)
+                return false;
+
             var items = await _thietbiDbContext.ThongsoAptomatKhoidongtus.FindAsync(Request.Id);
             if (items == null)
             {

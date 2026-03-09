@@ -2,7 +2,6 @@
 using WebApi.Data.Entites;
 using WebApi.Models.Common;
 using WebApi.Models.DanhmucRole;
-using WebApi.Data.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Services

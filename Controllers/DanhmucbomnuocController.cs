@@ -1,4 +1,4 @@
-﻿using ExcelDataReader;
+using ExcelDataReader;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -48,7 +48,7 @@ namespace WebApi.Controllers
             var query = await _danhmucbomnuocService.DeleteMutiple(reponse);
             if (query.Count == 0)
             {
-                return NotFound("Không xóa được bản ghi nào");
+                return NotFound("Kh�ng x�a du?c b?n ghi n�o");
             }
             return Ok(query.Count);
 
@@ -103,13 +103,13 @@ namespace WebApi.Controllers
                     }
 
                 }
-                return Ok("Thêm bản ghi thành công");
+                return Ok("Th�m b?n ghi th�nh c�ng");
             }
             catch (Exception ex)
             {
                 StatusCode(5000, ex.Message);
             }
-            return BadRequest("Thêm thất bại");
+            return BadRequest("Th�m th?t b?i");
         }
         [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] DanhmucBomnuoc request)
@@ -151,7 +151,7 @@ namespace WebApi.Controllers
             var query = await _danhmucbomnuocService.DeleteMuny(ids);
             if (query.Count == 0)
             {
-                return NotFound("Không xóa được bản ghi nào");
+                return NotFound("Kh�ng x�a du?c b?n ghi n�o");
             }
             return Ok(query.Count);
 

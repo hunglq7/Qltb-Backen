@@ -15,6 +15,7 @@ namespace WebApi.Services
         Task<List<TongHopNeoVm>> GetDetailById(int id);
         Task<bool> Update(TongHopNeo request);
         Task<bool> Delete(int id);
+        Task<ApiResult<int>> DeleteMultiple(List<int> ids);
         Task<PagedResult<TongHopNeoVm>> GetAllPaging(TongHopNeoPagingRequest request);
     }
 
@@ -142,5 +143,27 @@ namespace WebApi.Services
                 SumRecords = sumRecords
             };
         }
+
+        public Task<ApiResult<int>> DeleteMultiple(List<int> ids)
+        {
+            var entities = _thietbiDbContext.TongHopNeos.Where(e => ids.Contains(e.Id)).ToList();
+            if (entities.Count == 0)
+            {
+                return Task.FromResult(new ApiResult<int> { IsSuccessed = false, Message = "Không tìm thấy bản ghi nào để xóa", ResultObj = 0 });
+            }
+            _thietbiDbContext.TongHopNeos.RemoveRange(entities);
+            return _thietbiDbContext.SaveChangesAsync().ContinueWith(t =>
+            {
+                if (t.Result > 0)
+                {
+                    return new ApiResult<int> { IsSuccessed = true, Message = "Xóa thành công", ResultObj = t.Result };
+                }
+                else
+                {
+                    return new ApiResult<int> { IsSuccessed = false, Message = "Xóa thất bại", ResultObj = 0 };
+                }
+            });
+        }
+
     }
 }

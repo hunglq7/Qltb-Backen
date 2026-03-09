@@ -10,8 +10,8 @@ namespace WebApi.Data.Extentions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-           
-           
+
+
             // any guid
             var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
             var adminId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
@@ -32,11 +32,11 @@ namespace WebApi.Data.Extentions
                 Email = "hunglq7@gmail.com",
                 NormalizedEmail = "hunglq7@gmail.com",
                 EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "123$"),
+                PasswordHash = hasher.HashPassword(null!, "123$"),
                 SecurityStamp = string.Empty,
                 FirstName = "Hùng",
                 LastName = "Lê",
-                FullName="Lê Quang Hùng",
+                FullName = "Lê Quang Hùng",
                 Dob = new DateTime(1979, 02, 16)
             });
 
@@ -45,7 +45,7 @@ namespace WebApi.Data.Extentions
                 RoleId = roleId,
                 UserId = adminId
             });
-           
+
         }
     }
 }

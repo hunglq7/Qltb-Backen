@@ -65,12 +65,20 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             var result = await _tonghopneoService.Delete(id);
             if (!result)
                 return BadRequest();
+            return Ok(result);
+        }
+        [HttpPost("Delete-Multiple")]
+        public async Task<ActionResult<ApiResult<int>>> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var result = await _tonghopneoService.DeleteMultiple(ids);
+            if (!result.IsSuccessed)
+                return BadRequest(result);
             return Ok(result);
         }
     }

@@ -35,7 +35,7 @@ namespace WebApi.Data.EF
         public DbSet<TheoDoiSuaChua> TheoDoiSuaChuas { get; set; }
         public DbSet<VatTu> VatTus { get; set; }
         public DbSet<NhanVien> NhanViens { get; set; }
-        public DbSet<NhanvienImage> NhanvienImages { get; }
+        public DbSet<NhanvienImage> NhanvienImages { get; set; }
         public DbSet<MayXuc> MayXucs { get; set; }
         public DbSet<TongHopMayXuc> TongHopMayXucs { get; set; }
         public DbSet<Camera> Cameras { get; set; }

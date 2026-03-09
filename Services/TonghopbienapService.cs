@@ -112,7 +112,7 @@ namespace WebApi.Services
 
         //         return result;
         //     }
-        //     catch (Exception ex)
+        //     catch (Exception)
         //     {
         //         throw new Exception($"GetAll error: {ex.Message}", ex);
         //     }

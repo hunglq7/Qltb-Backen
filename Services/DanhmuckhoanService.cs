@@ -10,8 +10,11 @@ namespace WebApi.Services
     public interface IDanhmucKhoanService
     {
         Task<List<DanhMucKhoanVm>> GetAll();
+        Task<ApiResult<int>> Add(DanhMucKhoan request);
+        Task<ApiResult<int>> Update(DanhMucKhoan request);
+        Task<ApiResult<int>> Delete(int id);
         Task<ApiResult<int>> UpdateMultiple(List<DanhMucKhoan> response);
-        Task<ApiResult<int>> DeleteMultiple(List<DanhMucKhoan> response);
+        Task<ApiResult<int>> DeleteMultiple(List<int> ids);
     }
     public class DanhmucKhoanService : IDanhmucKhoanService
     {
@@ -36,6 +39,32 @@ namespace WebApi.Services
             }).ToListAsync();
         }
 
+        public async Task<ApiResult<int>> Add(DanhMucKhoan request)
+        {
+            _thietbiDbContext.DanhMucKhoans.Add(request);
+            var result = await _thietbiDbContext.SaveChangesAsync();
+            return new ApiSuccessResult<int>(result);
+        }
+
+        public async Task<ApiResult<int>> Update(DanhMucKhoan request)
+        {
+            _thietbiDbContext.DanhMucKhoans.Update(request);
+            var result = await _thietbiDbContext.SaveChangesAsync();
+            return new ApiSuccessResult<int>(result);
+        }
+
+        public async Task<ApiResult<int>> Delete(int id)
+        {
+            var entity = await _thietbiDbContext.DanhMucKhoans.FindAsync(id);
+            if (entity == null)
+            {
+                return new ApiErrorResult<int>("Không tìm thấy bản ghi");
+            }
+            _thietbiDbContext.DanhMucKhoans.Remove(entity);
+            var result = await _thietbiDbContext.SaveChangesAsync();
+            return new ApiSuccessResult<int>(result);
+        }
+
         public async Task<ApiResult<int>> UpdateMultiple(List<DanhMucKhoan> response)
         {
             var ids = response.Select(x => x.Id).ToList();
@@ -56,9 +85,8 @@ namespace WebApi.Services
             return new ApiSuccessResult<int>(count);
         }
 
-        public async Task<ApiResult<int>> DeleteMultiple(List<DanhMucKhoan> response)
+        public async Task<ApiResult<int>> DeleteMultiple(List<int> ids)
         {
-            var ids = response.Select(x => x.Id).ToList();
             if (ids.Count == 0)
             {
                 return new ApiErrorResult<int>("Không tìm thấy bản ghi nào");

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.Entites;
 using WebApi.Services;
@@ -26,7 +26,7 @@ namespace WebApi.Controllers
 
                 if (request == null)
                 {
-                    return BadRequest(new { message = "Request không được rỗng", success = false });
+                    return BadRequest(new { message = "Request kh�ng du?c r?ng", success = false });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             try
             {
                 if (request == null)
-                    return BadRequest(new { message = "Request không hợp lệ", success = false });
+                    return BadRequest(new { message = "Request kh�ng h?p l?", success = false });
 
                 if (!ModelState.IsValid)
                 {
@@ -104,15 +104,15 @@ namespace WebApi.Controllers
 
                 if (id == 0)
                 {
-                    return BadRequest(new { message = "ID không hợp lệ", success = false });
+                    return BadRequest(new { message = "ID kh�ng h?p l?", success = false });
                 }
                 var deleted = await _service.Delete(id);
                 if (!deleted)
                 {
-                    return NotFound(new { message = "Không tìm thấy bản ghi", success = false });
+                    return NotFound(new { message = "Kh�ng t�m th?y b?n ghi", success = false });
                 }
                 _logger.LogInformation($"Delete successful for ID: {id}");
-                return Ok(new { message = "Xóa thành công", success = true });
+                return Ok(new { message = "X�a th�nh c�ng", success = true });
             }
             catch (Exception ex)
             {

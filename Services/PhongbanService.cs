@@ -1,4 +1,4 @@
-﻿
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data.EF;
@@ -65,12 +65,12 @@ namespace WebApi.Services
                 var ids = response.Select(x => x.Id).ToList();
                 if (ids.Count() == 0)
                 {
-                    return new ApiErrorResult<int>("Bạn chưa chọn bản ghi cần xóa");
+                    return new ApiErrorResult<int>("B?n chua ch?n b?n ghi c?n x�a");
 
                 }
                 if (ids.Any(x => x <= 0))
                 {
-                    return new ApiErrorResult<int>("Thực hiện xóa không hợp lệ");
+                    return new ApiErrorResult<int>("Th?c hi?n x�a kh�ng h?p l?");
                 }
                 var exitPhongban = _dbContext.PhongBans.AsNoTracking().Where(x => ids.Contains(x.Id)).ToList();
 
@@ -78,7 +78,7 @@ namespace WebApi.Services
                 var deff = ids.Except(phongbans).ToList();
                 if (deff.Count > 0)
                 {
-                    throw new Exception("id không hợp lệ");
+                    throw new Exception("id kh�ng h?p l?");
                 }
                 _dbContext.RemoveRange(exitPhongban);
                 var count = await _dbContext.SaveChangesAsync();
@@ -87,7 +87,7 @@ namespace WebApi.Services
             }
             catch (Exception ex)
             {
-                return new ApiErrorResult<int>("Lỗi kết nối máy chủ " + ex);
+                return new ApiErrorResult<int>("L?i k?t n?i m�y ch? " + ex);
             }
         }
 
@@ -114,14 +114,14 @@ namespace WebApi.Services
                 var ids = response.Select(x => x.Id).ToList();
                 if (ids.Count() == 0)
                 {
-                    return new ApiErrorResult<int>("Bạn chưa chọn bản ghi cần cập nhật");
+                    return new ApiErrorResult<int>("B?n chua ch?n b?n ghi c?n c?p nh?t");
 
                 }
                 var exitPhongban = _dbContext.PhongBans.AsNoTracking().Where(x => ids.Contains(x.Id)).ToList();
 
                 if (!exitPhongban.All(x => ids.Contains(x.Id)))
                 {
-                    return new ApiErrorResult<int>("Bạn chưa chọn bản ghi cần cập nhật");
+                    return new ApiErrorResult<int>("B?n chua ch?n b?n ghi c?n c?p nh?t");
                 }
                 _dbContext.UpdateRange(response);
                 var count = await _dbContext.SaveChangesAsync();
@@ -132,7 +132,7 @@ namespace WebApi.Services
             }
             catch (Exception ex)
             {
-                return new ApiErrorResult<int>("Lỗi kết nối hệ thống " + ex);
+                return new ApiErrorResult<int>("L?i k?t n?i h? th?ng " + ex);
             }
         }
 
@@ -181,7 +181,7 @@ namespace WebApi.Services
         {
             if (ids == null || ids.Count == 0)
             {
-                return new ApiErrorResult<int>("Danh sách ID rỗng");
+                return new ApiErrorResult<int>("Danh s�ch ID r?ng");
             }
 
             var items = await _dbContext.PhongBans
@@ -190,7 +190,7 @@ namespace WebApi.Services
 
             if (items.Count != ids.Count)
             {
-                return new ApiErrorResult<int>("Một số bản ghi không tồn tại");
+                return new ApiErrorResult<int>("M?t s? b?n ghi kh�ng t?n t?i");
             }
 
             _dbContext.PhongBans.RemoveRange(items);
