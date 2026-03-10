@@ -46,6 +46,12 @@ namespace WebApi.Controllers
             var result = await _tonghopneoService.Sum();
             return Ok(result);
         }
+        [HttpGet]
+        public async Task<ActionResult<List<TongHopNeoVm>>> GetAll()
+        {
+            var result = await _tonghopneoService.GetAll();
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<ActionResult<bool>> Add([FromBody] TongHopNeo request)

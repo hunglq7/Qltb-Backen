@@ -9,6 +9,7 @@ namespace WebApi.Services
 {
     public interface ITonghopneoService
     {
+        Task<List<TongHopNeoVm>> GetAll();
         Task<bool> Add(TongHopNeo request);
         Task<TongHopNeo> GetById(int id);
         Task<int> Sum();
@@ -165,5 +166,27 @@ namespace WebApi.Services
             });
         }
 
+        public Task<List<TongHopNeoVm>> GetAll()
+        {
+            var query = from tb in _thietbiDbContext.TongHopNeos
+                        join dm in _thietbiDbContext.DanhmucNeos on tb.NeoId equals dm.Id
+                        join dv in _thietbiDbContext.PhongBans on tb.DonViId equals dv.Id
+                        select new TongHopNeoVm()
+                        {
+                            Id = tb.Id,
+                            NeoId = tb.NeoId,
+                            DonViId = tb.DonViId,
+                            TenThietBi = dm.TenThietBi,
+                            TenDonVi = dv.TenPhong,
+                            DonViTinh = tb.DonViTinh,
+                            ViTriLapDat = tb.ViTriLapDat,
+                            NgayLap = tb.NgayLap,
+                            SoLuong = tb.SoLuong,
+                            TinhTrangKyThuat = tb.TinhTrangKyThuat,
+                            DuPhong = tb.DuPhong,
+                            GhiChu = tb.GhiChu
+                        };
+            return Task.FromResult(query.ToList());
+        }
     }
 }

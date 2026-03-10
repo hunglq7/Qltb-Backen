@@ -3,6 +3,8 @@ namespace WebApi.Models.Neo.TongHopNeo
     public class TongHopNeoVm
     {
         public int Id { get; set; }
+        public int NeoId { get; set; }
+        public int DonViId { get; set; }
         public string TenThietBi { get; set; } = string.Empty;
         public string TenDonVi { get; set; } = string.Empty;
         public string DonViTinh { get; set; } = string.Empty;
