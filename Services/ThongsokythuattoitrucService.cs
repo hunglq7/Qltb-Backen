@@ -163,6 +163,9 @@ namespace Api.Services
 
         public async Task<bool> Update(ThongsokythuattoitrucEdit Request)
         {
+            if (Request == null)
+                return false;
+
             var items = await _thietbiDbContext.ThongsokythuatToitrucs.FindAsync(Request.Id);
             if (items == null)
             {

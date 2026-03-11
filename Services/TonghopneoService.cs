@@ -9,12 +9,14 @@ namespace WebApi.Services
 {
     public interface ITonghopneoService
     {
+        Task<List<TongHopNeoVm>> GetAll();
         Task<bool> Add(TongHopNeo request);
         Task<TongHopNeo> GetById(int id);
         Task<int> Sum();
         Task<List<TongHopNeoVm>> GetDetailById(int id);
         Task<bool> Update(TongHopNeo request);
         Task<bool> Delete(int id);
+        Task<ApiResult<int>> DeleteMultiple(List<int> ids);
         Task<PagedResult<TongHopNeoVm>> GetAllPaging(TongHopNeoPagingRequest request);
     }
 
@@ -141,6 +143,50 @@ namespace WebApi.Services
                 PageSize = request.PageSize,
                 SumRecords = sumRecords
             };
+        }
+
+        public Task<ApiResult<int>> DeleteMultiple(List<int> ids)
+        {
+            var entities = _thietbiDbContext.TongHopNeos.Where(e => ids.Contains(e.Id)).ToList();
+            if (entities.Count == 0)
+            {
+                return Task.FromResult(new ApiResult<int> { IsSuccessed = false, Message = "Không tìm thấy bản ghi nào để xóa", ResultObj = 0 });
+            }
+            _thietbiDbContext.TongHopNeos.RemoveRange(entities);
+            return _thietbiDbContext.SaveChangesAsync().ContinueWith(t =>
+            {
+                if (t.Result > 0)
+                {
+                    return new ApiResult<int> { IsSuccessed = true, Message = "Xóa thành công", ResultObj = t.Result };
+                }
+                else
+                {
+                    return new ApiResult<int> { IsSuccessed = false, Message = "Xóa thất bại", ResultObj = 0 };
+                }
+            });
+        }
+
+        public Task<List<TongHopNeoVm>> GetAll()
+        {
+            var query = from tb in _thietbiDbContext.TongHopNeos
+                        join dm in _thietbiDbContext.DanhmucNeos on tb.NeoId equals dm.Id
+                        join dv in _thietbiDbContext.PhongBans on tb.DonViId equals dv.Id
+                        select new TongHopNeoVm()
+                        {
+                            Id = tb.Id,
+                            NeoId = tb.NeoId,
+                            DonViId = tb.DonViId,
+                            TenThietBi = dm.TenThietBi,
+                            TenDonVi = dv.TenPhong,
+                            DonViTinh = tb.DonViTinh,
+                            ViTriLapDat = tb.ViTriLapDat,
+                            NgayLap = tb.NgayLap,
+                            SoLuong = tb.SoLuong,
+                            TinhTrangKyThuat = tb.TinhTrangKyThuat,
+                            duPhong = tb.duPhong,
+                            GhiChu = tb.GhiChu
+                        };
+            return Task.FromResult(query.ToList());
         }
     }
 }

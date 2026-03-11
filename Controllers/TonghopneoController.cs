@@ -46,6 +46,12 @@ namespace WebApi.Controllers
             var result = await _tonghopneoService.Sum();
             return Ok(result);
         }
+        [HttpGet]
+        public async Task<ActionResult<List<TongHopNeoVm>>> GetAll()
+        {
+            var result = await _tonghopneoService.GetAll();
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<ActionResult<bool>> Add([FromBody] TongHopNeo request)
@@ -65,12 +71,20 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             var result = await _tonghopneoService.Delete(id);
             if (!result)
                 return BadRequest();
+            return Ok(result);
+        }
+        [HttpPost("Delete-Multiple")]
+        public async Task<ActionResult<ApiResult<int>>> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var result = await _tonghopneoService.DeleteMultiple(ids);
+            if (!result.IsSuccessed)
+                return BadRequest(result);
             return Ok(result);
         }
     }

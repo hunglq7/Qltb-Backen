@@ -35,17 +35,46 @@ namespace WebApi.Controllers
             return Ok(query.Count);
         }
 
-        [HttpPost("DeleteMultipale")]
-
-        public async Task<IActionResult> DeleteMultiple([FromBody] List<DanhmucNeo> reponse)
+        [HttpPost("Add")]
+        public async Task<IActionResult> Create([FromBody] DanhmucNeo reponse)
         {
-            var query = await _danhmucNeoService.DeleteMultiple(reponse);
-            if (query.Count == 0)
+            var result = await _danhmucNeoService.Add(reponse);
+            if (!result)
             {
-                return NotFound("Không xóa được bản ghi nào");
+                return BadRequest(ModelState);
             }
-            return Ok(query.Count);
+            return Ok(result);
 
+        }
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update([FromBody] DanhmucNeo reponse)
+        {
+            var result = await _danhmucNeoService.Update(reponse);
+            if (!result)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(result);
+        }
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _danhmucNeoService.Delete(id);
+            if (!result)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(result);
+        }
+        [HttpPost("Delete-Multiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<int> ids)
+        {
+            var result = await _danhmucNeoService.DeleteMultiple(ids);
+            if (result == null)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(result);
         }
     }
 }

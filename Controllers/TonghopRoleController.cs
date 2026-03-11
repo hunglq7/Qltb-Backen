@@ -18,11 +18,15 @@ namespace WebApi.Controllers
         [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] TongHopRole request)
         {
-            if (request == null)
+            if (request == null || !ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
-            await _tonghopRoleService.Add(request);
+            var result = await _tonghopRoleService.Add(request);
+            if (!result)
+            {
+                return BadRequest("Thêm mới thất bại");
+            }
             return Ok();
         }
         [HttpGet("{Id}")]
@@ -42,9 +46,13 @@ namespace WebApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
-            await _tonghopRoleService.Update(request);
+            var result = await _tonghopRoleService.Update(request);
+            if (!result)
+            {
+                return BadRequest("Cập nhật thất bại");
+            }
             return Ok();
         }
         [HttpDelete("{Id}")]

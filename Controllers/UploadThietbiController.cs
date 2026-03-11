@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
@@ -39,7 +39,7 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex}");
+                return StatusCode(500, $"L?i m�y ch? n?i b?: {ex}");
             }
         }
         [HttpPost("Multiple"), DisableRequestSizeLimit]
@@ -71,11 +71,11 @@ namespace WebApi.Controllers
                     }
                 }
 
-                return Ok("Tất cả các tập tin được tải lên thành công.");
+                return Ok("T?t c? c�c t?p tin du?c t?i l�n th�nh c�ng.");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex}");
+                return StatusCode(500, $"L?i m�y ch? n?i b?: {ex}");
             }
         }
     }

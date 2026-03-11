@@ -55,7 +55,7 @@ namespace WebApi.Services
                 await _thietbiDbContext.SaveChangesAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception here if you have logging configured
                 return false;
@@ -159,7 +159,7 @@ namespace WebApi.Services
                 };
                 return pagedResult;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception here if you have logging configured
                 return new PagedResult<TonghopBomnuocVm>
@@ -190,7 +190,7 @@ namespace WebApi.Services
 
                 return query;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception here if you have logging configured
                 return new TongHopBomNuoc()
@@ -226,7 +226,7 @@ namespace WebApi.Services
                     GhiChu = x.t.GhiChu ?? string.Empty
                 }).ToListAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception here if you have logging configured
                 return new List<TongHopBomNuoc>();
@@ -306,7 +306,7 @@ namespace WebApi.Services
                 var sum = await query.SumAsync(x => x.SoLuong);
                 return sum;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception here if you have logging configured
                 return 0;
@@ -343,7 +343,7 @@ namespace WebApi.Services
                 await _thietbiDbContext.SaveChangesAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Log the exception here if you have logging configured
                 return false;

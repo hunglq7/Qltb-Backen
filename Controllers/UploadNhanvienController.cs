@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
 namespace WebApi.Controllers
@@ -7,22 +7,24 @@ namespace WebApi.Controllers
     [ApiController]
     public class UploadNhanvienController : ControllerBase
     {
-       
+
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> Upload()
         {
             try
             {
                 var formCollection = await Request.ReadFormAsync();
+                if (formCollection?.Files == null || formCollection.Files.Count == 0)
+                    return BadRequest("No file");
                 var file = formCollection.Files.First();
-                var folderName = Path.Combine("wwwroot","Images", "NhanVien");
+                var folderName = Path.Combine("wwwroot", "Images", "NhanVien");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
                     //var dbPath = Path.Combine(folderName, fileName);
-                    var dbPath = "/Images/NhanVien/" +fileName;
+                    var dbPath = "/Images/NhanVien/" + fileName;
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
@@ -36,15 +38,17 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex}");
+                return StatusCode(500, $"L?i m�y ch? n?i b?: {ex}");
             }
         }
-        [HttpPost("Multiple"),DisableRequestSizeLimit]
+        [HttpPost("Multiple"), DisableRequestSizeLimit]
         public async Task<IActionResult> UploadMutiple()
         {
             try
             {
                 var formCollection = await Request.ReadFormAsync();
+                if (formCollection?.Files == null || !formCollection.Files.Any())
+                    return BadRequest("No files");
                 var files = formCollection.Files;
                 var folderName = Path.Combine("Images", "NhanVien");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
@@ -66,11 +70,11 @@ namespace WebApi.Controllers
                     }
                 }
 
-                return Ok("Tất cả các tập tin được tải lên thành công.");
+                return Ok("T?t c? c�c t?p tin du?c t?i l�n th�nh c�ng.");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Lỗi máy chủ nội bộ: {ex}");
+                return StatusCode(500, $"L?i m�y ch? n?i b?: {ex}");
             }
         }
     }

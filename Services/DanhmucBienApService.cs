@@ -1,8 +1,9 @@
+using Azure;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
-using WebApi.Models.Common;
 using WebApi.Models.BienAp;
+using WebApi.Models.Common;
 
 namespace WebApi.Services
 {
@@ -11,6 +12,10 @@ namespace WebApi.Services
         Task<List<DanhmucBienApVm>> GetAll();
         Task<ApiResult<int>> UpdateMultiple(List<DanhmucBienap> response);
         Task<ApiResult<int>> DeleteMultiple(List<DanhmucBienap> response);
+        Task<bool> Add(DanhmucBienap request);
+        Task<bool> Update(DanhmucBienap request);
+        Task<bool> Delete(int id);
+        Task<ApiResult<int>> DeleteSelect(List<int> ids);
     }
     public class DanhmucBienApService : IDanhmucBienApService
     {
@@ -19,6 +24,33 @@ namespace WebApi.Services
         {
             _thietbiDbContext = thietbiDbContext;
         }
+
+        public async Task<bool> Add(DanhmucBienap request)
+        {
+            if (request == null) return false;
+            var newItems = new DanhmucBienap()
+            {
+                TenThietBi = request.TenThietBi,
+                LoaiThietBi = request.LoaiThietBi,
+                GhiChu = request.GhiChu
+            };
+            await _thietbiDbContext.DanhmucBienaps.AddAsync(newItems);
+            await _thietbiDbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var item = await _thietbiDbContext.DanhmucBienaps.FindAsync(id);
+            if (item == null)
+            {
+                return false;
+            }
+            _thietbiDbContext.DanhmucBienaps.Remove(item);
+            await _thietbiDbContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<ApiResult<int>> DeleteMultiple(List<DanhmucBienap> response)
         {
             var ids = response.Select(x => x.Id).ToList();
@@ -37,6 +69,29 @@ namespace WebApi.Services
             var count = await _thietbiDbContext.SaveChangesAsync();
             return new ApiSuccessResult<int>(count);
         }
+
+        public async Task<ApiResult<int>> DeleteSelect(List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                return new ApiErrorResult<int>("Danh sách ID rỗng");
+            }
+
+            var items = await _thietbiDbContext.DanhmucBienaps
+                .Where(x => ids.Contains(x.Id))
+                .ToListAsync();
+
+            if (items.Count != ids.Count)
+            {
+                return new ApiErrorResult<int>("Một số bản ghi không tồn tại");
+            }
+
+            _thietbiDbContext.DanhmucBienaps.RemoveRange(items);
+            var count = await _thietbiDbContext.SaveChangesAsync();
+
+            return new ApiSuccessResult<int>(count);
+        }
+
         public async Task<List<DanhmucBienApVm>> GetAll()
         {
             var query = from c in _thietbiDbContext.DanhmucBienaps
@@ -49,6 +104,22 @@ namespace WebApi.Services
                 GhiChu = x.GhiChu
             }).ToListAsync();
         }
+
+        public async Task<bool> Update(DanhmucBienap request)
+        {
+            var existingItem = _thietbiDbContext.DanhmucBienaps.AsNoTracking().FirstOrDefault(x => x.Id == request.Id);
+            if (existingItem == null)
+            {
+                return false;
+            }
+            existingItem.TenThietBi = request.TenThietBi;
+            existingItem.LoaiThietBi = request.LoaiThietBi;
+            existingItem.GhiChu = request.GhiChu;
+            _thietbiDbContext.DanhmucBienaps.Update(existingItem);
+            await _thietbiDbContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<ApiResult<int>> UpdateMultiple(List<DanhmucBienap> response)
         {
             var ids = response.Select(x => x.Id).ToList();

@@ -252,12 +252,12 @@ namespace WebApi.Services
 
                 return result > 0;
             }
-            catch (DbUpdateException dbEx)
+            catch (DbUpdateException)
             {
                 // Handle database-specific errors
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Handle other exceptions
                 return false;
@@ -286,7 +286,7 @@ namespace WebApi.Services
 
         public async Task<PagedResult<TonghopmayxucVM>> SearchAsync(SearchTongHopRequest request)
         {
-            var query = from t in _thietbiDbContext.TongHopMayXucs.Include(x => x.MayXuc).Include(x => x.PhongBan).Include(x=>x.LoaiThietBi)
+            var query = from t in _thietbiDbContext.TongHopMayXucs.Include(x => x.MayXuc).Include(x => x.PhongBan).Include(x => x.LoaiThietBi)
                         select t;
 
             if (!string.IsNullOrWhiteSpace(request.Keyword))
@@ -325,22 +325,22 @@ namespace WebApi.Services
         .Take(request.PageSize)
          .Select(x => new TonghopmayxucVM()
 
-       
+
          {
              Id = x.Id,
-             MaQuanLy = x.MaQuanLy,                     
-            TenMayXuc=x.MayXuc!.TenThietBi,
-            MayxucId=x.MayXucId,
+             MaQuanLy = x.MaQuanLy,
+             TenMayXuc = x.MayXuc!.TenThietBi,
+             MayxucId = x.MayXucId,
              TenPhongBan = x.PhongBan!.TenPhong,
-             PhongBanId=x.PhongBanId,
-             LoaiThietBi=x.LoaiThietBi!.TenLoai,
-             LoaiThietBiId=x.LoaiThietBiId,
+             PhongBanId = x.PhongBanId,
+             LoaiThietBi = x.LoaiThietBi!.TenLoai,
+             LoaiThietBiId = x.LoaiThietBiId,
              ViTriLapDat = x.ViTriLapDat,
              NgayLap = x.NgayLap,
-             TinhTrang=x.TinhTrang,
-             SoLuong = x.SoLuong,             
+             TinhTrang = x.TinhTrang,
+             SoLuong = x.SoLuong,
              DuPhong = x.DuPhong,
-             GhiChu=x.GhiChu
+             GhiChu = x.GhiChu
 
          })
         .ToListAsync();

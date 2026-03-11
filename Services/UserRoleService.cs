@@ -21,13 +21,12 @@ namespace WebApi.Services
         private readonly RoleManager<AppRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly ThietbiDbContext _dbContext;
-        private readonly IdentityUserRole<Guid> _userRoleManager;
-        public UserRoleService(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager,ThietbiDbContext dbContext)
+        public UserRoleService(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager, ThietbiDbContext dbContext)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _dbContext = dbContext;
-            
+
         }
         public async Task<bool> Create([FromBody] UserRole reponse)
         {
@@ -47,24 +46,24 @@ namespace WebApi.Services
 
         public async Task<ApiResult<int>> DeleteMutipleUser(List<UserRole> response)
         {
-            
 
 
-            var idList=response.Select(u=>u.UserId).ToList();
+
+            var idList = response.Select(u => u.UserId).ToList();
             if (idList.Count == 0)
             {
                 return new ApiErrorResult<int>("Không tìm thấy bản ghi nào");
             }
-            
-            var exitUserRole = _dbContext.UserRoles.AsNoTracking().Where(x => x.UserId == response[0].UserId & x.RoleId == response[0].RoleId ).ToList();
-            var newUserRole=exitUserRole.Select(x=>x.UserId).ToList();  
-            var diff=idList.Except(newUserRole).ToList();
+
+            var exitUserRole = _dbContext.UserRoles.AsNoTracking().Where(x => x.UserId == response[0].UserId & x.RoleId == response[0].RoleId).ToList();
+            var newUserRole = exitUserRole.Select(x => x.UserId).ToList();
+            var diff = idList.Except(newUserRole).ToList();
             if (diff.Count > 0)
             {
                 return new ApiErrorResult<int>("Dũ liệu không họp lệ");
             }
             _dbContext.UserRoles.RemoveRange(exitUserRole);
-            var count= await _dbContext.SaveChangesAsync();
+            var count = await _dbContext.SaveChangesAsync();
             return new ApiSuccessResult<int>(count);
         }
 
@@ -90,9 +89,9 @@ namespace WebApi.Services
                 UserId = x.UserId,
                 RoleId = x.RoleId,
                 UserName = x.UserName,
-                FullName=x.FullName,
-                Email = x.Email ,
-                RoleName=x.Name
+                FullName = x.FullName,
+                Email = x.Email,
+                RoleName = x.Name
             }).ToListAsync();
         }
 
@@ -126,8 +125,8 @@ namespace WebApi.Services
             {
                 return new ApiErrorResult<int>("Cập nhật không hợp lệ");
             }
-            _dbContext.UpdateRange (response);
-            var Count = await _dbContext.SaveChangesAsync();          
+            _dbContext.UpdateRange(response);
+            var Count = await _dbContext.SaveChangesAsync();
 
             return new ApiSuccessResult<int>(Count);
         }

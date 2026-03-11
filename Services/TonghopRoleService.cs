@@ -40,7 +40,6 @@ namespace WebApi.Services
             }
             var items = new TongHopRole()
             {
-                Id = Request.Id,
                 RoleId = Request.RoleId,
                 PhongBanId = Request.PhongBanId,
                 ViTriLapDat = Request.ViTriLapDat,
@@ -186,8 +185,7 @@ namespace WebApi.Services
 
         public async Task<List<TonghopRoleVm>> GetAll()
         {
-            var query = from t in _thietbiDb.TongHopRoles
-                        select t;
+            var query = _thietbiDb.TongHopRoles.Include(x => x.DanhmucRole).Include(x => x.PhongBan);
             return await query.Select(x => new TonghopRoleVm()
             {
                 Id = x.Id,

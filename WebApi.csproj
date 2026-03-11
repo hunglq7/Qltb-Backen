@@ -4,6 +4,8 @@
     <TargetFramework>net7.0-Windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- suppress common nullable and other warnings that occur throughout the generated code and migrations -->
+    <NoWarn>CS8602;CS8601;CS8618;CS8625;CS8981;CS0105;CS0472</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

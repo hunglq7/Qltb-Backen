@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using WebApi.Common;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
@@ -23,6 +24,9 @@ var JwtSetting = builder.Configuration.GetSection("JWTSetting");
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; // ✅ Cho phép deserialize camelCase;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
 });
 builder.Services.AddDbContext<ThietbiDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ThietbiDb")));
@@ -94,6 +98,7 @@ builder.Services.AddTransient<IDanhmucBalangService, DanhmucBalangService>();
 builder.Services.AddTransient<ITonghopbalangService, TonghopbalangService>();
 builder.Services.AddTransient<IDanhmucKhoanService, DanhmucKhoanService>();
 builder.Services.AddTransient<ITonghopKhoanService, TonghopKhoanService>();
+builder.Services.AddTransient<IDanhmucKhoanBalangService, DanhmucKhoanBalangService>();
 builder.Services.AddTransient<IDanhmucMayCaoService, DanhmucMayCaoService>();
 builder.Services.AddTransient<INhatkyMayCaoService, NhatkyMayCaoService>();
 builder.Services.AddTransient<IThongsokythuatmaycaoService, ThongsokythuatmaycaoService>();
@@ -117,6 +122,9 @@ builder.Services.AddTransient<ITonghopaptomatkhoidongtuService, Tonghopaptomatkh
 builder.Services.AddTransient<INhatkyaptomatkhoidongtuService, NhatkyaptomatkhoidongtuService>();
 builder.Services.AddTransient<IDanhmucgiacotService, DanhmucgiacotService>();
 builder.Services.AddTransient<ICapnhatgiacotService, CapnhatgiacotService>();
+builder.Services.AddTransient<ITonghopbienapService, TonghopbienapService>();
+builder.Services.AddTransient<ITonghopKhoanBalangService, TonghopKhoanBalangService>();
+
 builder.Services.Configure<FormOptions>(o =>
 {
     o.ValueLengthLimit = int.MaxValue;

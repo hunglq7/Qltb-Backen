@@ -70,7 +70,6 @@ namespace WebApi.Services
             entity.NoiDung = request.NoiDung;
             entity.DonViTinh = request.DonViTinh;
             entity.ThongSo = request.ThongSo;
-
             _thietbiDbContext.Update(entity);
             await _thietbiDbContext.SaveChangesAsync();
             return true;
