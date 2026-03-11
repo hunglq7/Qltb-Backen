@@ -53,7 +53,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult<bool>> Add([FromBody] TongHopNeo request)
         {
             var result = await _tonghopneoService.Add(request);
@@ -62,7 +62,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public async Task<ActionResult<bool>> Update([FromBody] TongHopNeo request)
         {
             var result = await _tonghopneoService.Update(request);
