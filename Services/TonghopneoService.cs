@@ -183,7 +183,7 @@ namespace WebApi.Services
                             NgayLap = tb.NgayLap,
                             SoLuong = tb.SoLuong,
                             TinhTrangKyThuat = tb.TinhTrangKyThuat,
-                            DuPhong = tb.DuPhong,
+                            duPhong = tb.duPhong,
                             GhiChu = tb.GhiChu
                         };
             return Task.FromResult(query.ToList());
