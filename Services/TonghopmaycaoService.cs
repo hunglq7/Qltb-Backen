@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
-using WebApi.Models.Chucvu;
 using WebApi.Models.Common;
 using WebApi.Models.MayCao.Tonghopmaycao;
-using WebApi.Models.Tonghopmayxuc;
+
 
 namespace WebApi.Services
 {
@@ -70,7 +69,7 @@ namespace WebApi.Services
                 SoLuongXich = x.t.SoLuongXich,
                 SoLuongCauMang = x.t.SoLuongCauMang,
                 TinhTrangThietBi = x.t.TinhTrangThietBi,
-                duPhong= x.t.duPhong,
+                duPhong = x.t.duPhong,
                 GhiChu = x.t.GhiChu
             }).ToListAsync();
         }
@@ -142,7 +141,7 @@ namespace WebApi.Services
                                       SoLuongXich = x.SoLuongXich,
                                       SoLuongCauMang = x.SoLuongCauMang,
                                       TinhTrangThietBi = x.TinhTrangThietBi,
-                                      duPhong= x.duPhong,
+                                      duPhong = x.duPhong,
                                       GhiChu = x.GhiChu
                                   }).ToListAsync();
 
@@ -156,15 +155,17 @@ namespace WebApi.Services
             };
         }
 
-        public async Task<List<TonghopmaycaoVm>> GetMaycao()        {
+        public async Task<List<TonghopmaycaoVm>> GetMaycao()
+        {
             var query = from t in _thietbiDbContext.TongHopMayCaos.Include(x => x.DanhmucMayCao).Include(x => x.PhongBan)
                         select t;
-            return await query.Select(x => new TonghopmaycaoVm()            {
+            return await query.Select(x => new TonghopmaycaoVm()
+            {
                 Id = x.Id,
                 MaQuanLy = x.MaQuanLy,
-                MayCaoId=x.MayCaoId,
+                MayCaoId = x.MayCaoId,
                 TenThietBi = x.DanhmucMayCao!.TenThietBi,
-                DonViId=x.DonViId,
+                DonViId = x.DonViId,
                 TenDonVi = x.PhongBan!.TenPhong,
                 ViTriLapDat = x.ViTriLapDat,
                 NgayLap = x.NgayLap,
@@ -212,7 +213,7 @@ namespace WebApi.Services
             // ✅ Lọc theo trạng thái true / false
             if (request.DuPhong.HasValue)
             {
-                query = query.Where(x => x.duPhong== request.DuPhong.Value);
+                query = query.Where(x => x.duPhong == request.DuPhong.Value);
             }
 
             // 📅 Từ ngày
@@ -241,15 +242,15 @@ namespace WebApi.Services
              TenThietBi = x.DanhmucMayCao!.TenThietBi,
              MayCaoId = x.MayCaoId,
              TenDonVi = x.PhongBan!.TenPhong,
-             DonViId = x.DonViId,            
+             DonViId = x.DonViId,
              ViTriLapDat = x.ViTriLapDat,
              NgayLap = x.NgayLap,
              SoLuongCauMang = x.SoLuongCauMang,
-             ChieuDaiMay=x.ChieuDaiMay,
-             SoLuongXich=x.SoLuongXich,
-            TinhTrangThietBi = x.TinhTrangThietBi,
+             ChieuDaiMay = x.ChieuDaiMay,
+             SoLuongXich = x.SoLuongXich,
+             TinhTrangThietBi = x.TinhTrangThietBi,
              SoLuong = x.SoLuong,
-             duPhong=x.duPhong,
+             duPhong = x.duPhong,
              GhiChu = x.GhiChu
 
          })
@@ -262,6 +263,6 @@ namespace WebApi.Services
                 Items = items
             };
 
-    }
+        }
     }
 }

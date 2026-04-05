@@ -302,7 +302,7 @@ namespace WebApi.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "deb7f932-99b6-4211-9585-4a9e0293ebe9",
+                            ConcurrencyStamp = "6cf00eaf-8911-4b5b-a13c-6b05221fd79d",
                             Dob = new DateTime(1979, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hunglq7@gmail.com",
                             EmailConfirmed = true,
@@ -312,7 +312,7 @@ namespace WebApi.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hunglq7@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHvDiSLH5YInZW+VdBc7rPuQUi0DChE+Kdmu8XS/whbgd7T1x7Qy/iPpLGd5rwI9aw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGLt4SU6njKxAlw2kk0EJ5v0OI61P2omIO58xvdtvtDCc4HNFBQJY/cIrSkXLEuW6A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -693,7 +693,6 @@ namespace WebApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("GhiChu")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -1724,6 +1723,26 @@ namespace WebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("BitCoCap")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CapPhongNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CheDoLamViec")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("DienApDieuKhien")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("DienApSuDung")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int>("DonViId")
                         .HasColumnType("int");
 
@@ -1734,17 +1753,35 @@ namespace WebApi.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("MaQuanLy")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Idm")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("KheHoPhongNo")
+                        .HasMaxLength(50)
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("NamSanXuat")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("NapMoNhanh")
+                        .HasMaxLength(50)
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("NgayKiemDinh")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("NgayLap")
-                        .HasColumnType("datetime2");
+                    b.Property<bool>("NoiDat")
+                        .HasMaxLength(50)
+                        .HasColumnType("bit");
 
-                    b.Property<int>("SoLuong")
-                        .HasColumnType("int");
+                    b.Property<bool>("TayDao")
+                        .HasMaxLength(50)
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ThongGio")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TinhTrangThietBi")
                         .HasMaxLength(200)
@@ -1941,14 +1978,12 @@ namespace WebApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("GhiChu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("KhoanBalangId")
                         .HasColumnType("int");
 
                     b.Property<string>("LoaiThietBi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NgayLap")
@@ -1958,11 +1993,9 @@ namespace WebApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TinhTrangKyThuat")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ViTriLapDat")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

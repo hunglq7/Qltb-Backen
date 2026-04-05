@@ -3,20 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Models.AptomatKhoidongtu.TonghopAptomatKhoidongtu
+namespace WebApi.Models.AptomatKhoidongtu.TonghopAptomatKhoidongtu
 {
     public class TonghopaptomatkhoidongtuVm
     {
         public int Id { get; set; }
-        public string MaQuanLy { get; set; } = string.Empty;
-        public string TenThietBi { get; set; } = string.Empty;
-        public string PhongBan { get; set; } = string.Empty;
-        public string ViTriLapDat { get; set; } = string.Empty;
+        public string? TenThietBi { get; set; }
+        public int aptomatkhoidongtuId { get; set; }
+        public string? TenDonVi { get; set; }
+        public int DonViId { get; set; }
+        public string? ViTriLapDat { get; set; }
         public DateTime? NgayKiemDinh { get; set; }
-        public DateTime? NgayLap { get; set; }
-        public int SoLuong { get; set; }
+        public DateTime? NamSanXuat { get; set; }
+        public string? DienApSuDung { get; set; }
+        public string? Idm { get; set; }
+        public string? DienApDieuKhien { get; set; }
+        public string? CheDoLamViec { get; set; }
+        public string? ThongGio { get; set; }
+        public bool NoiDat { get; set; }
+        public bool KheHoPhongNo { get; set; }
+        public bool NapMoNhanh { get; set; }
+        public bool TayDao { get; set; }
+        public string? BitCoCap { get; set; }
+        public string? CapPhongNo { get; set; }
+        public string? TinhTrangThietBi { get; set; }
         public bool DuPhong { get; set; }
-        public string TinhTrangThietBi { get; set; } = string.Empty;
-        public string GhiChu { get; set; } = string.Empty;
+        public string? GhiChu { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Api.Models.AptomatKhoidongtu.ThongsoAptomatKhoidongtu;
 using Api.Services;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Services;
 
 namespace Api.Controllers
 {
@@ -37,7 +38,7 @@ namespace Api.Controllers
             return Ok(query);
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult> Add([FromBody] ThongsoAptomatKhoidongtuEdit request)
         {
             if (request == null)
@@ -62,7 +63,7 @@ namespace Api.Controllers
             return Ok(items);
         }
 
-        [HttpPut("update")]
+        [HttpPut("Update")]
         public async Task<ActionResult> Update([FromBody] ThongsoAptomatKhoidongtuEdit request)
         {
             if (!ModelState.IsValid)

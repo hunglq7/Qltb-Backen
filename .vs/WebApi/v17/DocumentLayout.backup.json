@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\DU AN WEB JEACT\\Qltb-Backen\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\controllers\\tonghopaptomatkhoidongtucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\tonghopaptomatkhoidongtucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|d:\\du an web jeact\\qltb-backen\\controllers\\danhmucaptomatkhoidongtucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{44FA1EAE-3620-4410-8A41-0F484750C186}|WebApi.csproj|solutionrelative:controllers\\danhmucaptomatkhoidongtucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -70,11 +74,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "TonghopaptomatkhoidongtuController.cs",
+              "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\TonghopaptomatkhoidongtuController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TonghopaptomatkhoidongtuController.cs",
+              "ToolTip": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\TonghopaptomatkhoidongtuController.cs",
+              "RelativeToolTip": "Controllers\\TonghopaptomatkhoidongtuController.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAwwDAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T12:11:56.765Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "DanhmucBienapController.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\DanhmucBienapController.cs",
               "RelativeDocumentMoniker": "Controllers\\DanhmucBienapController.cs",
@@ -82,12 +99,11 @@
               "RelativeToolTip": "Controllers\\DanhmucBienapController.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAowEUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T15:35:52.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T15:35:52.227Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "DanhmucBienApService.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\DanhmucBienApService.cs",
               "RelativeDocumentMoniker": "Services\\DanhmucBienApService.cs",
@@ -95,12 +111,11 @@
               "RelativeToolTip": "Services\\DanhmucBienApService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T15:35:32.221Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T15:35:32.221Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "DanhmucbangtaiService.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\DanhmucbangtaiService.cs",
               "RelativeDocumentMoniker": "Services\\DanhmucbangtaiService.cs",
@@ -108,12 +123,11 @@
               "RelativeToolTip": "Services\\DanhmucbangtaiService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T15:35:30.247Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T15:35:30.247Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DanhmucBalangService.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\DanhmucBalangService.cs",
               "RelativeDocumentMoniker": "Services\\DanhmucBalangService.cs",
@@ -121,12 +135,11 @@
               "RelativeToolTip": "Services\\DanhmucBalangService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T15:35:27.703Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T15:35:27.703Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "DanhmucAptomatKhoidongtuService.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\DanhmucAptomatKhoidongtuService.cs",
               "RelativeDocumentMoniker": "Services\\DanhmucAptomatKhoidongtuService.cs",
@@ -134,12 +147,11 @@
               "RelativeToolTip": "Services\\DanhmucAptomatKhoidongtuService.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAkwDYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T15:15:41.355Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T15:15:41.355Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DanhmucAptomatKhoidongtuController.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\DanhmucAptomatKhoidongtuController.cs",
               "RelativeDocumentMoniker": "Controllers\\DanhmucAptomatKhoidongtuController.cs",
@@ -152,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DanhmucbalangController.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\DanhmucbalangController.cs",
               "RelativeDocumentMoniker": "Controllers\\DanhmucbalangController.cs",
@@ -160,12 +172,11 @@
               "RelativeToolTip": "Controllers\\DanhmucbalangController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T15:37:43.241Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-02T15:37:43.241Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "TonghopKhoanBalangService.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\TonghopKhoanBalangService.cs",
               "RelativeDocumentMoniker": "Services\\TonghopKhoanBalangService.cs",
@@ -173,12 +184,11 @@
               "RelativeToolTip": "Services\\TonghopKhoanBalangService.cs",
               "ViewState": "AgIAAGAAAAAAAAAAAAAAAGYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T01:04:32.724Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-09T01:04:32.724Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -190,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ThietbiDbContext.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Data\\EF\\ThietbiDbContext.cs",
               "RelativeDocumentMoniker": "Data\\EF\\ThietbiDbContext.cs",
@@ -202,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -214,7 +224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "TonghopbienapService.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\TonghopbienapService.cs",
               "RelativeDocumentMoniker": "Services\\TonghopbienapService.cs",
@@ -226,7 +236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "TonghopmaycaoService.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Services\\TonghopmaycaoService.cs",
               "RelativeDocumentMoniker": "Services\\TonghopmaycaoService.cs",
@@ -238,7 +248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "TonghopbienapController.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\TonghopbienapController.cs",
               "RelativeDocumentMoniker": "Controllers\\TonghopbienapController.cs",
@@ -250,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "TonghopRoleController.cs",
               "DocumentMoniker": "D:\\DU AN WEB JEACT\\Qltb-Backen\\Controllers\\TonghopRoleController.cs",
               "RelativeDocumentMoniker": "Controllers\\TonghopRoleController.cs",

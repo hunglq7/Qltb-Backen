@@ -2,83 +2,89 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Models.AptomatKhoidongtu.TonghopAptomatKhoidongtu;
-using WebApi.Services;
-using WebApi.Data.Entites;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.AptomatKhoidongtu.TonghopAptomatKhoidongtu;
+using WebApi.Models.Common;
+using WebApi.Services;
 
-namespace Api.Controllers
+namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class TonghopaptomatkhoidongtuController : ControllerBase
     {
-        private readonly ITonghopaptomatkhoidongtuService _tonghopaptomatkhoidongtuService;
-
+        protected readonly ITonghopaptomatkhoidongtuService _tonghopaptomatkhoidongtuService;
         public TonghopaptomatkhoidongtuController(ITonghopaptomatkhoidongtuService tonghopaptomatkhoidongtuService)
         {
             _tonghopaptomatkhoidongtuService = tonghopaptomatkhoidongtuService;
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var data = await _tonghopaptomatkhoidongtuService.GetAll();
+            return Ok(data);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var data = await _tonghopaptomatkhoidongtuService.GetById(id);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+        [HttpPost("Add")]
+        public async Task<IActionResult> Create([FromBody] TonghopaptomatkhoidongtuCreateRequest request)
+        {
+            var result = await _tonghopaptomatkhoidongtuService.Create(request);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update([FromBody] TonghopaptomatkhoidongtuUpdateRequest request)
+        {
+            var result = await _tonghopaptomatkhoidongtuService.Update(request);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _tonghopaptomatkhoidongtuService.Delete(id);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+        [HttpPost("Delete-Multiple")]
+        public async Task<IActionResult> DeleteMany(List<int> ids)
+        {
+            var result = await _tonghopaptomatkhoidongtuService.DeleteMany(ids);
+            if (result == null || result.Count == 0)
+            {
+                return BadRequest();
+            }
+            return Ok(result);
+        }
         [HttpGet("paging")]
-        public async Task<IActionResult> Get([FromQuery] TonghopaptomatkhoidongduPagingRequest request)
+        public async Task<IActionResult> GetAllPaging([FromQuery] TonghopaptomatkhoidongduPagingRequest request)
         {
-            var query = await _tonghopaptomatkhoidongtuService.GetAllPaging(request);
-            return Ok(query);
+            var data = await _tonghopaptomatkhoidongtuService.GetAllPaging(request);
+            return Ok(data);
         }
-
-        [HttpPost]
-        public async Task<ActionResult> Add([FromBody] TongHopAptomatKhoidongtu request)
+        [HttpGet("search")]
+        public async Task<IActionResult> GetAllSearchPaging([FromQuery] SearchTongHopRequest request)
         {
-            if (request == null)
-            {
-                return BadRequest();
-            }
-            await _tonghopaptomatkhoidongtuService.Add(request);
-            return Ok();
-        }
-
-        [HttpGet("{Id}")]
-        public async Task<ActionResult> GetById(int Id)
-        {
-            var items = await _tonghopaptomatkhoidongtuService.GetById(Id);
-            return Ok(items);
-        }
-
-        [HttpGet("DetailById/{Id}")]
-        public async Task<ActionResult> GetDetailById(int Id)
-        {
-            var items = await _tonghopaptomatkhoidongtuService.GetDataiById(Id);
-            return Ok(items);
-        }
-
-        [HttpGet("Sum")]
-        public async Task<ActionResult> GetSum()
-        {
-            var sum = await _tonghopaptomatkhoidongtuService.Sum();
-            return Ok(sum);
-        }
-
-        [HttpPut("update")]
-        public async Task<ActionResult> Update([FromBody] TongHopAptomatKhoidongtu request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            await _tonghopaptomatkhoidongtuService.Update(request);
-            return Ok();
-        }
-
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            if (id == 0)
-            {
-                return BadRequest();
-            }
-            await _tonghopaptomatkhoidongtuService.Delete(id);
-            return Ok();
+            var data = await _tonghopaptomatkhoidongtuService.GetAllSearchPaging(request);
+            return Ok(data);
         }
     }
 }

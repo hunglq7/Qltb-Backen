@@ -1,21 +1,21 @@
 using Api.Data.Entites;
-using Api.Models.AptomatKhoidongtu.ThongsoAptomatKhoidongtu;
+using WebApi.Models.AptomatKhoidongtu.TonghopAptomatKhoidongtu;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data.EF;
 using WebApi.Models.Common;
 using WebApi.Data.Entites;
-
-namespace Api.Services
+using Api.Models.AptomatKhoidongtu.ThongsoAptomatKhoidongtu;
+namespace WebApi.Services
 {
     public interface IThongsoAptomatKhoidongtuService
     {
         Task<List<ThongsoAptomatKhoidongtuVm>> GetAll();
-        Task<PagedResult<ThongsoAptomatKhoidongtuVm>> GetAllPaging(ThongsoAptomatKhoidongtuPagingRequest request);
         Task<ThongsoAptomatKhoidongtu> GetById(int id);
         Task<List<ThongsoAptomatKhoidongtuVm>> GetDetailById(int id);
         Task<bool> Add(ThongsoAptomatKhoidongtuEdit Request);
         Task<bool> Update(ThongsoAptomatKhoidongtuEdit Request);
         Task<bool> Delete(int id);
+        Task<PagedResult<ThongsoAptomatKhoidongtuVm>> GetAllPaging(ThongsoAptomatKhoidongtuPagingRequest request);
     }
 
     public class ThongsoAptomatKhoidongtuService : IThongsoAptomatKhoidongtuService

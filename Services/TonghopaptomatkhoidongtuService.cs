@@ -1,190 +1,304 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApi.Data.EF;
 using WebApi.Data.Entites;
+using WebApi.Models.AptomatKhoidongtu.TonghopAptomatKhoidongtu;
 using WebApi.Models.Common;
-using Api.Models.AptomatKhoidongtu.TonghopAptomatKhoidongtu;
-
 namespace WebApi.Services
 {
     public interface ITonghopaptomatkhoidongtuService
     {
-        Task<bool> Add([FromBody] TongHopAptomatKhoidongtu Request);
-        Task<TongHopAptomatKhoidongtu> GetById(int id);
-        Task<int> Sum();
-        Task<List<TonghopaptomatkhoidongtuVm>> GetDataiById(int id);
-        Task<bool> Update([FromBody] TongHopAptomatKhoidongtu Request);
+        Task<List<TonghopaptomatkhoidongtuVm>> GetAll();
+        Task<TongHopAptomatKhoidongtu?> GetById(int id);
+        Task<bool> Create(TonghopaptomatkhoidongtuCreateRequest request);
+        Task<bool> Update(TonghopaptomatkhoidongtuUpdateRequest request);
         Task<bool> Delete(int id);
+        Task<List<int>> DeleteMany(List<int> ids);
         Task<PagedResult<TonghopaptomatkhoidongtuVm>> GetAllPaging(TonghopaptomatkhoidongduPagingRequest request);
-    }
+        Task<PagedResult<TonghopaptomatkhoidongtuVm>> GetAllSearchPaging(SearchTongHopRequest request);
 
+    }
     public class TonghopaptomatkhoidongtuService : ITonghopaptomatkhoidongtuService
     {
-        private readonly ThietbiDbContext _thietbiDbContext;
-
-        public TonghopaptomatkhoidongtuService(ThietbiDbContext thietbiDbContext)
+        public readonly ThietbiDbContext _context;
+        public TonghopaptomatkhoidongtuService(ThietbiDbContext context)
         {
-            _thietbiDbContext = thietbiDbContext;
+            _context = context;
         }
-
-        public async Task<bool> Add([FromBody] TongHopAptomatKhoidongtu Request)
+        public Task<bool> Create(TonghopaptomatkhoidongtuCreateRequest request)
         {
-            if (Request == null)
+            if (request == null)
             {
-                return false;
+                return Task.FromResult(false);
             }
-            var items = new TongHopAptomatKhoidongtu()
+            var entity = new TongHopAptomatKhoidongtu
             {
-                Id = Request.Id,
-                MaQuanLy=Request.MaQuanLy,
-                aptomatkhoidongtuId = Request.aptomatkhoidongtuId,
-                DonViId = Request.DonViId,
-                ViTriLapDat = Request.ViTriLapDat,
-                NgayKiemDinh = Request.NgayKiemDinh,
-                NgayLap = Request.NgayLap,
-                SoLuong = Request.SoLuong,
-                TinhTrangThietBi = Request.TinhTrangThietBi,
-                DuPhong = Request.DuPhong,
-                GhiChu = Request.GhiChu
+                aptomatkhoidongtuId = request.aptomatkhoidongtuId,
+                DonViId = request.DonViId,
+                ViTriLapDat = request.ViTriLapDat,
+                NgayKiemDinh = request.NgayKiemDinh,
+                NamSanXuat = request.NamSanXuat,
+                DienApSuDung = request.DienApSuDung,
+                Idm = request.Idm,
+                DienApDieuKhien = request.DienApDieuKhien,
+                CheDoLamViec = request.CheDoLamViec,
+                ThongGio = request.ThongGio,
+                NoiDat = request.NoiDat,
+                KheHoPhongNo = request.KheHoPhongNo,
+                NapMoNhanh = request.NapMoNhanh,
+                TayDao = request.TayDao,
+                BitCoCap = request.BitCoCap,
+                CapPhongNo = request.CapPhongNo,
+                TinhTrangThietBi = request.TinhTrangThietBi,
+                DuPhong = request.DuPhong,
+                GhiChu = request.GhiChu
             };
-            await _thietbiDbContext.TongHopAptomatKhoidongtus.AddAsync(items);
-            await _thietbiDbContext.SaveChangesAsync();
-            return true;
+            _context.TongHopAptomatKhoidongtus.Add(entity);
+            var result = _context.SaveChanges();
+            return Task.FromResult(result > 0);
         }
 
-        public async Task<bool> Delete(int id)
+        public Task<bool> Delete(int id)
         {
-            var query = await _thietbiDbContext.TongHopAptomatKhoidongtus.FindAsync(id);
-            if (query == null)
+            if (id <= 0)
             {
-                return false;
+                return Task.FromResult(false);
             }
-            _thietbiDbContext.TongHopAptomatKhoidongtus.Remove(query);
-            _thietbiDbContext.SaveChanges();
-            return true;
-        }
-
-        public async Task<PagedResult<TonghopaptomatkhoidongtuVm>> GetAllPaging(TonghopaptomatkhoidongduPagingRequest request)
-        {
-            var query = from t in _thietbiDbContext.TongHopAptomatKhoidongtus.Include(x => x.DanhmucAptomatKhoidongtu).Include(x => x.PhongBan)
-                        select t;
-
-            if (!string.IsNullOrEmpty(request.Keyword))
-            {
-                query = query.Where(x => x.ViTriLapDat.Contains(request.Keyword) ||
-                                       x.TinhTrangThietBi.Contains(request.Keyword) ||
-                                       x.GhiChu.Contains(request.Keyword));
-            }
-
-            if (request.aptomatkhoidongtuId > 0 && request.DonViId > 0)
-            {
-                query = query.Where(x => x.aptomatkhoidongtuId == request.aptomatkhoidongtuId && x.DonViId == request.DonViId);
-            }
-            else if (request.aptomatkhoidongtuId > 0 && (request.DonViId == 0 || request.DonViId == null))
-            {
-                query = query.Where(x => x.aptomatkhoidongtuId == request.aptomatkhoidongtuId);
-            }
-            else if ((request.aptomatkhoidongtuId == 0 || request.aptomatkhoidongtuId == null) && request.DonViId > 0)
-            {
-                query = query.Where(x => x.DonViId == request.DonViId);
-            }
-
-            int totalRow = await query.CountAsync();
-            int SumRecodes= await query.SumAsync(x => x.SoLuong);
-            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .Select(x => new TonghopaptomatkhoidongtuVm()
-                {
-                    Id = x.Id,
-                    MaQuanLy = x.MaQuanLy ?? string.Empty,
-                    TenThietBi = x.DanhmucAptomatKhoidongtu.TenThietBi,
-                    PhongBan = x.PhongBan.TenPhong,
-                    ViTriLapDat = x.ViTriLapDat,
-                    NgayKiemDinh = x.NgayKiemDinh,
-                    NgayLap = x.NgayLap,
-                    SoLuong = x.SoLuong,
-                    DuPhong = x.DuPhong,
-                    TinhTrangThietBi = x.TinhTrangThietBi,
-                    GhiChu = x.GhiChu
-                }).ToListAsync();
-
-            var pagedResult = new PagedResult<TonghopaptomatkhoidongtuVm>()
-            {
-                TotalRecords = totalRow,
-                Items = data,
-                PageIndex = request.PageIndex,
-                PageSize = request.PageSize,
-                SumRecords=SumRecodes
-            };
-            return pagedResult;
-        }
-
-        public async Task<TongHopAptomatKhoidongtu> GetById(int id)
-        {
-            var query = await _thietbiDbContext.TongHopAptomatKhoidongtus.FindAsync(id);
-            if (query == null)
-            {
-                query = new TongHopAptomatKhoidongtu()
-                {
-                    Id = 0,
-                    aptomatkhoidongtuId = 0,
-                    DonViId = 0,
-                    NgayLap = DateTime.Now
-                };
-            }
-            return query;
-        }
-
-        public async Task<List<TonghopaptomatkhoidongtuVm>> GetDataiById(int id)
-        {
-            var Query = from t in _thietbiDbContext.TongHopAptomatKhoidongtus.Where(x => x.Id == id)
-                        join p in _thietbiDbContext.PhongBans on t.DonViId equals p.Id
-                        join m in _thietbiDbContext.DanhmucAptomatKhoidongtus on t.aptomatkhoidongtuId equals m.Id
-                        select new { t, p, m };
-
-            return await Query.Select(x => new TonghopaptomatkhoidongtuVm
-            {
-                Id = x.t.Id,
-                MaQuanLy = x.t.MaQuanLy ?? string.Empty,
-                TenThietBi = x.m.TenThietBi,
-                PhongBan = x.p.TenPhong,
-                ViTriLapDat = x.t.ViTriLapDat,
-                NgayKiemDinh = x.t.NgayKiemDinh,
-                NgayLap = x.t.NgayLap,
-                TinhTrangThietBi = x.t.TinhTrangThietBi,
-                DuPhong = x.t.DuPhong,
-                GhiChu = x.t.GhiChu
-            }).ToListAsync();
-        }
-
-        public async Task<int> Sum()
-        {
-            var query = from s in _thietbiDbContext.TongHopAptomatKhoidongtus
-                        select s;
-            var count = await query.CountAsync();
-            return count;
-        }
-
-        public async Task<bool> Update([FromBody] TongHopAptomatKhoidongtu Request)
-        {
-            var entity = await _thietbiDbContext.TongHopAptomatKhoidongtus.FindAsync(Request.Id);
+            var entity = _context.TongHopAptomatKhoidongtus.FirstOrDefault(x => x.Id == id);
             if (entity == null)
             {
-                return false;
+                return Task.FromResult(false);
             }
-            entity.MaQuanLy = Request.MaQuanLy;
-            entity.aptomatkhoidongtuId= Request.aptomatkhoidongtuId;
-            entity.DonViId = Request.DonViId;
-            entity.ViTriLapDat = Request.ViTriLapDat;
-            entity.NgayKiemDinh = Request.NgayKiemDinh;
-            entity.NgayLap = Request.NgayLap;
-            entity.TinhTrangThietBi = Request.TinhTrangThietBi;
-            entity.SoLuong = Request.SoLuong;
-            entity.DuPhong = Request.DuPhong;
-            entity.GhiChu = Request.GhiChu;
-            _thietbiDbContext.Update(entity);
-            await _thietbiDbContext.SaveChangesAsync();
-            return true;
+            _context.TongHopAptomatKhoidongtus.Remove(entity);
+            var result = _context.SaveChanges();
+            return Task.FromResult(result > 0);
         }
+
+        public Task<List<int>> DeleteMany(List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                return Task.FromResult(new List<int>());
+            }
+            var entities = _context.TongHopAptomatKhoidongtus.Where(x => ids.Contains(x.Id)).ToList();
+            _context.TongHopAptomatKhoidongtus.RemoveRange(entities);
+            var result = _context.SaveChanges();
+            return Task.FromResult(ids);
+
+        }
+
+        public Task<List<TonghopaptomatkhoidongtuVm>> GetAll()
+        {
+            var query = from a in _context.TongHopAptomatKhoidongtus
+                        join b in _context.DanhmucAptomatKhoidongtus on a.aptomatkhoidongtuId equals b.Id
+                        join c in _context.PhongBans on a.DonViId equals c.Id
+                        select new { a, b, c };
+            var data = query.Select(x => new TonghopaptomatkhoidongtuVm
+            {
+                Id = x.a.Id,
+                aptomatkhoidongtuId = x.a.aptomatkhoidongtuId,
+                TenThietBi = x.b.TenThietBi,
+
+                DonViId = x.a.DonViId,
+                TenDonVi = x.c.TenPhong,
+                ViTriLapDat = x.a.ViTriLapDat,
+                NgayKiemDinh = x.a.NgayKiemDinh,
+                NamSanXuat = x.a.NamSanXuat,
+                DienApSuDung = x.a.DienApSuDung,
+                Idm = x.a.Idm,
+                DienApDieuKhien = x.a.DienApDieuKhien,
+                CheDoLamViec = x.a.CheDoLamViec,
+                ThongGio = x.a.ThongGio,
+                NoiDat = x.a.NoiDat,
+                KheHoPhongNo = x.a.KheHoPhongNo,
+                NapMoNhanh = x.a.NapMoNhanh,
+                TayDao = x.a.TayDao,
+                BitCoCap = x.a.BitCoCap,
+                CapPhongNo = x.a.CapPhongNo,
+                TinhTrangThietBi = x.a.TinhTrangThietBi,
+                DuPhong = x.a.DuPhong,
+                GhiChu = x.a.GhiChu
+            }).ToList();
+            return Task.FromResult(data);
+        }
+
+        public Task<PagedResult<TonghopaptomatkhoidongtuVm>> GetAllPaging(TonghopaptomatkhoidongduPagingRequest request)
+        {
+            var query = from a in _context.TongHopAptomatKhoidongtus
+                        join b in _context.DanhmucAptomatKhoidongtus on a.aptomatkhoidongtuId equals b.Id
+                        join c in _context.PhongBans on a.DonViId equals c.Id
+                        select new { a, b, c };
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.b.TenThietBi.Contains(request.Keyword) || x.c.TenPhong.Contains(request.Keyword));
+            }
+            if (request.thietbiId.HasValue)
+            {
+                query = query.Where(x => x.a.aptomatkhoidongtuId == request.thietbiId.Value);
+            }
+            if (request.donviId.HasValue)
+            {
+                query = query.Where(x => x.a.DonViId == request.donviId.Value);
+            }
+            if (request.duPhong.HasValue)
+            {
+                query = query.Where(x => x.a.DuPhong == request.duPhong.Value);
+            }
+            var totalRecords = query.Count();
+            var data = query.Skip((request.PageIndex - 1) * request.PageSize).
+                        Take(request.PageSize)
+                        .Select(x => new TonghopaptomatkhoidongtuVm
+                        {
+                            Id = x.a.Id,
+                            aptomatkhoidongtuId = x.a.aptomatkhoidongtuId,
+                            TenThietBi = x.b.TenThietBi,
+
+                            DonViId = x.a.DonViId,
+                            TenDonVi = x.c.TenPhong,
+                            ViTriLapDat = x.a.ViTriLapDat,
+                            NgayKiemDinh = x.a.NgayKiemDinh,
+                            NamSanXuat = x.a.NamSanXuat,
+                            DienApSuDung = x.a.DienApSuDung,
+                            Idm = x.a.Idm,
+                            DienApDieuKhien = x.a.DienApDieuKhien,
+                            CheDoLamViec = x.a.CheDoLamViec,
+                            ThongGio = x.a.ThongGio,
+                            NoiDat = x.a.NoiDat,
+                            KheHoPhongNo = x.a.KheHoPhongNo,
+                            NapMoNhanh = x.a.NapMoNhanh,
+                            TayDao = x.a.TayDao,
+                            BitCoCap = x.a.BitCoCap,
+                            CapPhongNo = x.a.CapPhongNo,
+                            TinhTrangThietBi = x.a.TinhTrangThietBi,
+                            DuPhong = x.a.DuPhong,
+                            GhiChu = x.a.GhiChu
+                        }).ToList();
+            var pagedResult = new PagedResult<TonghopaptomatkhoidongtuVm>
+            {
+                TotalRecords = totalRecords,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data
+            };
+            return Task.FromResult(pagedResult);
+
+        }
+
+        public Task<PagedResult<TonghopaptomatkhoidongtuVm>> GetAllSearchPaging(SearchTongHopRequest request)
+        {
+            var query = from a in _context.TongHopAptomatKhoidongtus
+                        join b in _context.DanhmucAptomatKhoidongtus on a.aptomatkhoidongtuId equals b.Id
+                        join c in _context.PhongBans on a.DonViId equals c.Id
+                        select new { a, b, c };
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.b.TenThietBi.Contains(request.Keyword) ||
+                x.c.TenPhong.Contains(request.Keyword) ||
+                x.a.ViTriLapDat.Contains(request.Keyword)
+                );
+            }
+            if (request.DuPhong.HasValue)
+            {
+                query = query.Where(x => x.a.DuPhong == request.DuPhong.Value);
+            }
+            if (request.TuNgay.HasValue)
+            {
+                query = query.Where(x => x.a.NgayKiemDinh >= request.TuNgay.Value);
+            }
+            if (request.DenNgay.HasValue)
+            {
+                query = query.Where(x => x.a.NgayKiemDinh <= request.DenNgay.Value);
+            }
+
+            var totalRecords = query.Count();
+            var data = query.
+                        OrderByDescending(x => x.a.NgayKiemDinh).
+                         Skip((request.PageIndex - 1) * request.PageSize).
+                        Take(request.PageSize)
+                        .Select(x => new TonghopaptomatkhoidongtuVm
+                        {
+                            Id = x.a.Id,
+                            aptomatkhoidongtuId = x.a.aptomatkhoidongtuId,
+                            TenThietBi = x.b.TenThietBi,
+                            DonViId = x.a.DonViId,
+                            TenDonVi = x.c.TenPhong,
+                            ViTriLapDat = x.a.ViTriLapDat,
+                            NgayKiemDinh = x.a.NgayKiemDinh,
+                            NamSanXuat = x.a.NamSanXuat,
+                            DienApSuDung = x.a.DienApSuDung,
+                            Idm = x.a.Idm,
+                            DienApDieuKhien = x.a.DienApDieuKhien,
+                            CheDoLamViec = x.a.CheDoLamViec,
+                            ThongGio = x.a.ThongGio,
+                            NoiDat = x.a.NoiDat,
+                            KheHoPhongNo = x.a.KheHoPhongNo,
+                            NapMoNhanh = x.a.NapMoNhanh,
+                            TayDao = x.a.TayDao,
+                            BitCoCap = x.a.BitCoCap,
+                            CapPhongNo = x.a.CapPhongNo,
+                            TinhTrangThietBi = x.a.TinhTrangThietBi,
+                            DuPhong = x.a.DuPhong,
+                            GhiChu = x.a.GhiChu
+                        }).ToList();
+            var pagedResult = new PagedResult<TonghopaptomatkhoidongtuVm>
+            {
+                TotalRecords = totalRecords,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data
+            };
+            return Task.FromResult(pagedResult);
+
+        }
+
+        public Task<TongHopAptomatKhoidongtu?> GetById(int id)
+        {
+            if (id <= 0)
+            {
+                return Task.FromResult<TongHopAptomatKhoidongtu?>(null);
+            }
+            var entity = _context.TongHopAptomatKhoidongtus.FirstOrDefault(x => x.Id == id);
+            return Task.FromResult(entity);
+
+        }
+
+        public Task<bool> Update(TonghopaptomatkhoidongtuUpdateRequest request)
+        {
+            if (request == null || request.Id <= 0)
+            {
+                return Task.FromResult(false);
+            }
+            var entity = _context.TongHopAptomatKhoidongtus.FirstOrDefault(x => x.Id == request.Id);
+            if (entity == null)
+            {
+                return Task.FromResult(false);
+            }
+            entity.aptomatkhoidongtuId = request.aptomatkhoidongtuId;
+            entity.DonViId = request.DonViId;
+            entity.ViTriLapDat = request.ViTriLapDat;
+            entity.NgayKiemDinh = request.NgayKiemDinh;
+            entity.NamSanXuat = request.NamSanXuat;
+            entity.DienApSuDung = request.DienApSuDung;
+            entity.Idm = request.Idm;
+            entity.DienApDieuKhien = request.DienApDieuKhien;
+            entity.CheDoLamViec = request.CheDoLamViec;
+            entity.ThongGio = request.ThongGio;
+            entity.NoiDat = request.NoiDat;
+            entity.KheHoPhongNo = request.KheHoPhongNo;
+            entity.NapMoNhanh = request.NapMoNhanh;
+            entity.TayDao = request.TayDao;
+            entity.BitCoCap = request.BitCoCap;
+            entity.CapPhongNo = request.CapPhongNo;
+            entity.TinhTrangThietBi = request.TinhTrangThietBi;
+            entity.DuPhong = request.DuPhong;
+            entity.GhiChu = request.GhiChu;
+            _context.TongHopAptomatKhoidongtus.Update(entity);
+            var result = _context.SaveChanges();
+            return Task.FromResult(result > 0);
+        }
+
+
     }
 }
